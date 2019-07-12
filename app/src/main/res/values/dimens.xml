@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="chat_title_bar_txt_size">20sp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="card_padding">40dp</dimen>
 </resources>

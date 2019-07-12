@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.face_android.R;
+import com.example.face_android.features.demo.styled.StyledDialogsActivity;
 
 
 /**
@@ -18,7 +19,8 @@ public class AddThirdFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_chat, container,false);
+        View view = inflater.inflate(R.layout.activity_styled_dialogs_bar, container,false);
+//        StyledDialogsActivity.open(this.getContext());
         return view;
     }
 
