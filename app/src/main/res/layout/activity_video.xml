@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="com.example.face_android.imuisample.messages.VideoActivity">
+    tools:context="com.example.face.com.example.face.imuisample.messages.VideoActivity">
 
     <VideoView
         android:id="@+id/videoview_video"

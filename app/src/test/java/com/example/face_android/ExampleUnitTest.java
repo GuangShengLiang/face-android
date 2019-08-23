@@ -1,4 +1,4 @@
-package com.example.face_android;
+package com.example.face;
 
 import org.junit.Test;
 
