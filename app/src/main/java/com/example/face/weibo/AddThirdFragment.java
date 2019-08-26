@@ -72,9 +72,9 @@ public class AddThirdFragment extends Fragment implements DateFormatter.Formatte
 
 //        dialogsAdapter.setOnDialogClickListener(this);
 //        dialogsAdapter.setOnDialogLongClickListener(this);
-        dialogsAdapter.setDatesFormatter(this);
+//        dialogsAdapter.setDatesFormatter(this);
 
-        dialogsList.setAdapter(dialogsAdapter);
+//        dialogsList.setAdapter(dialogsAdapter);
     }
 
 }
