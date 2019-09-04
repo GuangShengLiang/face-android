@@ -32,7 +32,7 @@ public class MyInfoFragment extends Fragment {
     TextView nickName;
     @BindView(R.id.tv_sign)
     TextView sign;
-    @BindView(R.id.et_gander)
+    @BindView(R.id.tv_gander)
     TextView gander;
     @BindView(R.id.et_birthday)
     TextView birthday;

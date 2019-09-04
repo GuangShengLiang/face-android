@@ -15,8 +15,8 @@ public class BirthdayActivity extends AppCompatActivity {
 
     @BindView(R.id.ev_nick_name)
     EditText nickName;
-    @BindView(R.id.titlebar)
-    CustomTitleBar titleBar;
+//    @BindView(R.id.titlebar)
+//    CustomTitleBar titleBar;
 
     @Nullable
     @Override
@@ -26,10 +26,10 @@ public class BirthdayActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         nickName.setText(getIntent().getStringExtra("nickName"));
-        titleBar.setLeftIconOnClickListener(v -> finish());
-        titleBar.setRightTextOnClickListener(v -> {
-                    finish();
-                }
-        );
+//        titleBar.setLeftIconOnClickListener(v -> finish());
+//        titleBar.setRightTextOnClickListener(v -> {
+//                    finish();
+//                }
+//        );
     }
 }

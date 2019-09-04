@@ -1,5 +1,6 @@
 package com.example.face.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -28,15 +29,19 @@ public class CustomTitleBar extends RelativeLayout {
         ivBack = inflate.findViewById(R.id.iv_back);
         tvTitle = inflate.findViewById(R.id.tv_title);
         tvMore = inflate.findViewById(R.id.tv_more);
-
         init(context,attributeSet);
+        if(context instanceof Activity) {
+            ivBack.setOnClickListener((s)->
+                    ((Activity) context).finish()
+            );
+        }
     }
 
     //初始化资源文件
     public void init(Context context, AttributeSet attributeSet){
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CustomTitleBar);
         String title = typedArray.getString(R.styleable.CustomTitleBar_title);//标题
-        int leftIcon = typedArray.getResourceId(R.styleable.CustomTitleBar_left_icon, R.drawable.ic_action_delete);//左边图片
+        int leftIcon = typedArray.getResourceId(R.styleable.CustomTitleBar_left_icon, R.drawable.barrow_left);//左边图片
 //        int rightIcon = typedArray.getResourceId(R.styleable.CustomTitleBar_right_icon, R.drawable.icon_more);//右边图片
         String rightText = typedArray.getString(R.styleable.CustomTitleBar_right_text);//右边文字
 //        int titleBarType = typedArray.getInt(R.styleable.CustomTitleBar_titlebar_type, 10);//标题栏类型,默认为10

@@ -29,7 +29,7 @@ public class NickNameActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         nickName.setText(getIntent().getStringExtra("nickName"));
-        titleBar.setLeftIconOnClickListener(v -> finish());
+//        titleBar.setLeftIconOnClickListener(v -> finish());
         titleBar.setRightTextOnClickListener(v -> {
                     finish();
                 }
