@@ -1,6 +1,9 @@
 package com.example.face.http;
 
 import android.util.Log;
+
+import com.google.gson.Gson;
+
 import okhttp3.*;
 import okio.Buffer;
 import retrofit2.Retrofit;
@@ -11,25 +14,26 @@ import java.util.concurrent.TimeUnit;
 
 public class HTTPFactory {
 
-    private static final String base_url="http://localhost:8080/api";
+    private static final String base_url="http://192.168.0.111:8080/api/";
     private static final AccountHTTP accHttp;
 
     static {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(base_url)
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(base_url+"account/")
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(slowHttpClient())
                 .build();
-
         accHttp = retrofit.create(AccountHTTP.class);
     }
 
     public static OkHttpClient slowMoreHttpClient() {
+        // 添加公共参数拦截器
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(8L, TimeUnit.SECONDS)
                 .writeTimeout(5L, TimeUnit.SECONDS)
                 .connectionPool(new ConnectionPool(10, 30L, TimeUnit.MINUTES))
-                .connectTimeout(8L, TimeUnit.SECONDS).addInterceptor(chain -> interceptor(chain)).build();
+                .connectTimeout(8L, TimeUnit.SECONDS).addInterceptor(commonInterceptor())
+                .addInterceptor(chain -> logInterceptor(chain)).build();
         return client;
     }
 
@@ -39,7 +43,8 @@ public class HTTPFactory {
                 .writeTimeout(2L, TimeUnit.SECONDS)
                 .connectTimeout(5L, TimeUnit.SECONDS)
                 .connectionPool(new ConnectionPool(20, 30L, TimeUnit.MINUTES))
-                .addInterceptor(chain -> interceptor(chain)).build();
+                .addInterceptor(commonInterceptor())
+                .addInterceptor(chain -> logInterceptor(chain)).build();
         return client;
     }
 //
@@ -54,9 +59,25 @@ public class HTTPFactory {
 //    }
 
 
-    private static Response interceptor(Interceptor.Chain chain) throws IOException {
+    private static Interceptor commonInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                Request.Builder requestBuilder = originalRequest.newBuilder()
+                        .addHeader("Accept-Encoding", "gzip")
+                        .addHeader("Accept", "application/json")
+                        .addHeader("Content-Type", "application/json; charset=utf-8")
+                        .method(originalRequest.method(), originalRequest.body());
+                requestBuilder.addHeader("token", "6589affbcb794b97a4ca477c458bbff9");//添加请求头信息，服务器进行token有效性验证
+                Request request = requestBuilder.build();
+                return chain.proceed(request);
+            }
+        };
+    }
+    private static Response logInterceptor(Interceptor.Chain chain) throws IOException {
         HttpUrl url = chain.request().url();
-        long t1 = System.nanoTime();
+        long t1 = System.currentTimeMillis();
         Request request = chain.request();
         String rb = "";
         if (request.body() != null) {
@@ -74,12 +95,11 @@ public class HTTPFactory {
         } catch (Exception e) {
             throw e;
         } finally {
-            long cost = System.nanoTime()-t1;
+            long cost = System.currentTimeMillis()-t1;
             Log.d("HTTP_LOG",String.format("|%s|reqBody %s|respBody %s|cost %d|", url, rb, pb, cost));
         }
         return response.newBuilder()
                 .body(okhttp3.ResponseBody.create(pb,mediaType))
-                .header("token","6589affbcb794b97a4ca477c458bbff9")
                 .build();
     }
 
