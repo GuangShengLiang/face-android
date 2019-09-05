@@ -13,5 +13,4 @@
         <attr name="right_text" format="string"/>
         <attr name="titlebar_type" format="integer"/>
     </declare-styleable>
-
 </resources>

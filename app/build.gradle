@@ -19,8 +19,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 
@@ -48,8 +48,12 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:datetime:3.1.0'
     implementation 'cn.aigestudio.datepicker:DatePicker:2.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.hjq:titlebar:6.0'
     implementation 'com.android.support:support-v13:25.3.1'
     implementation 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.0.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     annotationProcessor "org.projectlombok:lombok:1.18.8"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

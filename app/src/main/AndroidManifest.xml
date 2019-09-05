@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.user.NickNameActivity" android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".activity.user.NickNameActivity" />
     </application>
 
 </manifest>

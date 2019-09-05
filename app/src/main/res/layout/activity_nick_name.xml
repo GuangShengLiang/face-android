@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFE8EDF3"
     android:orientation="vertical">
 
-    <com.example.face.view.CustomTitleBar
-        android:id="@+id/titlebar"
-        android:background="#DCDCDC"
-        app:right_text="完成"
-        app:titlebar_type="11"
-        app:title="修改昵称"
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.example.face.view.CustomTitleBar>
+        android:layout_height="wrap_content"
+        app:backButton="true"
+        app:barStyle="light"
+        app:rightColor="@color/black"
+        app:rightTitle="完成"
+        app:rightSize="14dp"
+        app:title="修改昵称"
+        app:titleSize="13dp"
+        app:titleColor="@color/black" />
+
     <LinearLayout
         android:id="@+id/ll_nick_name"
         android:layout_width="match_parent"
@@ -21,10 +26,10 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp">
         <!--item 中间部分的输入框（有则显示五则隐藏，默认隐藏）-->
         <EditText
             android:id="@+id/ev_nick_name"
