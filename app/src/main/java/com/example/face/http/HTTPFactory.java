@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import okio.Buffer;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
@@ -14,12 +15,14 @@ import java.util.concurrent.TimeUnit;
 
 public class HTTPFactory {
 
-    private static final String base_url="http://192.168.0.111:8080/api/";
+//    private static final String base_url="http://192.168.0.111:8080/api/";
+    private static final String base_url="http://172.19.240.218:8080/api/";
     private static final AccountHTTP accHttp;
 
     static {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(base_url+"account/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(slowHttpClient())
                 .build();

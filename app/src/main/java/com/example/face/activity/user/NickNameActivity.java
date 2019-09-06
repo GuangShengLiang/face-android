@@ -14,13 +14,21 @@ import com.example.face.R;
 import com.example.face.http.AccountHTTP;
 import com.example.face.http.HTTPFactory;
 import com.example.face.model.Account;
+import com.example.face.model.ErrorResponse;
+import com.google.gson.Gson;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+
+import org.reactivestreams.Subscription;
 
 import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 public class NickNameActivity extends AppCompatActivity {
 
@@ -35,25 +43,32 @@ public class NickNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nick_name);
         ButterKnife.bind(this);
-        Runnable runnable =new Runnable(){
-            @Override
-            public void run(){
-                //进行访问网络操作
-//                Message msg = Message.obtain();
-//                Bundle data = new Bundle();
-                Account acc = new Account();
-                try {
-                    acc = ah.myInfo().execute().body();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                nickName.setText(acc.getNickName());
-//                data.putString("value", acc.getNickName());
-//                msg.setData(data);
-//                handler.sendMessage(msg);
-            }
-        };
-        new Thread(runnable).start();
+        ah.myInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<Account>() {
+                    @Override
+                    public void onComplete() {
+
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException){
+                            HttpException he = (HttpException)e;
+                            if (he.code()==600){
+                                try {
+                                    Log.d("biz error {}",he.response().errorBody().string());
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onNext(Account a) {
+                        nickName.setText(a.getNickName());
+                    }
+                });
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
             public void onLeftClick(View v) {
