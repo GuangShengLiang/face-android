@@ -63,7 +63,7 @@ public class WeiboActivity extends AppCompatActivity {
 
         navigationBar = findViewById(R.id.navigationBar);
 
-        fragments.add(new WBFirstFragment());
+        fragments.add(new HomeFragment());
         fragments.add(new WBSecondFragment());
         fragments.add(new AddThirdFragment());
         fragments.add(new MyInfoFragment());
@@ -74,7 +74,8 @@ public class WeiboActivity extends AppCompatActivity {
                 .fragmentList(fragments)
                 .fragmentManager(getSupportFragmentManager())
                 .addLayoutRule(EasyNavigationBar.RULE_BOTTOM)
-                .addLayoutBottom(100)
+                .navigationHeight(40)
+                .hasPadding(true)
                 .onTabClickListener(new EasyNavigationBar.OnTabClickListener() {
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
@@ -90,7 +91,7 @@ public class WeiboActivity extends AppCompatActivity {
                     }
                 })
                 .mode(EasyNavigationBar.MODE_ADD)
-//                .anim(Anim.ZoomIn)
+                .anim(Anim.ZoomIn)
                 .build();
 
 
