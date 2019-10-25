@@ -1,14 +1,17 @@
 package com.example.face.weibo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.face.MainActivity;
 import com.example.face.R;
 import com.example.face.model.ActivityDetail;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -77,15 +80,17 @@ public class HomeFragment extends Fragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new RecyclerView.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(android.R.layout.activity_list_item,parent,false)) {
+            return new RecyclerView.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_list_item,parent,false)) {
             };
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            TextView textView1 =  holder.itemView.findViewById(android.R.id.text1);
-            textView1.setText(String.format(Locale.CHINA, "第%d条数据", position + 1));
-            textView1.setText(list.get(position).getName());
+            TextView textView1 =  holder.itemView.findViewById(R.id.text1);
+            textView1.setText(String.format(Locale.CHINA, "第%d条数据的饼屋", position + 1));
+            holder.itemView.setOnClickListener(view ->
+//                    Toast.makeText("这是条目"+textView1.getText(),Toast.LENGTH_LONG).show());
+                    Log.i("click",position+""));
         }
 
         @Override
