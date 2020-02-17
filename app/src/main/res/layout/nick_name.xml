@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFE8EDF3"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backButton="true"
+        app:barStyle="light"
+        app:rightColor="@color/black"
+        app:rightTitle="完成"
+        app:rightSize="14dp"
+        app:title="修改昵称"
+        app:titleSize="13dp"
+        app:titleColor="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/ll_nick_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp">
+        <!--item 中间部分的输入框（有则显示五则隐藏，默认隐藏）-->
+        <EditText
+            android:id="@+id/ev_nick_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="" android:lines="1"
+            android:maxLines="1"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

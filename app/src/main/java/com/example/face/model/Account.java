@@ -1,13 +1,13 @@
 package com.example.face.model;
 
-import java.util.Date;
-
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class Account {
     private String uid;
-    private String nickName;
+    public String nickName;
     private String avatarUrl;
     private Date birthday;
     private int status;

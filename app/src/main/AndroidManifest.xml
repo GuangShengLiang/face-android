@@ -3,21 +3,44 @@
     package="com.example.face">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
+            android:name=".FLinkApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.face.WeiboActivity"
+            android:name="com.example.face.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.user.NickNameActivity" />
+        <activity android:name=".activity.NickNameActivity" />
+        <activity android:name=".activity.ActDetailActivity" />
+        <activity android:name=".activity.ActManageActivity" />
+        <activity android:name=".activity.FriendDetailActivity" />
+        <activity android:name=".activity.PublishActivity" />
+        <activity android:name=".activity.SearchAddressActivity" />
+        <activity android:name=".activity.AboutAddressActivity" />
+        <activity android:name=".activity.NewFriendsMsgActivity" />
+        <activity android:name=".activity.AddFriendsBySearchActivity" />
+        <activity android:name=".activity.NewFriendsAcceptActivity" />
+        <activity android:name=".activity.AddFriendsActivity" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.QrCodeActivity" />
+        <activity android:name=".activity.BigImageActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MyUserInfoActivity" />
+        <activity android:name=".activity.MyPublishListActivity" />
+        <activity android:name=".activity.MyJoinListActivity" />
+        <meta-data
+                android:name="com.amap.api.v2.apikey"
+                android:value="f8c81c2ebb3604034c503298d1581cbc" />
     </application>
 
 </manifest>

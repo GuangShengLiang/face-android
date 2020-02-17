@@ -1,9 +1,7 @@
 package com.example.face.http;
 
 import android.util.Log;
-
 import com.google.gson.Gson;
-
 import okhttp3.*;
 import okio.Buffer;
 import retrofit2.Retrofit;

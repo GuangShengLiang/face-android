@@ -6,11 +6,4 @@
         <item>@color/google_yellow</item>
         <item>@color/google_green</item>
     </integer-array>
-    <declare-styleable name="CustomTitleBar">
-        <attr name="title" format="string"/>
-        <attr name="left_icon" format="reference"/>
-        <attr name="right_icon" format="reference"/>
-        <attr name="right_text" format="string"/>
-        <attr name="titlebar_type" format="integer"/>
-    </declare-styleable>
 </resources>
