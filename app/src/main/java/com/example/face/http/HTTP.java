@@ -4,27 +4,38 @@ import android.util.Log;
 import com.google.gson.Gson;
 import okhttp3.*;
 import okio.Buffer;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
-public class HTTPFactory {
+public class HTTP {
 
-//    private static final String base_url="http://192.168.0.111:8080/api/";
-    private static final String base_url="http://172.19.240.218:8080/api/";
-    private static final AccountHTTP accHttp;
+    private static final String base_url = "http://192.168.0.118:8080/api/";
+    //    private static final String base_url="http://172.19.240.218:8080/api/";
+    public static final AccountHTTP account;
+    public static final LinkHTTP link;
+    public static final ActivityHTTP activity;
+    public static final RelationHTTP relation;
+    public static final ApplyHTTP apply;
 
     static {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(base_url+"account/")
+        Retrofit.Builder builder = new Retrofit.Builder()
+//                .baseUrl(base_url+"account/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .client(slowHttpClient())
-                .build();
-        accHttp = retrofit.create(AccountHTTP.class);
+                .client(slowHttpClient());
+        account = builder.baseUrl(base_url + "account/").build().create(AccountHTTP.class);
+        relation = builder.baseUrl(base_url + "account/").build().create(RelationHTTP.class);
+        activity = builder.baseUrl(base_url + "activity/").build().create(ActivityHTTP.class);
+        apply = builder.baseUrl(base_url + "activity/").build().create(ApplyHTTP.class);
+        link = builder.baseUrl(base_url + "link/").build().create(LinkHTTP.class);
     }
 
     public static OkHttpClient slowMoreHttpClient() {
@@ -61,21 +72,19 @@ public class HTTPFactory {
 
 
     private static Interceptor commonInterceptor() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request.Builder requestBuilder = originalRequest.newBuilder()
-                        .addHeader("Accept-Encoding", "gzip")
-                        .addHeader("Accept", "application/json")
-                        .addHeader("Content-Type", "application/json; charset=utf-8")
-                        .method(originalRequest.method(), originalRequest.body());
-                requestBuilder.addHeader("token", "6589affbcb794b97a4ca477c458bbff9");//添加请求头信息，服务器进行token有效性验证
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
+        return chain -> {
+            Request originalRequest = chain.request();
+            Request.Builder requestBuilder = originalRequest.newBuilder()
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Content-Type", "application/json; charset=utf-8")
+                    .method(originalRequest.method(), originalRequest.body());
+            requestBuilder.addHeader("token", "6589affbcb794b97a4ca477c458bbff9");//添加请求头信息，服务器进行token有效性验证
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
         };
     }
+
     private static Response logInterceptor(Interceptor.Chain chain) throws IOException {
         HttpUrl url = chain.request().url();
         long t1 = System.currentTimeMillis();
@@ -96,15 +105,23 @@ public class HTTPFactory {
         } catch (Exception e) {
             throw e;
         } finally {
-            long cost = System.currentTimeMillis()-t1;
-            Log.d("HTTP_LOG",String.format("|%s|reqBody %s|respBody %s|cost %d|", url, rb, pb, cost));
+            long cost = System.currentTimeMillis() - t1;
+            Log.d("HTTP_LOG", String.format("|%s |reqBody %s|respBody %s|cost %d|", url, rb, pb, cost));
         }
         return response.newBuilder()
-                .body(okhttp3.ResponseBody.create(pb,mediaType))
+                .body(okhttp3.ResponseBody.create(pb, mediaType))
                 .build();
     }
 
-    public static AccountHTTP getAccountHTTP(){
-        return accHttp;
+    static class NullOnEmptyConverterFactory extends Converter.Factory {
+
+        @Override
+        public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+            final Converter<ResponseBody, ?> delegate = retrofit.nextResponseBodyConverter(this, type, annotations);
+            return (Converter<ResponseBody, Object>) body -> {
+                if (body.contentLength() == 0) return null;
+                return delegate.convert(body);
+            };
+        }
     }
 }

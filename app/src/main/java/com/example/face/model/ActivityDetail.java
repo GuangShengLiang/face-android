@@ -4,5 +4,11 @@ import lombok.Data;
 
 @Data
 public class ActivityDetail {
-    private String name;
+    private long id;
+    private long aid;
+    private int status;
+    private String title;
+    private String uname;
+    private String address;
+    private String stime;
 }

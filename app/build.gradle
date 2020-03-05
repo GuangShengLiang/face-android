@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
     implementation 'com.jakewharton:butterknife:10.2.1'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'com.hjq:titlebar:6.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.okhttp3:okhttp:4.0.1'

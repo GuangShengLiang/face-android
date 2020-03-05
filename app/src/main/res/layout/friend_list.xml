@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+               >
+
+<!--    <include layout="@layout/friend_list_header"/>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rcv_friend"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--           />-->
+    <ListView
+            android:id="@+id/lv_friends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_loading"
+            android:background="@android:color/transparent"
+            android:cacheColorHint="@color/divider_list"
+            android:descendantFocusability="afterDescendants"
+            android:divider="@color/divider_list"
+            android:dividerHeight="0.1dp"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:scrollbars="none" />
+</LinearLayout>

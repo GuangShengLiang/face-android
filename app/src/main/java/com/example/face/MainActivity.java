@@ -15,7 +15,10 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.example.face.activity.PublishActivity;
-import com.example.face.fragment.*;
+import com.example.face.fragment.DiscoverFragment;
+import com.example.face.fragment.FriendFragment;
+import com.example.face.fragment.HomeFragment;
+import com.example.face.fragment.ProfileFragment;
 import com.example.face.view.KickBackAnimator;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.utils.NavigationUtil;
@@ -28,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     private EasyNavigationBar navigationBar;
 
-    private String[] tabText = {"首页", "发现", "", "好友", "我的"};
+    private String[] tabText = {"首页", "好友", "", "消息", "我的"};
     //未选中icon
-    private int[] normalIcon = {R.mipmap.index, R.mipmap.find, R.mipmap.add_image, R.mipmap.message, R.mipmap.me};
+    private int[] normalIcon = {R.mipmap.index, R.mipmap.friend1, R.mipmap.add_image, R.mipmap.message, R.mipmap.me};
     //选中时icon
     private int[] selectIcon = {R.mipmap.index1, R.mipmap.find1, R.mipmap.add_image, R.mipmap.message1, R.mipmap.me1};
 
@@ -53,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         navigationBar = findViewById(R.id.navigationBar);
 
         fragments.add(new HomeFragment());
-        fragments.add(new DiscoverFragment());
         fragments.add(new FriendFragment());
+        fragments.add(new DiscoverFragment());
         fragments.add(new ProfileFragment());
 
         navigationBar.titleItems(tabText)
