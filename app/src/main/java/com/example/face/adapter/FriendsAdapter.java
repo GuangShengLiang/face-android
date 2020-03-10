@@ -78,7 +78,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
         }
 
         if (!TextUtils.isEmpty(avatar)) {
-            viewHolder.mAvatarSdv.setImageURI(Uri.parse(Constant.BASE_URL_PICTURE+avatar));
+            CommonUtil.loadAvatar(getContext(), viewHolder.mAvatarSdv, avatar);
         }
 
         return convertView;

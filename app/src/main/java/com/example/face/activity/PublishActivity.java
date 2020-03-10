@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -17,10 +16,13 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.face.R;
-import com.example.face.model.ActivityReq;
-import com.google.gson.Gson;
+import com.example.face.http.BaseObserver;
+import com.example.face.http.HTTP;
+import com.example.face.model.ActReq;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,12 +31,14 @@ public class PublishActivity extends BaseActivity {
 
     @BindView(R.id.tv_pd_title)
     EditText title;
-    @BindView(R.id.tv_pd_time)
-    TextView time;
-    //    @BindView(R.id.tv_pd_address)
-//    EditText address;
+    @BindView(R.id.tv_st_time)
+    TextView stime;
+    @BindView(R.id.tv_end_time)
+    TextView etime;
+    @BindView(R.id.tv_pd_address)
+    EditText address;
     @BindView(R.id.tv_pd_content)
-    EditText content;
+    EditText detail;
     //    @BindView(R.id.wheelview)
 //    WheelView wheelView;
     @BindView(R.id.title_bar)
@@ -90,21 +94,29 @@ public class PublishActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                ActivityReq r = ActivityReq.builder().title(title.getText().toString())
-                        .time(time.getText().toString())
-//                        .address(address.getText().toString())
-                        .content(content.getText().toString()).build();
-                Log.d("tt", new Gson().toJson(r));
+                ActReq r = ActReq.builder().title(title.getText().toString())
+                        .startTime(stime.getText().toString())
+                        .endTime(etime.getText().toString())
+                        .address(address.getText().toString())
+                        .detail(detail.getText().toString()).build();
+                HTTP.activity.add(r).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<>());
             }
         });
     }
 
-    @OnClick(R.id.tv_pd_time)
-    public void showDatePicker() {
-        pvTime.show(time);
+    @OnClick(R.id.tv_st_time)
+    public void showStimeDatePicker() {
+        pvTime.show(stime);
     }
 
-    @OnClick(R.id.tv_pd_address)
+    @OnClick(R.id.tv_end_time)
+    public void showEtimeDatePicker() {
+        pvTime.show(etime);
+    }
+
+//    @OnClick(R.id.tv_pd_address)
     public void showAddressChoice() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_choice, null);
         GridView gv = view.findViewById(R.id.gv_choice);
@@ -126,26 +138,23 @@ public class PublishActivity extends BaseActivity {
                 .create();
         alertDialog.show();
         //监听点击事件，点击以后，之前的选中应该变为未选中
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                alertDialog.dismiss();
-                ComponentName cn;
-                if (0 == position) {
-                    cn = new ComponentName(PublishActivity.this, SearchAddressActivity.class);
-                } else {
-                    cn = new ComponentName(PublishActivity.this, AboutAddressActivity.class);
-                }
-                Intent intent = new Intent();
-                intent.setComponent(cn);
-                intent.putExtra("id", position);
-                startActivity(intent);
+        gv.setOnItemClickListener((parent, view1, position, id) -> {
+            alertDialog.dismiss();
+            ComponentName cn;
+            if (0 == position) {
+                cn = new ComponentName(PublishActivity.this, SearchAddressActivity.class);
+            } else {
+                cn = new ComponentName(PublishActivity.this, AboutAddressActivity.class);
             }
+            Intent intent = new Intent();
+            intent.setComponent(cn);
+            intent.putExtra("id", position);
+            startActivity(intent);
         });
     }
 
     private String getTimes(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }
 

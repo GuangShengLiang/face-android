@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.example.face.activity.PublishActivity;
-import com.example.face.fragment.DiscoverFragment;
+import com.example.face.fragment.MessageFragment;
 import com.example.face.fragment.FriendFragment;
 import com.example.face.fragment.HomeFragment;
 import com.example.face.fragment.ProfileFragment;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragments.add(new HomeFragment());
         fragments.add(new FriendFragment());
-        fragments.add(new DiscoverFragment());
+        fragments.add(new MessageFragment());
         fragments.add(new ProfileFragment());
 
         navigationBar.titleItems(tabText)

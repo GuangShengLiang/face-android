@@ -31,6 +31,7 @@ import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
 import com.example.face.model.AccountReq;
+import com.example.face.util.CommonUtil;
 import com.example.face.util.FileUtil;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.util.VolleyUtil;
@@ -43,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyUserInfoActivity extends FragmentActivity {
+public class MyUserInfoActivity extends BaseActivity {
 
     private static final int WRITE_PERMISSION = 0x01;
 
@@ -81,7 +82,6 @@ public class MyUserInfoActivity extends FragmentActivity {
         user = PreferencesUtil.getInstance().getUser();
         dialog = new LoadingDialog(MyUserInfoActivity.this);
 
-        requestWritePermission();
         HTTP.account.myInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -92,7 +92,7 @@ public class MyUserInfoActivity extends FragmentActivity {
                         PreferencesUtil.saveAccount(context, a);
                         mNickNameTv.setText(a.getNickName());
                         mWxIdTv.setText(String.valueOf(a.getUid()));
-                        mAvatarSdv.setImageURI(Uri.parse(Constant.BASE_URL_PICTURE + a.getAvatar()));
+                        CommonUtil.loadAvatar(mContext, mAvatarSdv, a.getAvatar());
                         mSexTv.setText(a.getGenderName());
                     }
                 });

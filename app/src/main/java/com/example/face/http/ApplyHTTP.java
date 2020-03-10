@@ -18,5 +18,5 @@ public interface ApplyHTTP {
     Observable<Void> apply(@Body AidReq r);
 
     @PUT(value = "apply/agree")
-    Observable<Void> agree(@Body() IdReq r);
+    Observable<Void> agree(@Body IdReq r);
 }

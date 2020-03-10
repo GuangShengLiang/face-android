@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.face.Constant;
 import com.example.face.R;
 import com.example.face.activity.UserInfoActivity;
 import com.example.face.entity.FriendApply;
+import com.example.face.util.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -58,7 +61,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
 
         mNickNameTv.setText(p.getNickName());
         mApplyReasonTv.setText(p.getReason());
-        mAvatarSdv.setImageURI(Uri.parse(Constant.BASE_URL_PICTURE + p.getAvatar()));
+        CommonUtil.loadAvatar(mContext, mAvatarSdv, p.getAvatar());
         if (Constant.FRIEND_APPLY_STATUS_ACCEPT.equals(p.getStatus())) {
             mAddTv.setVisibility(View.VISIBLE);
             mAddBtn.setVisibility(View.GONE);

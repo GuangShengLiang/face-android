@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.face.entity.User;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
+import com.example.face.util.CommonUtil;
 import com.example.face.util.PreferencesUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,7 +63,7 @@ public class ProfileFragment extends Fragment {
                     public void onNext(Account a) {
                         mNickNameTv.setText(a.getNickName());
                         mWxIdTv.setText("ID:" + a.getUid());
-                        mAvatarSdv.setImageURI(Uri.parse(Constant.BASE_URL_PICTURE + a.getAvatar()));
+                        CommonUtil.loadAvatar(getContext(), mAvatarSdv, a.getAvatar());
                     }
                 });
 
@@ -99,12 +101,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        user = PreferencesUtil.getInstance().getUser();
-        mNickNameTv.setText(user.getUserNickName());
-        String userWxId = user.getUserWxId() == null ? "" : user.getUserWxId();
-        mWxIdTv.setText("ID:" + userWxId);
-        if (!TextUtils.isEmpty(user.getUserAvatar())) {
-            mAvatarSdv.setImageURI(Uri.parse(user.getUserAvatar()));
-        }
+        Account acc = PreferencesUtil.getAccount(this.getContext());
+        mNickNameTv.setText(acc.getNickName());
+        mWxIdTv.setText("ID:" + acc.getUid());
+        CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
     }
 }

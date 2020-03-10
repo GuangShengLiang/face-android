@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.face.R;
 
-public class DiscoverFragment extends Fragment {
+public class MessageFragment extends Fragment {
 
     @Nullable
     @Override

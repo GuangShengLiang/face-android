@@ -20,6 +20,7 @@ import com.example.face.model.Account;
 import com.example.face.model.FriendReq;
 import com.example.face.model.Relation;
 import com.example.face.model.RuidReq;
+import com.example.face.util.CommonUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -72,13 +73,8 @@ public class UserInfoActivity extends BaseActivity {
                         name.setText(a.getNickName());
                         birthday.setText(a.getYear());
                         city.setText("北京");
-                        RequestOptions options = new RequestOptions();
-                        options.placeholder(R.drawable.boy) //这里设置占位图
-                                .error(R.drawable.boy);
-                        Glide.with(mContext)
-                                .load(Constant.BASE_URL_PICTURE + a.getAvatar())
-                                .apply(options)
-                                .into(avatar);
+                        CommonUtil.loadAvatar(mContext, avatar, a.getAvatar());
+
                     }
                 });
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {

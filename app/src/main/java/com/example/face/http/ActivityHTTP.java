@@ -5,10 +5,7 @@ import com.example.face.model.Account;
 import com.example.face.model.ActReq;
 import com.example.face.model.ActivityDetail;
 import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -36,10 +33,10 @@ public interface ActivityHTTP {
     Observable<ActivityDetail> detail(@Query("aid") long aid);
 
     @POST(value = "activity")
-    Observable<Void> add(ActReq r);
+    Observable<Void> add(@Body ActReq r);
 
     @PUT(value = "activity")
-    Observable<Void> modify(ActReq req);
+    Observable<Void> modify(@Body ActReq req);
 
     @GET(value = "activity/member/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);

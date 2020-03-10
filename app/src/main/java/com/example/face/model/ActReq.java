@@ -8,17 +8,16 @@ import java.util.Date;
 @Data
 @Builder
 public class ActReq {
-    private long aid;
     private String title;
-    private String detail;
     private String address;
+    private String detail;
     private String picture;
     private Integer status;
     private Integer pubType;
     private Double latitude;
     private Double longitude;
     //    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date startTime;
+    private String startTime;
     //    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date endTime;
+    private String endTime;
 }

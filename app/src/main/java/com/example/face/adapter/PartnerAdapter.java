@@ -16,6 +16,7 @@ import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
 import com.example.face.util.ActivityUtils;
+import com.example.face.util.CommonUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -56,13 +57,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
         Account acc = mList.get(position);
         holder.tvContent.setText(acc.getNickName());
-        RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.boy) //这里设置占位图
-                .error(R.drawable.boy);
-        Glide.with(mContext)
-                .load(Constant.BASE_URL_PICTURE + acc.getAvatar())
-                .apply(options)
-                .into(holder.imAvatar);
+        CommonUtil.loadAvatar(mContext, holder.imAvatar, acc.getAvatar());
         holder.itemView.setOnClickListener(view -> {
             ActivityUtils.openUserInfoActivity(mContext,acc.getUid());
         });

@@ -82,7 +82,5 @@ public class HomeFragment extends Fragment {
                     });
             refreshLayout.finishLoadMore(2000);
         });
-
-
     }
 }
