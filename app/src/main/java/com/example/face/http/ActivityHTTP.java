@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ActivityHTTP {
 
-    @GET("list_friend_activity")
+    @GET("friend_activity/list")
     Observable<List<ActivityDetail>> listFriendAct();
 
     @GET(value = "search")
