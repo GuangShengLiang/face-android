@@ -12,7 +12,10 @@ import java.util.List;
 public interface ApplyHTTP {
 
     @GET(value = "apply/aid/list")
-    Observable<List<ActApply>> listApply(@Query("aid") long aid);
+    Observable<List<ActApply>> listApplyByAid(@Query("aid") long aid);
+
+    @GET(value = "apply/list")
+    Observable<List<ActApply>> listApply();
 
     @POST(value = "apply")
     Observable<Void> apply(@Body AidReq r);

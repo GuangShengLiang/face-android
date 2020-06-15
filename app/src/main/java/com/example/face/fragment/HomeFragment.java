@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (mAdapter == null) {
             mRecyclerView.setAdapter(mAdapter = new ActAdapter(this.getContext()));
-            actHTTP.listFriendAct()
+            actHTTP.listFriendRefresh(0)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<List<ActivityDetail>>() {
@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
             refreshLayout.finishRefresh(2000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            actHTTP.listFriendAct()
+            actHTTP.listFriendNext(0)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<List<ActivityDetail>>() {
