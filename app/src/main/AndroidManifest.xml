@@ -37,6 +37,8 @@
         <activity android:name=".activity.MyUserInfoActivity"/>
         <activity android:name=".activity.MyPublishListActivity"/>
         <activity android:name=".activity.MyJoinListActivity"/>
+        <activity android:name=".activity.MyApplyListActivity"/>
+        <activity android:name=".activity.MyInvitedListActivity"/>
         <meta-data
                 android:name="com.amap.api.v2.apikey"
                 android:value="f8c81c2ebb3604034c503298d1581cbc"/>

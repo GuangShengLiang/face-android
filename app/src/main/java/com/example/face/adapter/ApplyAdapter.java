@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.ActApply;
+import com.example.face.model.act.ApplyResp;
 import com.example.face.model.IdReq;
 import com.example.face.util.ActivityUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,19 +29,19 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
 
     private Context mContext;
 
-    private List<ActApply> mList = new ArrayList<>();
+    private List<ApplyResp> mList = new ArrayList<>();
 
     public ApplyAdapter(Context context) {
         mContext = context;
     }
 
     public void setHorizontalDataList(long aid) {
-        HTTP.apply.listApply(aid)
+        HTTP.apply.listApply()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActApply>>() {
+                .subscribe(new BaseObserver<List<ApplyResp>>() {
                     @Override
-                    public void onNext(List<ActApply> l) {
+                    public void onNext(List<ApplyResp> l) {
                         mList.addAll(l);
                         notifyDataSetChanged();
                     }
@@ -57,8 +57,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
-        ActApply p = mList.get(position);
-        holder.name.setText(p.getNickName());
+        ApplyResp p = mList.get(position);
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.boy) //这里设置占位图
                 .error(R.drawable.boy);

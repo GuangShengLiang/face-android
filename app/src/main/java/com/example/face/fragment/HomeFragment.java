@@ -13,7 +13,7 @@ import com.example.face.adapter.ActAdapter;
 import com.example.face.http.ActivityHTTP;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.ActivityDetail;
+import com.example.face.model.act.ActivityDetail;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;

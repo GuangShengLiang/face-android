@@ -98,6 +98,11 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.rl_my_apply)
+    void myapplyList() {
+        Intent intent = new Intent(getActivity(), MyApplyListActivity.class);
+        startActivity(intent);
+    }
     @OnClick(R.id.rl_my_invited)
     void myInvitedList() {
         Intent intent = new Intent(getActivity(), MyInvitedListActivity.class);

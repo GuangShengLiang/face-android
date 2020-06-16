@@ -18,7 +18,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.ActReq;
+import com.example.face.model.act.ActReq;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -17,8 +17,7 @@ import com.example.face.R;
 import com.example.face.activity.ActManageActivity;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.ActInvitedResp;
-import com.example.face.model.ActivityDetail;
+import com.example.face.model.act.ActInvitedResp;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

@@ -15,7 +15,7 @@ import com.example.face.adapter.InviteAdapter;
 import com.example.face.adapter.PartnerAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.ActivityDetail;
+import com.example.face.model.act.ActivityDetail;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import io.reactivex.android.schedulers.AndroidSchedulers;

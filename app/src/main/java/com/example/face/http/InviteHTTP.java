@@ -1,8 +1,8 @@
 package com.example.face.http;
 
 
-import com.example.face.model.ActInviteResp;
-import com.example.face.model.ActReq;
+import com.example.face.model.act.ActInviteResp;
+import com.example.face.model.act.ActReq;
 import com.example.face.model.IdReq;
 import io.reactivex.Observable;
 import retrofit2.http.Body;

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.activity.ActDetailActivity;
-import com.example.face.model.ActivityDetail;
+import com.example.face.model.act.ActivityDetail;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,8 @@ package com.example.face.http;
 
 
 import com.example.face.model.Account;
-import com.example.face.model.ActReq;
-import com.example.face.model.ActivityDetail;
+import com.example.face.model.act.ActReq;
+import com.example.face.model.act.ActivityDetail;
 import io.reactivex.Observable;
 import retrofit2.http.*;
 

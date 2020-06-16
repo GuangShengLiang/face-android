@@ -1,4 +1,4 @@
-package com.example.face.model;
+package com.example.face.model.act;
 
 import lombok.Builder;
 import lombok.Data;
