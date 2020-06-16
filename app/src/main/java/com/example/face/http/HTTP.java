@@ -58,7 +58,7 @@ public class HTTP {
                 .readTimeout(2L, TimeUnit.SECONDS)
                 .writeTimeout(2L, TimeUnit.SECONDS)
                 .connectTimeout(5L, TimeUnit.SECONDS)
-                .connectionPool(new ConnectionPool(20, 30L, TimeUnit.MINUTES))
+                .connectionPool(new ConnectionPool(5, 10L, TimeUnit.MINUTES))
                 .addInterceptor(commonInterceptor())
                 .addInterceptor(chain -> logInterceptor(chain)).build();
         return client;

@@ -12,7 +12,10 @@ import java.util.List;
 public interface ActivityHTTP {
 
     @GET("friend_activity/list")
-    Observable<List<ActivityDetail>> listFriendAct();
+    Observable<List<ActivityDetail>> listFriendRefresh(@Query("aid") long aid);
+
+    @GET("friend_activity/list")
+    Observable<List<ActivityDetail>> listFriendNext(@Query("aid") long aid);
 
     @GET(value = "search")
     Observable<Object> search(int fromId);
