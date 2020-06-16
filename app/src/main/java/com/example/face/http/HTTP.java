@@ -23,6 +23,8 @@ public class HTTP {
     public static final ActivityHTTP activity;
     public static final RelationHTTP relation;
     public static final ApplyHTTP apply;
+    public static final InviteHTTP invite;
+    public static final InvitedHTTP invited;
 
     static {
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -35,6 +37,8 @@ public class HTTP {
         relation = builder.baseUrl(base_url + "account/").build().create(RelationHTTP.class);
         activity = builder.baseUrl(base_url + "activity/").build().create(ActivityHTTP.class);
         apply = builder.baseUrl(base_url + "activity/").build().create(ApplyHTTP.class);
+        invite = builder.baseUrl(base_url + "activity/").build().create(InviteHTTP.class);
+        invited = builder.baseUrl(base_url + "activity/").build().create(InvitedHTTP.class);
         link = builder.baseUrl(base_url + "link/").build().create(LinkHTTP.class);
     }
 

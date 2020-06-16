@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.face.R;
 import com.example.face.adapter.ApplyAdapter;
+import com.example.face.adapter.InviteAdapter;
 import com.example.face.adapter.PartnerAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
@@ -32,6 +33,8 @@ public class ActManageActivity extends BaseActivity {
     RecyclerView partnerView;
     @BindView(R.id.rcv_apply)
     RecyclerView applyView;
+    @BindView(R.id.rcv_invite)
+    RecyclerView inviteView;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
@@ -81,7 +84,7 @@ Log.d("tt","right");
         partnerView.setAdapter(adapter);
         adapter.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
         initApply();
-
+        initInvite();
     }
     void initApply(){
         ApplyAdapter ad = new ApplyAdapter(this);
@@ -90,6 +93,15 @@ Log.d("tt","right");
         applyView.setLayoutManager(horizontal);
         applyView.setHasFixedSize(true);
         applyView.setAdapter(ad);
+        ad.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
+    }
+    void initInvite(){
+        InviteAdapter ad = new InviteAdapter(this);
+        LinearLayoutManager horizontal = new LinearLayoutManager(this);
+        horizontal.setOrientation(RecyclerView.VERTICAL);
+        inviteView.setLayoutManager(horizontal);
+        inviteView.setHasFixedSize(true);
+        inviteView.setAdapter(ad);
         ad.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
     }
 }
