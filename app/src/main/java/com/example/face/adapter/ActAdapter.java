@@ -11,7 +11,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.activity.ActDetailActivity;
+import com.example.face.activity.ActManageActivity;
+import com.example.face.model.Account;
 import com.example.face.model.act.ActivityDetail;
+import com.example.face.util.PreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +62,13 @@ public class ActAdapter extends RecyclerView.Adapter {
         uname.setText(d.getUname());
         time.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, ActDetailActivity.class);
+            Account acc = PreferencesUtil.getAccount(mContext);
+            Intent intent;
+            if (acc != null && acc.getUid() == d.getUid()) {
+                intent = new Intent(mContext, ActManageActivity.class);
+            } else {
+                intent = new Intent(mContext, ActDetailActivity.class);
+            }
             intent.putExtra("aid", d.getAid());
             mContext.startActivity(intent);
         });

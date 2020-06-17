@@ -36,7 +36,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
     }
 
     public void setHorizontalDataList(long aid) {
-        HTTP.apply.listApply()
+        HTTP.apply.listApplyByAid(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<List<ApplyResp>>() {

@@ -3,6 +3,7 @@ package com.example.face.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.act.ActivityDetail;
 import com.example.face.model.act.AidReq;
+import com.example.face.model.act.ApplyButtonResp;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,9 +33,12 @@ public class ActDetailActivity extends BaseActivity {
     TextView address;
     @BindView(R.id.rcv_partner)
     RecyclerView partnerView;
+    @BindView(R.id.btn_apply)
+    Button appbtn;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
     ActivityDetail d;
+    ApplyButtonResp buttonResp;
 
     @Nullable
     @Override
@@ -52,6 +57,15 @@ public class ActDetailActivity extends BaseActivity {
                         title.setText(a.getTitle());
                         time.setText(a.getStime());
                         address.setText(a.getAddress());
+                    }
+                });
+        HTTP.apply.applyButton(getIntent().getExtras().getLong("aid"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<ApplyButtonResp>() {
+                    @Override
+                    public void onNext(ApplyButtonResp a) {
+                        appbtn.setText(a.getButtonLabel());
                     }
                 });
 

@@ -25,8 +25,11 @@ import com.example.face.model.Account;
 import com.example.face.util.CommonUtil;
 import com.example.face.util.PreferencesUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.zxing.common.StringUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+import java.util.Optional;
 
 /**
  * tab - "我"
@@ -99,7 +102,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @OnClick(R.id.rl_my_apply)
-    void myapplyList() {
+    void myApplyList() {
         Intent intent = new Intent(getActivity(), MyApplyListActivity.class);
         startActivity(intent);
     }
@@ -112,8 +115,10 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Account acc = PreferencesUtil.getAccount(this.getContext());
-        mNickNameTv.setText(acc.getNickName());
-        mWxIdTv.setText("ID:" + acc.getUid());
-        CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
+        Optional.ofNullable(acc).ifPresent(e->{
+            mNickNameTv.setText(Optional.ofNullable(acc.getNickName()).orElse(""));
+            mWxIdTv.setText("ID:" + acc.getUid());
+            CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
+        });
     }
 }

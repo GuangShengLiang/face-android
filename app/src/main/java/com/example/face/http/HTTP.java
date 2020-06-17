@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 public class HTTP {
 
-    private static final String base_url = "http://192.168.0.118:8080/api/";
-    //    private static final String base_url="http://172.19.240.218:8080/api/";
+//    private static final String base_url = "http://192.168.0.118:8080/api/";
+        private static final String base_url="http://172.19.231.191:8080/api/";
     public static final AccountHTTP account;
     public static final LinkHTTP link;
     public static final ActivityHTTP activity;
@@ -57,7 +57,7 @@ public class HTTP {
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(2L, TimeUnit.SECONDS)
                 .writeTimeout(2L, TimeUnit.SECONDS)
-                .connectTimeout(5L, TimeUnit.SECONDS)
+                .connectTimeout(3L, TimeUnit.SECONDS)
                 .connectionPool(new ConnectionPool(5, 10L, TimeUnit.MINUTES))
                 .addInterceptor(commonInterceptor())
                 .addInterceptor(chain -> logInterceptor(chain)).build();

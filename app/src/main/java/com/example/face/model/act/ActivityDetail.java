@@ -6,6 +6,7 @@ import lombok.Data;
 public class ActivityDetail {
     private long id;
     private long aid;
+    private int uid;
     private int status;
     private String title;
     private String uname;
