@@ -15,8 +15,8 @@ public interface ApplyHTTP {
     @GET(value = "apply/aid/list")
     Observable<List<ApplyResp>> listApplyByAid(@Query("aid") long aid);
 
-    @GET(value = "apply/button")
-    Observable<ApplyButtonResp> applyButton(@Query("aid") long aid);
+    @GET(value = "apply/is_need_apply")
+    Observable<Boolean> isNeedApply(@Query("aid") long aid);
 
     @GET(value = "apply/list")
     Observable<List<ApplyResp>> listApply();

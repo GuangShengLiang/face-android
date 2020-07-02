@@ -16,6 +16,7 @@ public class ActInviteResp {
     private String title;
     private String address;
     private String picture;
+    private String statusName;
 
 }
 

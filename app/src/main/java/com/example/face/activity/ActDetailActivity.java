@@ -59,13 +59,17 @@ public class ActDetailActivity extends BaseActivity {
                         address.setText(a.getAddress());
                     }
                 });
-        HTTP.apply.applyButton(getIntent().getExtras().getLong("aid"))
+        HTTP.apply.isNeedApply(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ApplyButtonResp>() {
+                .subscribe(new BaseObserver<Boolean>() {
                     @Override
-                    public void onNext(ApplyButtonResp a) {
-                        appbtn.setText(a.getButtonLabel());
+                    public void onNext(Boolean b) {
+                        if (b){
+                            appbtn.setText("立即申请");
+                        }else {
+                            appbtn.setText("已申请");
+                        }
                     }
                 });
 

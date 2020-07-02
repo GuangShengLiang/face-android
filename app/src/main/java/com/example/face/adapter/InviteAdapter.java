@@ -59,6 +59,7 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
         ActInviteResp p = mList.get(position);
         holder.name.setText(p.getNickName());
+        holder.status.setText(p.getStatusName());
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.boy) //这里设置占位图
                 .error(R.drawable.boy);
@@ -78,6 +79,7 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
                     .subscribe(new BaseObserver<Void>() {
                         @Override
                         public void onNext(Void v) {
+                            holder.status.setText("已取消");
                         }
                     });
         });
@@ -96,6 +98,8 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
         ImageView avatar;
         @BindView(R.id.invite_cancel)
         Button cancel;
+        @BindView(R.id.invite_status)
+        TextView status;
 
         public HorizontalViewHolder(View itemView) {
             super(itemView);

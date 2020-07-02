@@ -65,6 +65,8 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
                 .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
                 .apply(options)
                 .into(holder.avatar);
+        holder.statusName.setText(p.getStatusName());
+        holder.name.setText(p.getNickName());
         holder.avatar.setOnClickListener(view -> {
             ActivityUtils.openUserInfoActivity(mContext,p.getUid());
         });
@@ -77,6 +79,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
                     .subscribe(new BaseObserver<Void>() {
                         @Override
                         public void onNext(Void v) {
+                            holder.statusName.setText("同意");
                         }
                     });
         });
@@ -91,6 +94,8 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
 
         @BindView(R.id.apply_name)
         TextView name;
+        @BindView(R.id.apply_status)
+        TextView statusName;
         @BindView(R.id.apply_avatar)
         ImageView avatar;
         @BindView(R.id.apply_approval)

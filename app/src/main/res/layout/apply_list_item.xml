@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
-    <LinearLayout
-            android:layout_width="60dp"
-            android:layout_height="80dp"
-            android:orientation="vertical">
-        <ImageView
-                android:id="@+id/apply_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/boy"
-        />
-        <TextView
-                android:id="@+id/apply_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                tools:text="jack"/>
-    </LinearLayout>
-
+              android:orientation="vertical">
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"/>
-        <Button
-                android:id="@+id/apply_approval"
-                android:layout_width="100dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:background="@color/btn_green_noraml"
-                android:text="通过"/>
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+        <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <ImageView
+                    android:id="@+id/apply_avatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/boy"
+            />
+            <TextView
+                    android:id="@+id/apply_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <TextView
+                    android:id="@+id/apply_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"/>
+            <Button
+                    android:id="@+id/apply_approval"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/btn_green_noraml"
+                    android:text="通过"/>
+        </LinearLayout>
     </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#f0f0f0"/>
 </LinearLayout>

@@ -172,7 +172,7 @@
                 android:layout_weight="19"
                 android:background="@color/green"
                 android:gravity="center"
-                android:text="立即报名"
+                android:text="停止报名"
                 android:textColor="#ffffff"
                 android:textSize="15sp"/>
 
