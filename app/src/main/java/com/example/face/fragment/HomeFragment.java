@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
                         public void onNext(List<ActivityDetail> ls) {
                             mAdapter.loadMore(ls);
                         }
+
                     });
             mRefreshLayout.autoRefresh();
         }

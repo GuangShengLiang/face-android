@@ -26,7 +26,7 @@ public class BaseObserver<T> implements Observer<T> {
             HttpException he = (HttpException)e;
             if (he.code()==600){
                 try {
-                    Log.d("biz error {}",he.response().errorBody().string());
+                    Log.e("biz error {}",he.response().errorBody().string());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

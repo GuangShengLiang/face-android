@@ -15,7 +15,7 @@ buildscript {
         maven { url 'https://www.jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
 //        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
@@ -27,13 +27,20 @@ buildscript {
 android {
     compileSdkVersion 29
     buildToolsVersion '29.0.0'
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.x.myapplication"
-        minSdkVersion 24
-        targetSdkVersion 24
+        minSdkVersion 23
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        maxSdkVersion 28
     }
     buildTypes {
         release {

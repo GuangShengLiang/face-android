@@ -1,7 +1,6 @@
 package com.example.face;
 
 import android.app.Application;
-import com.chaoliu.mock.core.RetrofitMock;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orm.SugarContext;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -17,7 +16,7 @@ public class FLinkApplication extends Application {
         Fresco.initialize(this);
         SugarContext.init(this);
 
-        RetrofitMock.setEnabled( true );
+//        RetrofitMock.setEnabled( true );
 
 //        // 极光推送
 //        JPushInterface.setDebugMode(true);

@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new FriendFragment());
         fragments.add(new MessageFragment());
         fragments.add(new ProfileFragment());
+//        fragments.add(new ProfileFragment());
+//        fragments.add(new ProfileFragment());
+//        fragments.add(new ProfileFragment());
 
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)

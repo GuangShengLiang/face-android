@@ -115,10 +115,10 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Account acc = PreferencesUtil.getAccount(this.getContext());
-        Optional.ofNullable(acc).ifPresent(e->{
-            mNickNameTv.setText(Optional.ofNullable(acc.getNickName()).orElse(""));
-            mWxIdTv.setText("ID:" + acc.getUid());
-            CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
-        });
+//        Optional.ofNullable(acc).ifPresent(e -> {
+//            mNickNameTv.setText(Optional.ofNullable(e.getNickName()).orElse(""));
+//            mWxIdTv.setText("ID:" + e.getUid());
+//            CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
+//        });
     }
 }
