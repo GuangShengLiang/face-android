@@ -11,15 +11,16 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
             <ImageView
-                    android:id="@+id/apply_avatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/boy"
-            />
+                android:id="@+id/apply_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:src="@drawable/boy" />
             <TextView
                     android:id="@+id/apply_name"
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_height="20dp"
                     android:textAlignment="center"/>
         </LinearLayout>
@@ -32,11 +33,12 @@
                     android:id="@+id/apply_status"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"/>
+                    android:layout_weight="4"/>
             <Button
                     android:id="@+id/apply_approval"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:background="@color/btn_green_noraml"
                     android:text="通过"/>
         </LinearLayout>
