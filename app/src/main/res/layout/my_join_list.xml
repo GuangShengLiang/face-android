@@ -4,18 +4,6 @@
               android:layout_width="match_parent"
               android:orientation="vertical"
               android:layout_height="match_parent">
-    <com.hjq.bar.TitleBar xmlns:app="http://schemas.android.com/apk/res-auto"
-                          android:id="@+id/title_bar"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          app:backButton="true"
-                          app:barStyle="light"
-                          app:rightColor="@color/black"
-                          app:rightTitle="完成"
-                          app:rightSize="14dp"
-                          app:title="修改昵称"
-                          app:titleSize="13dp"
-                          app:titleColor="@color/black"/>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"

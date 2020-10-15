@@ -91,7 +91,8 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.rl_my_join)
     void myJoinList() {
-        Intent intent = new Intent(getActivity(), MyJoinListActivity.class);
+//        Intent intent = new Intent(getActivity(), MyJoinListActivity.class);
+        Intent intent = new Intent(getActivity(), ActTabsActivity.class);
         startActivity(intent);
     }
 
