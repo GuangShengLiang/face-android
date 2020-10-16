@@ -1,6 +1,7 @@
 package com.example.face.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,11 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
                 .into(holder.avatar);
         holder.statusName.setText(p.getStatusName());
         holder.name.setText(p.getNickName());
+
+        if (p.getStatus() != 0) {
+            holder.approval.setClickable(false);
+            holder.approval.setBackgroundColor(Color.GRAY);
+        }
         holder.avatar.setOnClickListener(view -> {
             ActivityUtils.openUserInfoActivity(mContext,p.getUid());
         });
@@ -80,6 +86,8 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
                         @Override
                         public void onNext(Void v) {
                             holder.statusName.setText("同意");
+                            holder.approval.setClickable(false);
+                            holder.approval.setBackgroundColor(Color.GRAY);
                         }
                     });
         });

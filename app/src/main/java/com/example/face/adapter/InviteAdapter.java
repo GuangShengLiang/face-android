@@ -1,6 +1,7 @@
 package com.example.face.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,10 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
         ActInviteResp p = mList.get(position);
         holder.name.setText(p.getNickName());
         holder.status.setText(p.getStatusName());
+        if (p.getStatus() != 0) {
+            holder.cancel.setClickable(false);
+            holder.cancel.setBackgroundColor(Color.GRAY);
+        }
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.boy) //这里设置占位图
                 .error(R.drawable.boy);
@@ -68,10 +73,10 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
                 .apply(options)
                 .into(holder.avatar);
         holder.avatar.setOnClickListener(view -> {
-            ActivityUtils.openUserInfoActivity(mContext,p.getUid());
+            ActivityUtils.openUserInfoActivity(mContext, p.getUid());
         });
         holder.cancel.setOnClickListener(view -> {
-            IdReq req =new IdReq();
+            IdReq req = new IdReq();
             req.setId(p.getId());
             HTTP.invite.cancel(req)
                     .subscribeOn(Schedulers.io())
@@ -80,6 +85,8 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
                         @Override
                         public void onNext(Void v) {
                             holder.status.setText("已取消");
+                            holder.cancel.setClickable(false);
+                            holder.cancel.setBackgroundColor(Color.GRAY);
                         }
                     });
         });
