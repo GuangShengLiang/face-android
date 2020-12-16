@@ -17,16 +17,16 @@ import retrofit2.http.Query;
 public interface AccountHTTP {
 
     @GET("login")
-    String login(String mobike, String vcode);
+    String login(String mobile, String vcode);
 
     @POST("register")
-    String register(String mobike, String vcode);
+    String register(String mobile, String vcode);
 
     @GET("mine/info")
     Observable<Account> myInfo();
 
     @GET("search_mobile")
-    Observable<Account> searchMobile(@Query("mobile") String mobike);
+    Observable<Account> searchMobile(@Query("mobile") String mobile);
 
     @GET("msg/list")
     Observable<List<Message>> listMessage();
