@@ -5,12 +5,18 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.example.face.entity.User;
 import com.example.face.model.Account;
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 public class PreferencesUtil {
     private SharedPreferences preferences = null;

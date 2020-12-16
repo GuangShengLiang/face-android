@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.face.R;
 import com.example.face.adapter.ActAdapter;
 import com.example.face.http.ActivityHTTP;
@@ -17,10 +18,11 @@ import com.example.face.model.act.ActivityDetail;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.OVER_SCROLL_NEVER;
 
@@ -30,9 +32,9 @@ public class HomeFragment extends Fragment {
     private ActAdapter mAdapter;
     private ActivityHTTP actHTTP = HTTP.activity;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, null);
         RefreshLayout refreshLayout = view.findViewById(R.id.refreshLayout);
         if (mRefreshLayout == null) {
@@ -51,7 +53,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mAdapter == null) {
             mRecyclerView.setAdapter(mAdapter = new ActAdapter(this.getContext()));
@@ -61,18 +63,31 @@ public class HomeFragment extends Fragment {
                     .subscribe(new BaseObserver<List<ActivityDetail>>() {
                         @Override
                         public void onNext(List<ActivityDetail> ls) {
-                            mAdapter.loadMore(ls);
+                            mAdapter.refresh(ls);
                         }
 
                     });
             mRefreshLayout.autoRefresh();
         }
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-//            mAdapter.refresh(initData());
-            refreshLayout.finishRefresh(2000);
+            actHTTP.listFriendRefresh(0)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        @Override
+                        public void onNext(List<ActivityDetail> ls) {
+                            mAdapter.refresh(ls);
+                        }
+
+                    });
+            refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            actHTTP.listFriendNext(0)
+            long sid = 0;
+            if (!mAdapter.list.isEmpty()) {
+                sid = mAdapter.list.get(mAdapter.list.size() - 1).getAid();
+            }
+            actHTTP.listFriendNext(sid)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<List<ActivityDetail>>() {

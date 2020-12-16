@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.example.face.Constant;
 import com.example.face.R;
 import com.example.face.entity.User;

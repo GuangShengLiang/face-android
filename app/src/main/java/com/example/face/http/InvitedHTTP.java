@@ -1,14 +1,15 @@
 package com.example.face.http;
 
 
-import com.example.face.model.act.ActInvitedResp;
 import com.example.face.model.IdReq;
+import com.example.face.model.act.ActInvitedResp;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-
-import java.util.List;
 
 public interface InvitedHTTP {
 

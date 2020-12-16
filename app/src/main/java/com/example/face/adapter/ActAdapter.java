@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class ActAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private List<ActivityDetail> list = new ArrayList<>();
+    public List<ActivityDetail> list = new ArrayList<>();
 
     //        @BindView(R.id.title)
 //        TextView title;

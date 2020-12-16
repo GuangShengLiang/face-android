@@ -72,51 +72,6 @@
 
 		/>
 	</RelativeLayout>
-
-	<RelativeLayout
-			android:id="@+id/act_list"
-			android:layout_width="match_parent"
-			android:layout_height="96dp"
-			android:background="@drawable/btn_list_item_bg"
-			android:clickable="true"
-			android:paddingLeft="12dp">
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="40dp"
-				android:background="#ebebeb"
-				android:orientation="vertical">
-		<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="我的活动"
-				android:textAlignment="textStart"
-		/>
-		<View
-				android:layout_width="wrap_content"
-				android:layout_height="0.1dp"
-				android:layout_alignParentBottom="true"
-				android:layout_marginRight="12dp"
-				android:background="#dadada"/>
-		</LinearLayout>
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="56dp"
-				android:background="#ebebeb"
-				android:orientation="horizontal">
-			<Button
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="待参加"
-					android:textColor="#353535"
-					android:textSize="16sp"/>
-			<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="申请中"
-					android:textColor="#353535"
-					android:textSize="16sp"/>
-		</LinearLayout>
-	</RelativeLayout>
 	<RelativeLayout
 			android:id="@+id/rl_album"
 			android:layout_width="match_parent"
@@ -179,6 +134,42 @@
 				android:textColor="#353535"
 				android:textSize="16sp"/>
 	</RelativeLayout>
+	<RelativeLayout
+		android:id="@+id/act_list"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:layout_marginTop="20dp"
+		android:background="@drawable/btn_list_item_bg"
+		android:clickable="true"
+		android:paddingLeft="12dp">
+
+		<ImageView
+			android:id="@+id/iv_wallet_a"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="12dp"
+			android:src="@mipmap/wallet"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="20dp"
+			android:layout_toRightOf="@id/iv_wallet_a"
+			android:text="我的活动"
+			android:textColor="#353535"
+			android:textSize="16sp"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="0.1dp"
+			android:layout_alignParentBottom="true"
+			android:layout_marginRight="12dp"
+			android:background="#dadada"/>
+	</RelativeLayout>
+
 	<RelativeLayout
 			android:id="@+id/rl_my_join"
 			android:layout_width="match_parent"

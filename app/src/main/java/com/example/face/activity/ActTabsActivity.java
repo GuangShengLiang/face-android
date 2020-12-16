@@ -3,14 +3,12 @@ package com.example.face.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.example.face.R;
 import com.example.face.fragment.FragmentA;
 import com.google.android.material.tabs.TabLayout;
@@ -20,6 +18,9 @@ import com.hjq.bar.TitleBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ActTabsActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     private String[] tabs = new String[]{"待参加", "申请中", " 被邀请", "发布中", "已完成"};
@@ -27,7 +28,7 @@ public class ActTabsActivity extends BaseActivity {
     TitleBar titleBar;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_tabs);
         ButterKnife.bind(this);
@@ -45,7 +46,7 @@ public class ActTabsActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                Log.d("tt","right");
+                Log.d("tt", "right");
             }
         });
         fragmentList.add(new FragmentA());
@@ -96,7 +97,6 @@ public class ActTabsActivity extends BaseActivity {
 
         }
 
-        @Nullable
 
         @Override
 

@@ -1,13 +1,14 @@
 package com.example.face.entity;
 
 import com.orm.SugarRecord;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class User extends SugarRecord {
     private String userId;
     private String userWxId;

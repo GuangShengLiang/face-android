@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class AidReq {
-   private Long aid;
+    private Long aid;
 }

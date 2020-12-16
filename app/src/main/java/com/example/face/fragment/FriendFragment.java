@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.example.face.activity.NewFriendsMsgActivity;
 import com.example.face.adapter.FriendsAdapter;
@@ -22,12 +22,14 @@ import com.example.face.model.Friend;
 import com.example.face.util.ActivityUtils;
 import com.example.face.util.PinyinComparator;
 import com.example.face.util.PreferencesUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class FriendFragment extends Fragment {
@@ -48,9 +50,9 @@ public class FriendFragment extends Fragment {
 
     private UserDao mUserDao;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.friend_list, container, false);
         ButterKnife.bind(this, view);
 
@@ -58,7 +60,7 @@ public class FriendFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         PreferencesUtil.getInstance().init(getActivity());
         mUserDao = new UserDao();
@@ -100,7 +102,7 @@ public class FriendFragment extends Fragment {
 
         mFriendsLv.setOnItemClickListener((parent, view, position, id) -> {
             Friend f = flist.get(position - 1);
-            ActivityUtils.openUserInfoActivity(getContext(),f.getUid());
+            ActivityUtils.openUserInfoActivity(getContext(), f.getUid());
         });
     }
 

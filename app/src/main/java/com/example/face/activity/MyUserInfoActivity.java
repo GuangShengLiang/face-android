@@ -13,13 +13,10 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.android.volley.NetworkError;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
@@ -37,12 +34,16 @@ import com.example.face.util.PreferencesUtil;
 import com.example.face.util.VolleyUtil;
 import com.example.face.widget.LoadingDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MyUserInfoActivity extends BaseActivity {
 
@@ -72,7 +73,7 @@ public class MyUserInfoActivity extends BaseActivity {
     Account acc;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
         context = this;
@@ -114,7 +115,7 @@ public class MyUserInfoActivity extends BaseActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             final User user = PreferencesUtil.getInstance().getUser();
             switch (requestCode) {

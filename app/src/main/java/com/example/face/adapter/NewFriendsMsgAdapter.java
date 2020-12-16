@@ -2,14 +2,12 @@ package com.example.face.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.example.face.Constant;
 import com.example.face.R;
 import com.example.face.activity.UserInfoActivity;

@@ -1,24 +1,32 @@
 package com.example.face.http;
 
 import android.util.Log;
+
 import com.google.gson.Gson;
-import okhttp3.*;
-import okio.Buffer;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.ConnectionPool;
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class HTTP {
 
-//    private static final String base_url = "http://192.168.0.118:8080/api/";
+    //    private static final String base_url = "http://192.168.0.118:8080/api/";
     private static final String base_url = "http://39.98.134.71/api/";
-//        private static final String base_url="http://172.19.231.191:8080/api/";
+    //        private static final String base_url="http://172.19.231.191:8080/api/";
     public static final AccountHTTP account;
     public static final LinkHTTP link;
     public static final ActivityHTTP activity;

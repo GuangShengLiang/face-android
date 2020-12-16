@@ -10,8 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.alibaba.fastjson.JSON;
 import com.android.volley.NetworkError;
 import com.android.volley.Response;
@@ -46,7 +47,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private UserDao mUserDao;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         PreferencesUtil.getInstance().init(this);
@@ -155,7 +156,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                     .show();
                         }
                     }
-                })*/;
+                })*/
+                ;
 
                 // 上面都是耗时操作
                 mDialog.dismiss();

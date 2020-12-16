@@ -8,27 +8,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.example.face.activity.UserInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.HorizontalViewHolder> {
 
     private static final String TAG = FriendAdapter.class.getSimpleName();
     private Context mContext;
-    private OnItemClickLitener  mOnItemClickLitener;
-    public interface OnItemClickLitener{
+    private OnItemClickLitener mOnItemClickLitener;
+
+    public interface OnItemClickLitener {
         void onItemClick(View view, int position);
     }
 
-    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener){
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
 

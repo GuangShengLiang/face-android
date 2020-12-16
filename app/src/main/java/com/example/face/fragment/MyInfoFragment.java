@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
+
+import com.example.face.R;
+import com.example.face.activity.NickNameActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.example.face.R;
-import com.example.face.activity.NickNameActivity;
 
 
 public class MyInfoFragment extends Fragment {
@@ -27,9 +29,8 @@ public class MyInfoFragment extends Fragment {
     TextView birthday;
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_info, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -53,7 +54,7 @@ public class MyInfoFragment extends Fragment {
 
     @OnClick(R.id.ll_gander)
     void editGander() {
-        String[] g=new String[]{"男","女"};
+        String[] g = new String[]{"男", "女"};
         AlertDialog.Builder builder3 = new AlertDialog.Builder(this.getActivity());// 自定义对话框
         // 2默认的选中
         builder3.setSingleChoiceItems(g, 0, (dialog, which) -> {// which是被选中的位置

@@ -4,17 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.FragmentActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
@@ -22,8 +20,10 @@ import com.example.face.model.Account;
 import com.example.face.util.ActivityUtils;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.widget.LoadingDialog;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class AddFriendsBySearchActivity extends FragmentActivity {
@@ -39,7 +39,7 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
     LoadingDialog mDialog;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends_by_search);
         context = this;

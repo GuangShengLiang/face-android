@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.example.face.R;
 import com.example.face.adapter.NewFriendsMsgAdapter;
 import com.example.face.entity.FriendApply;
@@ -15,11 +12,15 @@ import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewFriendsMsgActivity extends BaseActivity {
     @BindView(R.id.lv_new_friends_msg)
@@ -30,7 +31,7 @@ public class NewFriendsMsgActivity extends BaseActivity {
     private List<FriendApply> friendApplyList = new ArrayList<>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friends_msg);
         ButterKnife.bind(this);

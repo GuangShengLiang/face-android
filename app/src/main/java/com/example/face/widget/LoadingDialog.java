@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.face.R;
 
 public class LoadingDialog extends Dialog {
@@ -18,7 +19,7 @@ public class LoadingDialog extends Dialog {
         super(context, R.style.loading_dialog_style);
     }
 
-    public void setMessage(String loadingText){
+    public void setMessage(String loadingText) {
         this.loadingText = loadingText;
     }
 

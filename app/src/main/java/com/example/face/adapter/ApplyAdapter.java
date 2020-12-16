@@ -8,23 +8,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.act.ApplyResp;
 import com.example.face.model.IdReq;
+import com.example.face.model.act.ApplyResp;
 import com.example.face.util.ActivityUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalViewHolder> {
 
@@ -74,10 +77,10 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
             holder.approval.setBackgroundColor(Color.GRAY);
         }
         holder.avatar.setOnClickListener(view -> {
-            ActivityUtils.openUserInfoActivity(mContext,p.getUid());
+            ActivityUtils.openUserInfoActivity(mContext, p.getUid());
         });
         holder.approval.setOnClickListener(view -> {
-            IdReq req =new IdReq();
+            IdReq req = new IdReq();
             req.setId(p.getId());
             HTTP.apply.agree(req)
                     .subscribeOn(Schedulers.io())

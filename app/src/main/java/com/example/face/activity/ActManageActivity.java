@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.example.face.adapter.ApplyAdapter;
 import com.example.face.adapter.InviteAdapter;
@@ -18,6 +17,9 @@ import com.example.face.http.HTTP;
 import com.example.face.model.act.ActivityDetail;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,9 +40,9 @@ public class ActManageActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
-    @Nullable
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_manage);
         ButterKnife.bind(this);
@@ -69,7 +71,7 @@ public class ActManageActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-Log.d("tt","right");
+                Log.d("tt", "right");
             }
         });
     }
@@ -86,7 +88,8 @@ Log.d("tt","right");
         initApply();
         initInvite();
     }
-    void initApply(){
+
+    void initApply() {
         ApplyAdapter ad = new ApplyAdapter(this);
         LinearLayoutManager horizontal = new LinearLayoutManager(this);
         horizontal.setOrientation(RecyclerView.VERTICAL);
@@ -95,7 +98,8 @@ Log.d("tt","right");
         applyView.setAdapter(ad);
         ad.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
     }
-    void initInvite(){
+
+    void initInvite() {
         InviteAdapter ad = new InviteAdapter(this);
         LinearLayoutManager horizontal = new LinearLayoutManager(this);
         horizontal.setOrientation(RecyclerView.VERTICAL);

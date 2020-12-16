@@ -1,8 +1,8 @@
 package com.example.face.model;
 
-import lombok.Data;
-
 import java.util.Date;
+
+import lombok.Data;
 
 @Data
 public class AccountReq {

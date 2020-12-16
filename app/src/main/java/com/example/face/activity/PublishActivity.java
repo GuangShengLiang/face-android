@@ -7,11 +7,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.*;
-import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -21,11 +21,20 @@ import com.example.face.http.HTTP;
 import com.example.face.model.act.ActReq;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class PublishActivity extends BaseActivity {
 
@@ -55,9 +64,8 @@ public class PublishActivity extends BaseActivity {
     //时间选择器
 
 
-    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_publish);
         ButterKnife.bind(this);
@@ -98,6 +106,7 @@ public class PublishActivity extends BaseActivity {
                         .startTime(stime.getText().toString())
                         .endTime(etime.getText().toString())
                         .address(address.getText().toString())
+                        .pubType(0)
                         .detail(detail.getText().toString()).build();
                 HTTP.activity.add(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -116,7 +125,7 @@ public class PublishActivity extends BaseActivity {
         pvTime.show(etime);
     }
 
-//    @OnClick(R.id.tv_pd_address)
+    //    @OnClick(R.id.tv_pd_address)
     public void showAddressChoice() {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_choice, null);
         GridView gv = view.findViewById(R.id.gv_choice);

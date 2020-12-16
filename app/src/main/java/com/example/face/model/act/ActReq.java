@@ -3,8 +3,6 @@ package com.example.face.model.act;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 @Builder
 public class ActReq {

@@ -1,16 +1,15 @@
 package com.example.face.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.example.face.Constant;
+
 import com.example.face.R;
 import com.example.face.model.Friend;
 import com.example.face.util.CommonUtil;
@@ -33,7 +32,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
         if (null == convertView) {
             convertView = mLayoutInflater.inflate(mResource, null);

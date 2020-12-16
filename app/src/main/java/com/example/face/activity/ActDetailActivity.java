@@ -5,21 +5,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.example.face.R;
 import com.example.face.adapter.PartnerAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.act.ActivityDetail;
 import com.example.face.model.act.AidReq;
-import com.example.face.model.act.ApplyButtonResp;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,11 +39,10 @@ public class ActDetailActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
     ActivityDetail d;
-    ApplyButtonResp buttonResp;
 
-    @Nullable
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_detail);
         ButterKnife.bind(this);
@@ -53,7 +53,7 @@ public class ActDetailActivity extends BaseActivity {
                 .subscribe(new BaseObserver<ActivityDetail>() {
                     @Override
                     public void onNext(ActivityDetail a) {
-                        d=a;
+                        d = a;
                         title.setText(a.getTitle());
                         time.setText(a.getStime());
                         address.setText(a.getAddress());
@@ -65,9 +65,9 @@ public class ActDetailActivity extends BaseActivity {
                 .subscribe(new BaseObserver<Boolean>() {
                     @Override
                     public void onNext(Boolean b) {
-                        if (b){
+                        if (b) {
                             appbtn.setText("立即申请");
-                        }else {
+                        } else {
                             appbtn.setText("已申请");
                         }
                     }
@@ -90,8 +90,9 @@ public class ActDetailActivity extends BaseActivity {
             }
         });
     }
+
     @OnClick({R.id.btn_apply})
-    void apply(){
+    void apply() {
         AidReq r = AidReq.builder().aid(d.getAid()).build();
         HTTP.apply.apply(r)
                 .subscribeOn(Schedulers.io())
@@ -102,6 +103,7 @@ public class ActDetailActivity extends BaseActivity {
                     }
                 });
     }
+
     private void initView() {
         PartnerAdapter adapter = new PartnerAdapter(this);
 

@@ -4,10 +4,15 @@ package com.example.face.http;
 import com.example.face.model.Account;
 import com.example.face.model.AccountReq;
 import com.example.face.model.Message;
-import io.reactivex.Observable;
-import retrofit2.http.*;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface AccountHTTP {
 

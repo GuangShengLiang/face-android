@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.example.face.activity.PublishActivity;
-import com.example.face.fragment.MessageFragment;
 import com.example.face.fragment.FriendFragment;
 import com.example.face.fragment.HomeFragment;
+import com.example.face.fragment.MessageFragment;
 import com.example.face.fragment.ProfileFragment;
 import com.example.face.view.KickBackAnimator;
 import com.next.easynavigation.constant.Anim;

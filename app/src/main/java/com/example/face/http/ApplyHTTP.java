@@ -1,14 +1,18 @@
 package com.example.face.http;
 
 
-import com.example.face.model.act.ApplyButtonResp;
-import com.example.face.model.act.ApplyResp;
-import com.example.face.model.act.AidReq;
 import com.example.face.model.IdReq;
-import io.reactivex.Observable;
-import retrofit2.http.*;
+import com.example.face.model.act.AidReq;
+import com.example.face.model.act.ApplyResp;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface ApplyHTTP {
 

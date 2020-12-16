@@ -1,27 +1,28 @@
 package com.example.face.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.face.Constant;
+
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
 import com.example.face.util.ActivityUtils;
 import com.example.face.util.CommonUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.HorizontalViewHolder> {
 
@@ -41,6 +42,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
                     @Override
                     public void onNext(List<Account> l) {
                         mList.addAll(l);
+                        mList.add(new Account());
                         notifyDataSetChanged();
                     }
                 });
@@ -55,11 +57,19 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
+        //最后一个，+邀请链接
+        if (position == mList.size() - 1) {
+            holder.imAvatar.setImageResource(R.mipmap.icon_add_user_to_group);
+            holder.itemView.setOnClickListener(v -> {
+                Log.d("", "invite");
+            });
+            return;
+        }
         Account acc = mList.get(position);
         holder.tvContent.setText(acc.getNickName());
         CommonUtil.loadAvatar(mContext, holder.imAvatar, acc.getAvatar());
         holder.itemView.setOnClickListener(view -> {
-            ActivityUtils.openUserInfoActivity(mContext,acc.getUid());
+            ActivityUtils.openUserInfoActivity(mContext, acc.getUid());
         });
     }
 

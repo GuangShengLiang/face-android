@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
 import com.alibaba.fastjson.JSON;
 import com.example.face.R;
 import com.example.face.entity.User;
@@ -39,7 +40,7 @@ public class AddFriendsActivity extends FragmentActivity implements View.OnClick
     private User mUser;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
         mUser = PreferencesUtil.getInstance().getUser();

@@ -2,8 +2,9 @@ package com.example.face.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.example.face.dao.MessageDao;
 import com.example.face.entity.User;
 import com.example.face.util.PreferencesUtil;
@@ -16,7 +17,7 @@ public class BaseActivity extends FragmentActivity {
 //    protected TitleBar titleBar;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        ButterKnife.bind(this);
         mContext = this;

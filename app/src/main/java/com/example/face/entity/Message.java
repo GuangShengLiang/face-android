@@ -1,11 +1,12 @@
 package com.example.face.entity;
 
 import com.orm.SugarRecord;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class Message extends SugarRecord {
     private String messageId;
     private String messageType;

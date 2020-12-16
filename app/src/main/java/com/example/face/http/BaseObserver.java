@@ -1,11 +1,12 @@
 package com.example.face.http;
 
 import android.util.Log;
+
+import java.io.IOException;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
-
-import java.io.IOException;
 
 public class BaseObserver<T> implements Observer<T> {
 
@@ -18,15 +19,16 @@ public class BaseObserver<T> implements Observer<T> {
     }
 
     @Override
-    public void onNext(T t) {}
+    public void onNext(T t) {
+    }
 
     @Override
     public void onError(Throwable e) {
-        if (e instanceof HttpException){
-            HttpException he = (HttpException)e;
-            if (he.code()==600){
+        if (e instanceof HttpException) {
+            HttpException he = (HttpException) e;
+            if (he.code() == 600) {
                 try {
-                    Log.e("biz error {}",he.response().errorBody().string());
+                    Log.e("biz error {}", he.response().errorBody().string());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

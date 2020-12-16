@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import androidx.annotation.Nullable;
+
 import com.example.face.R;
 import com.example.face.util.PreferencesUtil;
 
@@ -13,7 +13,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private Button mLogoutBtn;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         PreferencesUtil.getInstance().init(this);

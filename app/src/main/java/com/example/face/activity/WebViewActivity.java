@@ -7,7 +7,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.annotation.Nullable;
+
 import com.example.face.R;
 
 public class WebViewActivity extends Activity {
@@ -15,7 +15,7 @@ public class WebViewActivity extends Activity {
     public static final String RESULT = "result_data";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         initViews();

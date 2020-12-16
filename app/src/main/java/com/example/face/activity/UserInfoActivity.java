@@ -6,13 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.face.Constant;
+
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
@@ -23,6 +17,10 @@ import com.example.face.model.RuidReq;
 import com.example.face.util.CommonUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -43,9 +41,8 @@ public class UserInfoActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
-    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info);
         ButterKnife.bind(this);

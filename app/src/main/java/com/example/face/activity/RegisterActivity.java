@@ -2,14 +2,23 @@ package com.example.face.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.*;
+import android.text.Editable;
+import android.text.Html;
+import android.text.Selection;
+import android.text.Spannable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
-import androidx.annotation.Nullable;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.alibaba.fastjson.JSON;
 import com.android.volley.NetworkError;
 import com.android.volley.Response;
@@ -60,7 +69,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     UserDao mUserDao;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         volleyUtil = VolleyUtil.getInstance(this);

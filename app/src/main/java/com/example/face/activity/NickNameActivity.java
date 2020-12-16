@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
@@ -15,10 +13,13 @@ import com.example.face.model.AccountReq;
 import com.example.face.util.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.Optional;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class NickNameActivity extends BaseActivity {
 
@@ -27,9 +28,9 @@ public class NickNameActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
-    @Nullable
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nick_name);
         ButterKnife.bind(this);

@@ -4,13 +4,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.example.face.R;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SearchAddressActivity extends AppCompatActivity {
 
@@ -19,9 +21,9 @@ public class SearchAddressActivity extends AppCompatActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
-    @Nullable
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_address_search);
         ButterKnife.bind(this);
@@ -67,7 +69,7 @@ public class SearchAddressActivity extends AppCompatActivity {
 
             @Override
             public void onRightClick(View v) {
-Log.d("tt","right");
+                Log.d("tt", "right");
             }
         });
     }
