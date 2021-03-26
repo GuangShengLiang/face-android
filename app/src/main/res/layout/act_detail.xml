@@ -15,9 +15,6 @@
                 android:layout_height="wrap_content"
                 app:backButton="true"
                 app:barStyle="light"
-                app:rightColor="@color/black"
-                app:rightTitle="完成"
-                app:rightSize="16dp"
                 app:title="活动详情"
                 app:titleSize="14dp"
                 app:titleColor="@color/black"/>

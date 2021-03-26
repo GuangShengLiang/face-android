@@ -11,9 +11,6 @@
             android:layout_height="wrap_content"
             app:backButton="true"
             app:barStyle="light"
-            app:rightColor="@color/black"
-            app:rightTitle="完成"
-            app:rightSize="14dp"
             app:titleSize="13dp"
             app:titleColor="@color/black"/>
 
