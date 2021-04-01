@@ -16,36 +16,36 @@ import retrofit2.http.Query;
 
 public interface ActivityHTTP {
 
-    @GET("friend_activity/list")
+    @GET("v1/activities/list/friend")
     Observable<List<ActivityDetail>> listFriendRefresh(@Query("aid") long aid);
 
-    @GET("friend_activity/list")
+    @GET("v1/activities/list/friend-next-page")
     Observable<List<ActivityDetail>> listFriendNext(@Query("aid") long aid);
 
-    @GET(value = "search")
+    @GET("v1/activities/search")
     Observable<Object> search(int fromId);
 
-    @GET(value = "publish/list")
+    @GET("v1/activities/list/publish")
     Observable<List<ActivityDetail>> listPublish();
 
-    @GET(value = "waiting/list")
+    @GET("v1/activities/list/waiting")
     Observable<Object> listWaiting();
 
-    @GET(value = "finish/list")
+    @GET("v1/activities/list/finish")
     Observable<Object> finish();
 
-    @GET(value = "join/list")
+    @GET("v1/activities/list/join")
     Observable<List<ActivityDetail>> listJoin();
 
-    @GET(value = "activity")
+    @GET("v1/activities/detail")
     Observable<ActivityDetail> detail(@Query("aid") long aid);
 
-    @POST(value = "activity")
-    Observable<Void> add(@Body ActReq r);
+    @POST("v1/activities/create")
+    Observable<Void> create(@Body ActReq r);
 
-    @PUT(value = "activity")
+    @PUT("v1/activities/update")
     Observable<Void> modify(@Body ActReq req);
 
-    @GET(value = "activity/member/list")
+    @GET("v1/activity/members/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);
 }

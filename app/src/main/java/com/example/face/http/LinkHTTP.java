@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 
 public interface LinkHTTP {
 
-    @GET("list_friend_activity")
+    @GET("v1/acitivities/list/friend")
     Observable<List<ActivityDetail>> listFriendAct();
 }

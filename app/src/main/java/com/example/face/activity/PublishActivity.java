@@ -108,7 +108,7 @@ public class PublishActivity extends BaseActivity {
                         .address(address.getText().toString())
                         .pubType(0)
                         .detail(detail.getText().toString()).build();
-                HTTP.activity.add(r).subscribeOn(Schedulers.io())
+                HTTP.activity.create(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<>());
             }

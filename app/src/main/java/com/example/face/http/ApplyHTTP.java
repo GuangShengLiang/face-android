@@ -16,24 +16,24 @@ import retrofit2.http.Query;
 
 public interface ApplyHTTP {
 
-    @GET(value = "apply/aid/list")
+    @GET("v1/activity/applies/list/aid")
     Observable<List<ApplyResp>> listApplyByAid(@Query("aid") long aid);
 
-    @GET(value = "apply/is_need_apply")
+    @GET("v1/activity/applies/is-need-apply")
     Observable<Boolean> isNeedApply(@Query("aid") long aid);
 
-    @GET(value = "apply/list")
+    @GET("v1/activity/applies/list")
     Observable<List<ApplyResp>> listApply();
 
-    @POST(value = "apply")
+    @POST("v1/activity/applies/create")
     Observable<Void> apply(@Body AidReq r);
 
-    @PUT(value = "apply/agree")
+    @PUT("v1/activity/applies/agree")
     Observable<Void> agree(@Body IdReq r);
 
-    @PUT(value = "apply/cancel")
+    @PUT("v1/activity/applies/cancel")
     Observable<Void> cancel(@Body IdReq r);
 
-    @PUT(value = "apply/reject")
+    @PUT("v1/activity/applies/reject")
     Observable<Void> reject(@Body IdReq r);
 }

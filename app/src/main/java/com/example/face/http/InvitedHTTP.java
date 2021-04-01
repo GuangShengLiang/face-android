@@ -13,12 +13,12 @@ import retrofit2.http.POST;
 
 public interface InvitedHTTP {
 
-    @POST(value = "invited/reject")
+    @POST("v1/invited/agree")
     Observable<Void> agree(@Body IdReq id);
 
-    @POST(value = "invited/reject")
+    @POST("v1/invited/reject")
     Observable<Void> reject(@Body IdReq id);
 
-    @GET(value = "invited/list")
+    @GET("v1/invited/list")
     Observable<List<ActInvitedResp>> listInvited();
 }

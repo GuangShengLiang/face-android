@@ -92,7 +92,7 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
     }
 
     private void searchUser(String mobile) {
-        HTTP.account.searchMobile(mobile)
+        HTTP.account.searchByMobile(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<Account>() {

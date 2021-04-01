@@ -16,24 +16,24 @@ import retrofit2.http.Query;
 
 public interface AccountHTTP {
 
-    @GET("login")
+    @GET("v1/account/login")
     String login(String mobile, String vcode);
 
-    @POST("register")
+    @POST("v1/account/register")
     String register(String mobile, String vcode);
 
-    @GET("mine/info")
+    @GET("v1/account/mine/info")
     Observable<Account> myInfo();
 
-    @GET("search_mobile")
-    Observable<Account> searchMobile(@Query("mobile") String mobile);
+    @GET("v1/account/search/mobile")
+    Observable<Account> searchByMobile(@Query("mobile") String mobile);
 
-    @GET("msg/list")
+    @GET("v1/msg/list")
     Observable<List<Message>> listMessage();
 
-    @GET("info")
+    @GET("v1/account/info/detail")
     Observable<Account> info(@Query("uid") int uid);
 
-    @PUT("info")
+    @PUT("v1/account/info/update")
     Observable<Void> updateInfo(@Body AccountReq r);
 }

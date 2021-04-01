@@ -15,12 +15,12 @@ import retrofit2.http.Query;
 
 public interface InviteHTTP {
 
-    @POST("invite")
+    @POST("v1/invites/create")
     Observable<Void> invite(@Body ActReq req);
 
-    @POST(value = "invite/cancel")
+    @POST("v1/invites/cancel")
     Observable<Void> cancel(@Body IdReq id);
 
-    @GET(value = "invite/aid/list")
+    @GET("v1/invites/list/aid")
     Observable<List<ActInviteResp>> listInviteByAid(@Query("aid") long aid);
 }
