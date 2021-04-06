@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 
 public interface InviteHTTP {
 
-    @POST("v1/invites/create")
+    @POST("v1/invites/invite")
     Observable<Void> invite(@Body ActReq req);
 
     @POST("v1/invites/cancel")

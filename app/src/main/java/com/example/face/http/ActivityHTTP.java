@@ -11,7 +11,6 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ActivityHTTP {
@@ -43,9 +42,9 @@ public interface ActivityHTTP {
     @POST("v1/activities/create")
     Observable<Void> create(@Body ActReq r);
 
-    @PUT("v1/activities/update")
+    @POST("v1/activities/update")
     Observable<Void> modify(@Body ActReq req);
 
-    @GET("v1/activity/members/list")
+    @GET("v1/activities/members/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);
 }

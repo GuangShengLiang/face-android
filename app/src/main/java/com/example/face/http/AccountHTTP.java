@@ -22,18 +22,19 @@ public interface AccountHTTP {
     @POST("v1/account/register")
     String register(String mobile, String vcode);
 
-    @GET("v1/account/mine/info")
-    Observable<Account> myInfo();
+    @GET("v1/mine/info/base")
+    Observable<Account> baseInfo();
 
-    @GET("v1/account/search/mobile")
+    @POST("v1/mine/info/base/update")
+    Observable<Void> updateInfo(@Body AccountReq r);
+
+    @GET("v1/account/search-mobile")
     Observable<Account> searchByMobile(@Query("mobile") String mobile);
 
     @GET("v1/msg/list")
     Observable<List<Message>> listMessage();
 
-    @GET("v1/account/info/detail")
+    @GET("v1/account/info/base")
     Observable<Account> info(@Query("uid") int uid);
 
-    @PUT("v1/account/info/update")
-    Observable<Void> updateInfo(@Body AccountReq r);
 }

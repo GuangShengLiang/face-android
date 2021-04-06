@@ -83,7 +83,7 @@ public class MyUserInfoActivity extends BaseActivity {
         user = PreferencesUtil.getInstance().getUser();
         dialog = new LoadingDialog(MyUserInfoActivity.this);
 
-        HTTP.account.myInfo()
+        HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<Account>() {

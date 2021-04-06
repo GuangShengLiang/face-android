@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         PreferencesUtil.getInstance().init(getActivity());
         user = PreferencesUtil.getInstance().getUser();
-        HTTP.account.myInfo()
+        HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<Account>() {

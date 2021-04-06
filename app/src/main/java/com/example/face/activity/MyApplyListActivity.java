@@ -20,8 +20,8 @@ public class MyApplyListActivity extends BaseActivity {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.title_bar)
-    TitleBar titleBar;
+//    @BindView(R.id.title_bar)
+//    TitleBar titleBar;
 
 
     @Override
@@ -31,22 +31,22 @@ public class MyApplyListActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
-            @Override
-            public void onLeftClick(View v) {
-                finish();
-            }
-
-            @Override
-            public void onTitleClick(View v) {
-
-            }
-
-            @Override
-            public void onRightClick(View v) {
-                Log.d("tt", "right");
-            }
-        });
+//        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+//            @Override
+//            public void onLeftClick(View v) {
+//                finish();
+//            }
+//
+//            @Override
+//            public void onTitleClick(View v) {
+//
+//            }
+//
+//            @Override
+//            public void onRightClick(View v) {
+//                Log.d("tt", "right");
+//            }
+//        });
         initView();
     }
 
