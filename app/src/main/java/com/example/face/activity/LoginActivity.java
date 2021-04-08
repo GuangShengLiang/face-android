@@ -4,56 +4,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.fragment.app.FragmentActivity;
-
-import com.alibaba.fastjson.JSON;
-import com.android.volley.NetworkError;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.example.face.Constant;
+import com.example.face.MainActivity;
 import com.example.face.R;
-import com.example.face.dao.UserDao;
-import com.example.face.entity.User;
-import com.example.face.util.MD5Util;
+import com.example.face.http.AccountHTTP;
+import com.example.face.http.BaseObserver;
+import com.example.face.http.HTTP;
+import com.example.face.http.PassportHTTP;
+import com.example.face.model.LoginReq;
 import com.example.face.util.PreferencesUtil;
-import com.example.face.util.VolleyUtil;
 import com.example.face.widget.LoadingDialog;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import lombok.SneakyThrows;
 
-/**
- * 登录
- *
- * @author zhou
- */
-public class LoginActivity extends FragmentActivity implements View.OnClickListener {
-
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
-    public static int sequence = 1;
-
-    private VolleyUtil mVolleyUtil;
-
     EditText mPhoneEt;
     EditText mPasswordEt;
     Button mLoginBtn;
     TextView mRegisterTv;
     LoadingDialog mDialog;
-    private UserDao mUserDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        PreferencesUtil.getInstance().init(this);
-        mVolleyUtil = VolleyUtil.getInstance(this);
         mDialog = new LoadingDialog(LoginActivity.this);
-        mUserDao = new UserDao();
         initView();
     }
 
@@ -77,7 +58,19 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 mDialog.show();
                 final String phone = mPhoneEt.getText().toString().trim();
                 final String password = mPasswordEt.getText().toString().trim();
-                login(phone, password);
+                LoginReq r = new LoginReq(phone,password);
+                HTTP.passport.login(r)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<String>() {
+                            @Override
+                            public void onNext(String token) {
+                                mDialog.dismiss();
+                                PreferencesUtil.saveToken(LoginActivity.this,token);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                 break;
             case R.id.tv_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
@@ -117,74 +110,20 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
      * @param phone    手机号
      * @param password 密码
      */
+    @SneakyThrows
     private void login(String phone, String password) {
-        String url = Constant.BASE_URL + "users/login?phone=" + phone
-                + "&password=" + MD5Util.encode(password, "utf8");
-        mVolleyUtil.httpGetRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                Log.d(TAG, "server response: " + response);
-                final User user = JSON.parseObject(response, User.class);
-                Log.d(TAG, "userId:" + user.getUserId());
-
-             /*   // 登录极光im
-                JMessageClient.login(user.getUserId(), user.getUserImPassword(), new BasicCallback() {
+        LoginReq r = new LoginReq(phone,password);
+        HTTP.passport.login(r)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<String>() {
                     @Override
-                    public void gotResult(int responseCode, String responseMessage) {
-                        if (responseCode == 0) {
-                            // 极光im登录成功
-                            // 登录成功后设置user和isLogin至sharedpreferences中
-                            PreferencesUtil.getInstance().setUser(user);
-                            PreferencesUtil.getInstance().setLogin(true);
-                            // 注册jpush
-                            JPushInterface.setAlias(LoginActivity.this, sequence, user.getUserId());
-                            List<User> friendList = user.getFriendList();
-                            for (User userFriend : friendList) {
-                                if (null != userFriend) {
-                                    userFriend.setIsFriend(Constant.IS_FRIEND);
-//                                    mFriendDao.saveFriendByUserInfo(userFriend);
-                                    mUserDao.saveUser(userFriend);
-                                }
-                            }
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
-                        } else {
-                            // 极光im登录失败
-                            Toast.makeText(LoginActivity.this,
-                                    R.string.username_or_password_error, Toast.LENGTH_SHORT)
-                                    .show();
-                        }
+                    public void onNext(String token) {
+                        mDialog.dismiss();
+                        PreferencesUtil.saveToken(LoginActivity.this,token);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
-                })*/
-                ;
-
-                // 上面都是耗时操作
-                mDialog.dismiss();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                mDialog.dismiss();
-
-                if (volleyError instanceof NetworkError) {
-                    Toast.makeText(LoginActivity.this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (volleyError instanceof TimeoutError) {
-                    Toast.makeText(LoginActivity.this, R.string.network_time_out, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                int errorCode = volleyError.networkResponse.statusCode;
-                switch (errorCode) {
-                    case 400:
-                        Toast.makeText(LoginActivity.this,
-                                R.string.username_or_password_error, Toast.LENGTH_SHORT)
-                                .show();
-                        break;
-                }
-            }
-        });
+                });
     }
 }

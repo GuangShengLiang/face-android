@@ -11,17 +11,9 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface AccountHTTP {
-
-    @GET("v1/account/login")
-    String login(String mobile, String vcode);
-
-    @POST("v1/account/register")
-    String register(String mobile, String vcode);
-
     @GET("v1/mine/info/base")
     Observable<Account> baseInfo();
 

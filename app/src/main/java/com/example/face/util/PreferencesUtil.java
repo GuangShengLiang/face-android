@@ -222,6 +222,7 @@ public class PreferencesUtil {
     private static Gson gson = new Gson();
     private static String ACCOUNT = "account";
     private static String CONFIG = "config";
+    private static String TOKEN = "token";
 
     public static void saveAccount(Context context, Account a) {
         SharedPreferences config = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
@@ -234,5 +235,15 @@ public class PreferencesUtil {
         SharedPreferences config = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
         String s = config.getString(ACCOUNT, "");
         return gson.fromJson(s, Account.class);
+    }
+    public static void saveToken(Context context,String token) {
+        SharedPreferences config = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = config.edit();
+        editor.putString(TOKEN, token);
+        editor.commit();
+    }
+    public static String getToken(Context context) {
+        SharedPreferences config = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+        return config.getString(TOKEN, "");
     }
 }

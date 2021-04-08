@@ -16,12 +16,16 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.face.activity.LoginActivity;
 import com.example.face.activity.PublishActivity;
+import com.example.face.activity.UserInfoActivity;
 import com.example.face.fragment.FriendFragment;
 import com.example.face.fragment.HomeFragment;
 import com.example.face.fragment.MessageFragment;
 import com.example.face.fragment.ProfileFragment;
+import com.example.face.util.PreferencesUtil;
 import com.example.face.view.KickBackAnimator;
+import com.google.zxing.common.StringUtils;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.utils.NavigationUtil;
 import com.next.easynavigation.view.EasyNavigationBar;
@@ -53,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String token=PreferencesUtil.getToken(this.getApplicationContext());
+        if (token==null||token.length()==0) {
+            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+            this.startActivity(intent);
+            return;
+        }
         setContentView(R.layout.weibo);
 
         navigationBar = findViewById(R.id.navigationBar);
