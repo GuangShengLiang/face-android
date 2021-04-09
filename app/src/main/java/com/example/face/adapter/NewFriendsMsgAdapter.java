@@ -71,7 +71,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
         convertView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, UserInfoActivity.class);
             intent.putExtra("applyId", p.getId());
-            intent.putExtra("ruid", p.getRuid());
+            intent.putExtra("ruid", p.getUid());
             mContext.startActivity(intent);
         });
         return convertView;
