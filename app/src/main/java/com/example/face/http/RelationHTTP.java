@@ -32,11 +32,11 @@ public interface RelationHTTP {
     @GET("v1/friends/applies/detail")
     Observable<Void> friendApply(@Query("uid") int ruid);
 
-    @POST("v1/friends/applies/create")
+    @POST("v1/friends/applies/apply")
     Observable<Void> friendApply(@Body FriendReq r);
 
     @POST("v1/friends/applies/agree")
-    Observable<Void> friendApplyAgree(@Body RuidReq r);
+    Observable<Void> friendAgree(@Body RuidReq r);
 
     @GET("v1/friends/applies/list")
     Observable<List<FriendApply>> friendApplyList();

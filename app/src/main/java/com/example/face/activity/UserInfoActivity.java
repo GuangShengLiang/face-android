@@ -107,7 +107,7 @@ public class UserInfoActivity extends BaseActivity {
         RuidReq r = new RuidReq();
         int ruid = getIntent().getExtras().getInt("ruid", 93);
         r.setRuid(ruid);
-        HTTP.relation.friendApplyAgree(r)
+        HTTP.relation.friendAgree(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<>());

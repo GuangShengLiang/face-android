@@ -1,7 +1,12 @@
 package com.example.face.http;
 
+import android.app.Application;
 import android.util.Log;
 
+import com.example.face.FLinkApplication;
+import com.example.face.MainActivity;
+import com.example.face.activity.LoginActivity;
+import com.example.face.util.PreferencesUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -26,7 +31,7 @@ public class HTTP {
 
     //    private static final String base_url = "http://192.168.0.118:8080/api/";
     private static final String base_url = "http://39.101.138.75/api/";
-//    private static final String base_url = "http://192.168.0.105/api/";
+    //    private static final String base_url = "http://192.168.0.105/api/";
     //        private static final String base_url="http://172.19.231.191:8080/api/";
     public static final AccountHTTP account;
     public static final PassportHTTP passport;
@@ -89,13 +94,14 @@ public class HTTP {
 
     private static Interceptor commonInterceptor() {
         return chain -> {
+            String token = PreferencesUtil.getToken(FLinkApplication.getContext());
             Request originalRequest = chain.request();
             Request.Builder requestBuilder = originalRequest.newBuilder()
                     .addHeader("Accept-Encoding", "gzip")
                     .addHeader("Accept", "application/json")
                     .addHeader("Content-Type", "application/json; charset=utf-8")
                     .method(originalRequest.method(), originalRequest.body());
-            requestBuilder.addHeader("token", "6589affbcb794b97a4ca477c458bbff9");//添加请求头信息，服务器进行token有效性验证
+            requestBuilder.addHeader("token", token);//添加请求头信息，服务器进行token有效性验证
             Request request = requestBuilder.build();
             return chain.proceed(request);
         };

@@ -15,11 +15,11 @@ import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.LoginReq;
+import com.example.face.model.LoginResp;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.widget.LoadingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import lombok.SneakyThrows;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -42,13 +42,8 @@ public class LoginActivity extends BaseActivity {
     private void initView() {
         mPhoneEt = findViewById(R.id.et_user_phone);
         mPasswordEt = findViewById(R.id.et_password);
-//        mLoginBtn = findViewById(R.id.btn_login);
-//        mRegisterTv = findViewById(R.id.tv_register);
-
         mPhoneEt.addTextChangedListener(new TextChange());
         mPasswordEt.addTextChangedListener(new TextChange());
-//        mLoginBtn.setOnClickListener(this);
-//        mRegisterTv.setOnClickListener(this);
     }
 
     @OnClick(R.id.btn_login)
@@ -61,13 +56,12 @@ public class LoginActivity extends BaseActivity {
         HTTP.passport.login(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<String>() {
+                .subscribe(new BaseObserver<LoginResp>() {
                     @Override
-                    public void onNext(String token) {
+                    public void onNext(LoginResp resp) {
                         mDialog.dismiss();
-                        PreferencesUtil.saveToken(LoginActivity.this, token);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        PreferencesUtil.saveToken(LoginActivity.this,resp.getToken() );
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 });
     }
@@ -98,26 +92,4 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 登录
-     *
-     * @param phone    手机号
-     * @param password 密码
-     */
-    @SneakyThrows
-    private void login(String phone, String password) {
-        LoginReq r = new LoginReq(phone, password);
-        HTTP.passport.login(r)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<String>() {
-                    @Override
-                    public void onNext(String token) {
-                        mDialog.dismiss();
-                        PreferencesUtil.saveToken(LoginActivity.this, token);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
-    }
 }

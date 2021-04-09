@@ -2,18 +2,19 @@ package com.example.face;
 
 import android.app.Application;
 
+import android.content.Context;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orm.SugarContext;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 public class FLinkApplication extends Application {
-
-//    public static LocationService locationService;
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         Fresco.initialize(this);
         SugarContext.init(this);
 
@@ -43,5 +44,9 @@ public class FLinkApplication extends Application {
         // 百度地图
 //        SDKInitializer.initialize(this);
 //        locationService = new LocationService(getApplicationContext());
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }
