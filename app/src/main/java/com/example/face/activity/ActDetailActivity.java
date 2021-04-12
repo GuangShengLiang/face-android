@@ -2,17 +2,21 @@ package com.example.face.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.face.FLinkApplication;
 import com.example.face.R;
 import com.example.face.adapter.PartnerAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
+import com.example.face.model.Response;
 import com.example.face.model.act.ActivityDetail;
 import com.example.face.model.act.AidReq;
 import com.hjq.bar.OnTitleBarListener;
@@ -21,7 +25,9 @@ import com.hjq.bar.TitleBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class ActDetailActivity extends BaseActivity {
@@ -68,6 +74,7 @@ public class ActDetailActivity extends BaseActivity {
                         if (b) {
                             appbtn.setText("立即申请");
                         } else {
+                            appbtn.setClickable(false);
                             appbtn.setText("已申请");
                         }
                     }
@@ -94,12 +101,29 @@ public class ActDetailActivity extends BaseActivity {
     @OnClick({R.id.btn_apply})
     void apply() {
         AidReq r = AidReq.builder().aid(d.getAid()).build();
+//        HTTP.apply.apply(r)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread()).doOnComplete(new Action() {
+//            @Override
+//            public void run() throws Exception {
+//
+//                Toast.makeText(ActDetailActivity.super.mContext,"申请成功",Toast.LENGTH_LONG).show();
+//            }
+//        }).subscribe();
+//        Toast.makeText(ActDetailActivity.super.mContext,"申请成功",Toast.LENGTH_LONG).show();
+
         HTTP.apply.apply(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Void>() {
+                .subscribe(new BaseObserver<Response>() {
                     @Override
-                    public void onNext(Void v) {
+                    public void onNext(Response v) {
+                        Toast t = Toasty.success(FLinkApplication.getContext(), "申请成功",
+                                Toast.LENGTH_SHORT, true);
+                        t.setGravity(Gravity.CENTER, 0, 0);
+                        t.show();
+                        appbtn.setClickable(false);
+                        appbtn.setText("已申请");
                     }
                 });
     }

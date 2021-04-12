@@ -2,53 +2,56 @@ package com.example.face.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.example.face.R;
 import com.example.face.util.PreferencesUtil;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 
-public class SettingActivity extends BaseActivity implements View.OnClickListener {
-
-    private Button mLogoutBtn;
+public class SettingActivity extends BaseActivity {
+    @BindView(R.id.title_bar)
+    TitleBar titleBar;
+    @BindView(R.id.btn_logout)
+    Button mLogoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        PreferencesUtil.getInstance().init(this);
-        initView();
-    }
-
-    private void initView() {
-        mLogoutBtn = findViewById(R.id.btn_logout);
-
-        mLogoutBtn.setOnClickListener(this);
-    }
-
-    public void back(View view) {
-        finish();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_logout:
-                // 清除sharedpreferences中存储信息
-                PreferencesUtil.getInstance().setLogin(false);
-                PreferencesUtil.getInstance().setUser(null);
-
-                // 清除通讯录
-//                User.deleteAll(User.class);
-                // 清除朋友圈
-//                FriendsCircle.deleteAll(FriendsCircle.class);
-
-                // 跳转至登录页
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+        ButterKnife.bind(this);
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
                 finish();
+            }
 
-                break;
-        }
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                Log.d("tt", "right");
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_logout)
+    public void onClick(View view) {
+        // 清除sharedpreferences中存储信息
+        PreferencesUtil.getInstance().setLogin(false);
+        // 清除通讯录
+        // 清除朋友圈
+        // 跳转至登录页
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }

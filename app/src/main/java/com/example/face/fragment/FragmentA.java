@@ -15,10 +15,23 @@ import com.example.face.adapter.MyJoinAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.face.http.BaseObserver;
+import com.example.face.http.HTTP;
+import com.example.face.model.act.ActivityDetail;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+import java.util.List;
 
 public class FragmentA extends Fragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    private String action;
+
+    public FragmentA(String action) {
+        super();
+        this.action = action;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +43,70 @@ public class FragmentA extends Fragment {
 
     private void initView() {
         MyJoinAdapter adapter = new MyJoinAdapter(this.getContext());
+        switch (action) {
+            case "waiting":
+                HTTP.activity.listWaiting()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                            @Override
+                            public void onNext(List<ActivityDetail> ls) {
+                                adapter.mList.addAll(ls);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;
+            case "invited":
+                HTTP.invited.listInvited()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                            @Override
+                            public void onNext(List<ActivityDetail> ls) {
+                                adapter.mList.addAll(ls);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;
+            case "apply":
+                HTTP.apply.listApply()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                            @Override
+                            public void onNext(List<ActivityDetail> ls) {
+                                adapter.mList.addAll(ls);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;
+            case "publish":
+                HTTP.activity.listPublish()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                            @Override
+                            public void onNext(List<ActivityDetail> ls) {
+                                adapter.mList.addAll(ls);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;
+            case "finish":
+                HTTP.activity.listFinish()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                            @Override
+                            public void onNext(List<ActivityDetail> ls) {
+                                adapter.mList.addAll(ls);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                break;
+            default:
+                break;
+        }
 
         LinearLayoutManager managerHorizontal = new LinearLayoutManager(this.getContext());
         managerHorizontal.setOrientation(RecyclerView.VERTICAL);

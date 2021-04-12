@@ -2,17 +2,17 @@ package com.example.face.http;
 
 
 import com.example.face.model.IdReq;
+import com.example.face.model.Response;
+import com.example.face.model.act.ActivityDetail;
 import com.example.face.model.act.AidReq;
 import com.example.face.model.act.ApplyResp;
-
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
+
+import java.util.List;
 
 public interface ApplyHTTP {
 
@@ -23,17 +23,17 @@ public interface ApplyHTTP {
     Observable<Boolean> isNeedApply(@Query("aid") long aid);
 
     @GET("v1/applies/list")
-    Observable<List<ApplyResp>> listApply();
+    Observable<List<ActivityDetail>> listApply();
 
     @POST("v1/applies/apply")
-    Observable<Void> apply(@Body AidReq r);
+    Observable<Response> apply(@Body AidReq r);
 
     @POST("v1/applies/agree")
-    Observable<Void> agree(@Body IdReq r);
+    Observable<Response> agree(@Body IdReq r);
 
     @POST("v1/applies/cancel")
-    Observable<Void> cancel(@Body IdReq r);
+    Observable<Response> cancel(@Body IdReq r);
 
     @POST("v1/applies/reject")
-    Observable<Void> reject(@Body IdReq r);
+    Observable<Response> reject(@Body IdReq r);
 }

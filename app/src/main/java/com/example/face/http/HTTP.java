@@ -30,8 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HTTP {
 
     //    private static final String base_url = "http://192.168.0.118:8080/api/";
-    private static final String base_url = "http://39.101.138.75/api/";
-    //    private static final String base_url = "http://192.168.0.105/api/";
+//    private static final String base_url = "http://39.101.138.75/api/";
+        private static final String base_url = "http://192.168.0.105/api/";
     //        private static final String base_url="http://172.19.231.191:8080/api/";
     public static final AccountHTTP account;
     public static final PassportHTTP passport;
@@ -125,6 +125,7 @@ public class HTTP {
             mediaType = response.body().contentType();
             pb = response.body() != null ? response.body().string() : "null";
         } catch (Exception e) {
+            Log.e("HTTP_LOG", "http error", e);
             throw e;
         } finally {
             long cost = System.currentTimeMillis() - t1;

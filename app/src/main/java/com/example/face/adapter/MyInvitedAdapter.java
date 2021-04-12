@@ -24,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.face.model.act.ActivityDetail;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -32,16 +33,16 @@ public class MyInvitedAdapter extends RecyclerView.Adapter<MyInvitedAdapter.Hori
 
     private Context mContext;
 
-    private List<ActInvitedResp> mList = new ArrayList<>();
+    private List<ActivityDetail> mList = new ArrayList<>();
 
     public MyInvitedAdapter(Context context) {
         mContext = context;
         HTTP.invited.listInvited()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActInvitedResp>>() {
+                .subscribe(new BaseObserver<List<ActivityDetail>>() {
                     @Override
-                    public void onNext(List<ActInvitedResp> ls) {
+                    public void onNext(List<ActivityDetail> ls) {
                         mList.addAll(ls);
                         notifyDataSetChanged();
                     }
@@ -64,10 +65,10 @@ public class MyInvitedAdapter extends RecyclerView.Adapter<MyInvitedAdapter.Hori
                 .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
                 .apply(options)
                 .into(holder.avatar);
-        ActInvitedResp d = mList.get(position);
+        ActivityDetail d = mList.get(position);
         holder.title.setText(d.getTitle());
         holder.address.setText(d.getAddress());
-        holder.uname.setText(d.getNickName());
+        holder.uname.setText(d.getUname());
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, ActManageActivity.class);
             intent.putExtra("aid", mList.get(position).getAid());

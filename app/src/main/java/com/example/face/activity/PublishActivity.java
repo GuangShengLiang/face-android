@@ -5,19 +5,19 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.example.face.FLinkApplication;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
+import com.example.face.model.Response;
 import com.example.face.model.act.ActReq;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -33,6 +33,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -110,7 +111,16 @@ public class PublishActivity extends BaseActivity {
                         .detail(detail.getText().toString()).build();
                 HTTP.activity.create(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<>());
+                        .subscribe(new BaseObserver<Response>(){
+                            @Override
+                            public void onNext(Response r) {
+                                Toast t = Toasty.success(FLinkApplication.getContext(), "发布成功",
+                                        Toast.LENGTH_SHORT, true);
+                                t.setGravity(Gravity.CENTER, 0, 0);
+                                t.show();
+                                finish();
+                            }
+                        });
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.example.face.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ public class ActManageActivity extends BaseActivity {
     RecyclerView inviteView;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
+    long aid;
 
 
     @Override
@@ -56,6 +58,7 @@ public class ActManageActivity extends BaseActivity {
                         title.setText(a.getTitle());
                         time.setText(a.getStime());
                         address.setText(a.getAddress());
+                        aid=a.getAid();
                     }
                 });
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
@@ -71,7 +74,9 @@ public class ActManageActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                Log.d("tt", "right");
+                Intent intent = new Intent(mContext, EditActivity.class);
+                intent.putExtra("aid", aid);
+                mContext.startActivity(intent);
             }
         });
     }

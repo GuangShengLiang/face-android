@@ -3,10 +3,12 @@ package com.example.face;
 import android.app.Application;
 
 import android.content.Context;
+import com.example.face.util.PreferencesUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orm.SugarContext;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import es.dmoral.toasty.Toasty;
 
 public class FLinkApplication extends Application {
     private static Context context;
@@ -17,6 +19,7 @@ public class FLinkApplication extends Application {
         context = getApplicationContext();
         Fresco.initialize(this);
         SugarContext.init(this);
+        PreferencesUtil.getInstance().init(this);
 
 //        RetrofitMock.setEnabled( true );
 

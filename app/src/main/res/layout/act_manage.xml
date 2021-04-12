@@ -19,7 +19,7 @@
                 app:backButton="true"
                 app:barStyle="light"
                 app:rightColor="@color/black"
-                app:rightTitle="完成"
+                app:rightTitle="修改"
                 app:rightSize="16dp"
                 app:title="活动详情"
                 app:titleSize="14dp"

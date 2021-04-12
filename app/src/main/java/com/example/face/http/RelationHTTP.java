@@ -2,10 +2,7 @@ package com.example.face.http;
 
 
 import com.example.face.entity.FriendApply;
-import com.example.face.model.Friend;
-import com.example.face.model.FriendReq;
-import com.example.face.model.Relation;
-import com.example.face.model.RuidReq;
+import com.example.face.model.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public interface RelationHTTP {
     Observable<Relation> relation(@Query("ruid") int ruid);
 
     @POST("v1/relations/black")
-    Observable<Void> black(@Query("ruid") int ruid);
+    Observable<Response> black(@Query("ruid") int ruid);
 
     @GET("v1/friends/list")
     Observable<List<Friend>> friendList();
@@ -33,10 +30,10 @@ public interface RelationHTTP {
     Observable<Void> friendApply(@Query("uid") int ruid);
 
     @POST("v1/friends/applies/apply")
-    Observable<Void> friendApply(@Body FriendReq r);
+    Observable<Response> friendApply(@Body FriendReq r);
 
     @POST("v1/friends/applies/agree")
-    Observable<Void> friendAgree(@Body RuidReq r);
+    Observable<Response> friendAgree(@Body RuidReq r);
 
     @GET("v1/friends/applies/list")
     Observable<List<FriendApply>> friendApplyList();

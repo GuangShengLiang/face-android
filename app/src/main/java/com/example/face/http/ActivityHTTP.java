@@ -2,6 +2,7 @@ package com.example.face.http;
 
 
 import com.example.face.model.Account;
+import com.example.face.model.Response;
 import com.example.face.model.act.ActReq;
 import com.example.face.model.act.ActivityDetail;
 
@@ -28,10 +29,10 @@ public interface ActivityHTTP {
     Observable<List<ActivityDetail>> listPublish();
 
     @GET("v1/activities/list/waiting")
-    Observable<Object> listWaiting();
+    Observable<List<ActivityDetail>> listWaiting();
 
     @GET("v1/activities/list/finish")
-    Observable<Object> finish();
+    Observable<List<ActivityDetail>> listFinish();
 
     @GET("v1/activities/list/join")
     Observable<List<ActivityDetail>> listJoin();
@@ -40,10 +41,10 @@ public interface ActivityHTTP {
     Observable<ActivityDetail> detail(@Query("aid") long aid);
 
     @POST("v1/activities/create")
-    Observable<Void> create(@Body ActReq r);
+    Observable<Response> create(@Body ActReq r);
 
     @POST("v1/activities/update")
-    Observable<Void> modify(@Body ActReq req);
+    Observable<Response> modify(@Body ActReq req);
 
     @GET("v1/activities/members/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);

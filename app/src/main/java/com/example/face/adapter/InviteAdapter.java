@@ -18,6 +18,7 @@ import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.IdReq;
+import com.example.face.model.Response;
 import com.example.face.model.act.ActInviteResp;
 import com.example.face.util.ActivityUtils;
 
@@ -84,9 +85,9 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
             HTTP.invite.cancel(req)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<Void>() {
+                    .subscribe(new BaseObserver<Response>() {
                         @Override
-                        public void onNext(Void v) {
+                        public void onNext(Response v) {
                             holder.status.setText("已取消");
                             holder.cancel.setClickable(false);
                             holder.cancel.setBackgroundColor(Color.GRAY);

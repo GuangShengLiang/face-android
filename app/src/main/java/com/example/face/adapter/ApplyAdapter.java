@@ -18,6 +18,7 @@ import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.IdReq;
+import com.example.face.model.Response;
 import com.example.face.model.act.ApplyResp;
 import com.example.face.util.ActivityUtils;
 
@@ -85,9 +86,9 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
             HTTP.apply.agree(req)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<Void>() {
+                    .subscribe(new BaseObserver<Response>() {
                         @Override
-                        public void onNext(Void v) {
+                        public void onNext(Response v) {
                             holder.statusName.setText("同意");
                             holder.approval.setClickable(false);
                             holder.approval.setBackgroundColor(Color.GRAY);

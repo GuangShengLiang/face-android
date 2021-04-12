@@ -10,6 +10,7 @@ import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
 import com.example.face.model.AccountReq;
+import com.example.face.model.Response;
 import com.example.face.util.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -54,13 +55,8 @@ public class NickNameActivity extends BaseActivity {
                 HTTP.account.updateInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Void>() {
-                            @Override
-                            public void onNext(Void v) {
-
-                            }
+                        .subscribe(new BaseObserver<Response>() {
                         });
-                Toast.makeText(mContext, "更新成功", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String token=PreferencesUtil.getToken(this.getApplicationContext());
-        if (token==null||token.length()==0) {
+        if (!PreferencesUtil.getInstance().isLogin()) {
             Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
             this.startActivity(intent);
             return;

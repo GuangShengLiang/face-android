@@ -7,6 +7,7 @@ import com.example.face.model.Message;
 
 import java.util.List;
 
+import com.example.face.model.Response;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,7 +19,7 @@ public interface AccountHTTP {
     Observable<Account> baseInfo();
 
     @POST("v1/mine/info/base/update")
-    Observable<Void> updateInfo(@Body AccountReq r);
+    Observable<Response> updateInfo(@Body AccountReq r);
 
     @GET("v1/account/search-mobile")
     Observable<Account> searchByMobile(@Query("mobile") String mobile);

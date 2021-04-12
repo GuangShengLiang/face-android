@@ -31,20 +31,20 @@ import io.reactivex.schedulers.Schedulers;
 public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.HorizontalViewHolder> {
     private Context mContext;
 
-    private List<ActivityDetail> mList = new ArrayList<>();
+    public List<ActivityDetail> mList = new ArrayList<>();
 
     public MyJoinAdapter(Context context) {
         mContext = context;
-        HTTP.activity.listJoin()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActivityDetail>>() {
-                    @Override
-                    public void onNext(List<ActivityDetail> ls) {
-                        mList.addAll(ls);
-                        notifyDataSetChanged();
-                    }
-                });
+//        HTTP.activity.listJoin()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserver<List<ActivityDetail>>() {
+//                    @Override
+//                    public void onNext(List<ActivityDetail> ls) {
+//                        mList.addAll(ls);
+//                        notifyDataSetChanged();
+//                    }
+//                });
     }
 
     @NonNull

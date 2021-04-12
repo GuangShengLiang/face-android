@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(LoginResp resp) {
                         mDialog.dismiss();
                         PreferencesUtil.saveToken(LoginActivity.this,resp.getToken() );
+                        PreferencesUtil.getInstance().setLogin(true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                 });

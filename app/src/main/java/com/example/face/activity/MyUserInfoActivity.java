@@ -1,10 +1,8 @@
 package com.example.face.activity;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,15 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-
-import com.android.volley.NetworkError;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.example.face.Constant;
 import com.example.face.R;
 import com.example.face.entity.User;
@@ -31,19 +24,12 @@ import com.example.face.model.AccountReq;
 import com.example.face.util.CommonUtil;
 import com.example.face.util.FileUtil;
 import com.example.face.util.PreferencesUtil;
-import com.example.face.util.VolleyUtil;
 import com.example.face.widget.LoadingDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+import java.util.List;
 
 public class MyUserInfoActivity extends BaseActivity {
 
@@ -61,8 +47,6 @@ public class MyUserInfoActivity extends BaseActivity {
     SimpleDraweeView mAvatarSdv;
     Context context;
 
-    private VolleyUtil volleyUtil;
-
     private static final int UPDATE_AVATAR_BY_ALBUM = 2;
     private static final int UPDATE_USER_NICK_NAME = 3;
     private static final int UPDATE_USER_WX_ID = 4;
@@ -78,7 +62,6 @@ public class MyUserInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_my_info);
         context = this;
         ButterKnife.bind(this);
-        volleyUtil = VolleyUtil.getInstance(this);
         PreferencesUtil.getInstance().init(this);
         user = PreferencesUtil.getInstance().getUser();
         dialog = new LoadingDialog(MyUserInfoActivity.this);
@@ -130,7 +113,7 @@ public class MyUserInfoActivity extends BaseActivity {
                                 List<String> imageList = FileUtil.uploadFile(Constant.FILE_UPLOAD_URL, filePath);
                                 if (null != imageList && imageList.size() > 0) {
                                     String newAvatar = Constant.FILE_BASE_URL + imageList.get(0);
-                                    updateUserAvatar(user.getUserId(), newAvatar);
+//                                    updateUserAvatar(user.getUserId(), newAvatar);
                                 }
                             }
                         }).start();
@@ -167,17 +150,15 @@ public class MyUserInfoActivity extends BaseActivity {
         TextView mMaleTv = window.findViewById(R.id.tv_content1);
         mMaleTv.setText(getString(R.string.sex_male));
         mMaleTv.setOnClickListener(view -> {
-            dialog.setMessage(getString(R.string.saving));
-            dialog.show();
             AccountReq req = new AccountReq();
             req.setGender(1);
             HTTP.account.updateInfo(req)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<Void>() {
+                    .subscribe(new BaseObserver<com.example.face.model.Response>() {
                         @Override
-                        public void onNext(Void v) {
-                            dialog.dismiss();
+                        public void onNext(com.example.face.model.Response v) {
+                            mSexTv.setText(mMaleTv.getText());
                             sexDialog.dismiss();
                         }
                     });
@@ -187,17 +168,15 @@ public class MyUserInfoActivity extends BaseActivity {
         mFemaleTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setMessage(getString(R.string.saving));
-                dialog.show();
                 AccountReq req = new AccountReq();
                 req.setGender(2);
                 HTTP.account.updateInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Void>() {
+                        .subscribe(new BaseObserver<com.example.face.model.Response>() {
                             @Override
-                            public void onNext(Void v) {
-                                dialog.dismiss();
+                            public void onNext(com.example.face.model.Response v) {
+                                mSexTv.setText(mFemaleTv.getText());
                                 sexDialog.dismiss();
                             }
                         });
@@ -234,41 +213,9 @@ public class MyUserInfoActivity extends BaseActivity {
 
     }
 
-
-    private void updateUserAvatar(String userId, final String userAvatar) {
-        String url = Constant.BASE_URL + "users/" + userId + "/userAvatar";
-        Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("userAvatar", userAvatar);
-
-        volleyUtil.httpPutRequest(url, paramMap, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                user.setUserAvatar(userAvatar);
-                PreferencesUtil.getInstance().setUser(user);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                if (volleyError instanceof NetworkError) {
-                    Toast.makeText(MyUserInfoActivity.this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (volleyError instanceof TimeoutError) {
-                    Toast.makeText(MyUserInfoActivity.this, R.string.network_time_out, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-    }
-
     // 运行时添加权限
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private void requestWritePermission() {
-        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
-        }
     }
 }
