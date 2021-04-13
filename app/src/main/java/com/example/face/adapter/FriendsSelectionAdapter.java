@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.example.face.R;
@@ -16,15 +17,16 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 public class FriendsSelectionAdapter extends ArrayAdapter<Friend> {
-
     List<Friend> mFriendList;
+    List<Integer> uids;
     int mResource;
     private LayoutInflater mLayoutInflater;
 
-    public FriendsSelectionAdapter(Context context, int resource, List<Friend> friendList) {
+    public FriendsSelectionAdapter(Context context, int resource, List<Friend> friendList, List<Integer> uids) {
         super(context, resource, friendList);
         this.mResource = resource;
         this.mFriendList = friendList;
+        this.uids = uids;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -37,22 +39,13 @@ public class FriendsSelectionAdapter extends ArrayAdapter<Friend> {
             viewHolder = new ViewHolder();
             viewHolder.mAvatarSdv = convertView.findViewById(R.id.sdv_avatar);
             viewHolder.mNameTv = convertView.findViewById(R.id.tv_name);
-            viewHolder.mHeaderTv = convertView.findViewById(R.id.tv_header);
-            viewHolder.mTempView = convertView.findViewById(R.id.view_header);
-
+            viewHolder.checkBox = convertView.findViewById(R.id.tv_check);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Friend friend = getItem(position);
-        String header;
-        if (TextUtils.isEmpty(friend.getRemark())) {
-            header = CommonUtil.setUserHeader(friend.getRname());
-        } else {
-            header = CommonUtil.setUserHeader(friend.getRemark());
-        }
-
         if (TextUtils.isEmpty(friend.getRemark())) {
             viewHolder.mNameTv.setText(friend.getRname());
         } else {
@@ -60,24 +53,19 @@ public class FriendsSelectionAdapter extends ArrayAdapter<Friend> {
         }
 
         String avatar = friend.getAvatar();
-        if (0 == position || null != header && !header.equals(getItem(position - 1).getHeader())) {
-            if (TextUtils.isEmpty(header)) {
-                viewHolder.mHeaderTv.setVisibility(View.GONE);
-                viewHolder.mTempView.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.mHeaderTv.setVisibility(View.VISIBLE);
-                viewHolder.mHeaderTv.setText(header);
-                viewHolder.mTempView.setVisibility(View.GONE);
-            }
-        } else {
-            viewHolder.mHeaderTv.setVisibility(View.GONE);
-            viewHolder.mTempView.setVisibility(View.VISIBLE);
-        }
-
         if (!TextUtils.isEmpty(avatar)) {
             CommonUtil.loadAvatar(getContext(), viewHolder.mAvatarSdv, avatar);
         }
-
+        viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewHolder.checkBox.isChecked()) {
+                    uids.add(mFriendList.get(position).getRuid());
+                } else {
+                    uids.remove(mFriendList.get(position).getRuid());
+                }
+            }
+        });
         return convertView;
     }
 
@@ -98,7 +86,6 @@ public class FriendsSelectionAdapter extends ArrayAdapter<Friend> {
     class ViewHolder {
         SimpleDraweeView mAvatarSdv;
         TextView mNameTv;
-        TextView mHeaderTv;
-        View mTempView;
+        CheckBox checkBox;
     }
 }

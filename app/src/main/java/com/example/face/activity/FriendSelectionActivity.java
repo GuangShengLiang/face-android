@@ -32,8 +32,8 @@ public class FriendSelectionActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
     @BindView(R.id.lv_friends)
-    private ListView mFriendsLv;
-    private long aid;
+    ListView mFriendsLv;
+    private long aid = 0;
     private List<Integer> uids = new ArrayList<>();
 
 
@@ -42,6 +42,7 @@ public class FriendSelectionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_selection_list);
         ButterKnife.bind(this);
+        aid = getIntent().getExtras().getLong("aid");
 
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
@@ -56,22 +57,22 @@ public class FriendSelectionActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                if (uids.isEmpty()) {
-                    return;
+                if (!uids.isEmpty()) {
+                    InviteReq r = new InviteReq(aid, uids);
+                    HTTP.invite.invite(r)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new BaseObserver<Response>() {
+                                @Override
+                                public void onNext(@NotNull Response v) {
+                                    Toast t = Toasty.success(FLinkApplication.getContext(), "添加成功",
+                                            Toast.LENGTH_SHORT, true);
+                                    t.setGravity(Gravity.CENTER, 0, 0);
+                                    t.show();
+                                }
+                            });
                 }
-                InviteReq r = new InviteReq(aid, uids);
-                HTTP.invite.invite(r)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Response>() {
-                            @Override
-                            public void onNext(@NotNull Response v) {
-                                Toast t = Toasty.success(FLinkApplication.getContext(), "添加成功",
-                                        Toast.LENGTH_SHORT, true);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        });
+                finish();
             }
         });
         initView();
@@ -80,7 +81,8 @@ public class FriendSelectionActivity extends BaseActivity {
 
     private void initView() {
         List<Friend> flist = new ArrayList<>();
-        FriendsSelectionAdapter adapter = new FriendsSelectionAdapter(mContext, R.layout.friend_selection_list, flist);
+        FriendsSelectionAdapter adapter = new FriendsSelectionAdapter(mContext, R.layout.friend_selection_list_item,
+                flist, uids);
         mFriendsLv.setAdapter(adapter);
         HTTP.relation.friendList()
                 .subscribeOn(Schedulers.io())
@@ -92,13 +94,14 @@ public class FriendSelectionActivity extends BaseActivity {
                         adapter.notifyDataSetChanged();
                     }
                 });
-        mFriendsLv.setOnItemClickListener((parent, view, position, id) -> {
+     /*   mFriendsLv.setOnItemClickListener((parent, view, position, id) -> {
+            Log.d("tag", position + "");
             int uid = flist.get(position).getUid();
             if (uids.contains(uid)) {
                 uids.remove(uid);
             } else {
                 uids.add(uid);
             }
-        });
+        });*/
     }
 }
