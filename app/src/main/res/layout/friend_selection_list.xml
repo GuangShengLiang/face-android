@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backButton="true"
+            app:barStyle="light"
+            app:rightColor="@color/google_blue"
+            app:rightTitle="确认"
+            app:rightSize="16dp"
+            app:title="选择参与人"
+            app:titleSize="14dp"
+            app:titleColor="@color/black"/>
+    <ListView
+            android:id="@+id/lv_friends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_loading"
+            android:background="@android:color/transparent"
+            android:cacheColorHint="@color/divider_list"
+            android:descendantFocusability="afterDescendants"
+            android:divider="@color/divider_list"
+            android:dividerHeight="0.1dp"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:scrollbars="none" />
+</LinearLayout>

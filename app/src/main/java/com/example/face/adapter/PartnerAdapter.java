@@ -1,6 +1,7 @@
 package com.example.face.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.face.R;
+import com.example.face.activity.EditActivity;
+import com.example.face.activity.FriendSelectionActivity;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
@@ -21,20 +24,22 @@ import com.example.face.util.CommonUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.face.util.PreferencesUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.HorizontalViewHolder> {
 
     private Context mContext;
-
     private List<Account> mList = new ArrayList<>();
+    private long aid;
 
     public PartnerAdapter(Context context) {
         mContext = context;
     }
 
     public void setHorizontalDataList(long aid) {
+        this.aid = aid;
         HTTP.activity.listMember(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -59,9 +64,16 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
         //最后一个，+邀请链接
         if (position == mList.size() - 1) {
+            int uid = PreferencesUtil.getAccount(mContext).getUid();
+            if (mList.stream().noneMatch(e -> e.getUid() == uid)) {
+                return;
+            }
             holder.imAvatar.setImageResource(R.mipmap.icon_add_user_to_group);
             holder.itemView.setOnClickListener(v -> {
                 Log.d("", "invite");
+                Intent intent = new Intent(mContext, FriendSelectionActivity.class);
+                intent.putExtra("aid", aid);
+                mContext.startActivity(intent);
             });
             return;
         }
