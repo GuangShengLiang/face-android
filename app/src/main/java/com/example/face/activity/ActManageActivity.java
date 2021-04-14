@@ -2,13 +2,12 @@ package com.example.face.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.face.R;
 import com.example.face.adapter.ApplyAdapter;
 import com.example.face.adapter.InviteAdapter;
@@ -18,9 +17,6 @@ import com.example.face.http.HTTP;
 import com.example.face.model.act.ActivityDetail;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -40,7 +36,7 @@ public class ActManageActivity extends BaseActivity {
     RecyclerView inviteView;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
-    long aid;
+    ActivityDetail d=null;
 
 
     @Override
@@ -49,18 +45,7 @@ public class ActManageActivity extends BaseActivity {
         setContentView(R.layout.act_manage);
         ButterKnife.bind(this);
         initView();
-        HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetail>() {
-                    @Override
-                    public void onNext(ActivityDetail a) {
-                        title.setText(a.getTitle());
-                        time.setText(a.getStime());
-                        address.setText(a.getAddress());
-                        aid=a.getAid();
-                    }
-                });
+
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
             public void onLeftClick(View v) {
@@ -75,7 +60,8 @@ public class ActManageActivity extends BaseActivity {
             @Override
             public void onRightClick(View v) {
                 Intent intent = new Intent(mContext, EditActivity.class);
-                intent.putExtra("aid", aid);
+                intent.putExtra("aid", d.getAid());
+                intent.putExtra("uid", d.getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -85,11 +71,22 @@ public class ActManageActivity extends BaseActivity {
         PartnerAdapter adapter = new PartnerAdapter(this);
         LinearLayoutManager managerHorizontal = new LinearLayoutManager(this);
         managerHorizontal.setOrientation(RecyclerView.HORIZONTAL);
-
         partnerView.setLayoutManager(managerHorizontal);
         partnerView.setHasFixedSize(true);
         partnerView.setAdapter(adapter);
-        adapter.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
+        HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<ActivityDetail>() {
+                    @Override
+                    public void onNext(ActivityDetail a) {
+                        d=a;
+                        title.setText(a.getTitle());
+                        time.setText(a.getStime());
+                        address.setText(a.getAddress());
+                        adapter.setHorizontalDataList(d.getAid());
+                    }
+                });
         initApply();
         initInvite();
     }

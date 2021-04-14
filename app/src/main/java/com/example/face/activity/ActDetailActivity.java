@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class ActDetailActivity extends BaseActivity {
@@ -137,6 +136,6 @@ public class ActDetailActivity extends BaseActivity {
         partnerView.setLayoutManager(managerHorizontal);
         partnerView.setHasFixedSize(true);
         partnerView.setAdapter(adapter);
-        adapter.setHorizontalDataList(getIntent().getExtras().getLong("aid"));
+        adapter.setHorizontalDataList(d.getAid());
     }
 }

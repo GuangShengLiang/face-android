@@ -14,8 +14,10 @@ import com.example.face.MainActivity;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
+import com.example.face.model.Account;
 import com.example.face.model.LoginReq;
 import com.example.face.model.LoginResp;
+import com.example.face.util.CommonUtil;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.widget.LoadingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,9 +62,22 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onNext(LoginResp resp) {
                         mDialog.dismiss();
-                        PreferencesUtil.saveToken(LoginActivity.this,resp.getToken() );
+                        PreferencesUtil.saveToken(LoginActivity.this, resp.getToken());
+                        loadUserInfo();
                         PreferencesUtil.getInstance().setLogin(true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                });
+    }
+
+    private void loadUserInfo() {
+        HTTP.account.baseInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<Account>() {
+                    @Override
+                    public void onNext(Account a) {
+                        PreferencesUtil.saveAccount(mContext, a);
                     }
                 });
     }
