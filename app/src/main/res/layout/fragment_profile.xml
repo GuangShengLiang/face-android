@@ -73,68 +73,6 @@
 		/>
 	</RelativeLayout>
 	<RelativeLayout
-			android:id="@+id/rl_album"
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			android:background="@drawable/btn_list_item_bg"
-			android:clickable="true"
-			android:paddingLeft="12dp">
-
-		<ImageView
-				android:id="@+id/iv_album"
-				android:layout_width="24dp"
-				android:layout_height="24dp"
-				android:layout_alignParentLeft="true"
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="12dp"
-				android:src="@mipmap/album"/>
-
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="20dp"
-				android:layout_toRightOf="@id/iv_album"
-				android:text="@string/album"
-				android:textColor="#353535"
-				android:textSize="16sp"/>
-
-		<View
-				android:layout_width="match_parent"
-				android:layout_height="0.1dp"
-				android:layout_alignParentBottom="true"
-				android:layout_marginRight="12dp"
-				android:background="#dadada"/>
-	</RelativeLayout>
-
-	<RelativeLayout
-			android:id="@+id/rl_collect"
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			android:background="@drawable/btn_list_item_bg"
-			android:clickable="true"
-			android:paddingLeft="12dp">
-
-		<ImageView
-				android:id="@+id/iv_collect"
-				android:layout_width="24dp"
-				android:layout_height="24dp"
-				android:layout_alignParentLeft="true"
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="12dp"
-				android:src="@mipmap/collect"/>
-
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerVertical="true"
-				android:layout_marginLeft="20dp"
-				android:layout_toRightOf="@id/iv_collect"
-				android:text="@string/collect"
-				android:textColor="#353535"
-				android:textSize="16sp"/>
-	</RelativeLayout>
-	<RelativeLayout
 		android:id="@+id/act_list"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
@@ -170,7 +108,7 @@
 			android:background="#dadada"/>
 	</RelativeLayout>
 
-	<RelativeLayout
+	<!--<RelativeLayout
 			android:id="@+id/rl_my_join"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
@@ -205,6 +143,7 @@
 				android:layout_marginRight="12dp"
 				android:background="#dadada"/>
 	</RelativeLayout>
+-->
 
 	<RelativeLayout
 			android:id="@+id/rl_my_publish"
@@ -233,6 +172,7 @@
 				android:textColor="#353535"
 				android:textSize="16sp"/>
 	</RelativeLayout>
+    <!--
 	<RelativeLayout
 			android:id="@+id/rl_my_apply"
 			android:layout_width="match_parent"
@@ -286,7 +226,7 @@
 				android:text="收到的邀请"
 				android:textColor="#353535"
 				android:textSize="16sp"/>
-	</RelativeLayout>
+	</RelativeLayout-->>
 
 	<RelativeLayout
 			android:id="@+id/rl_setting"

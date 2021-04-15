@@ -32,9 +32,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
 public class MyUserInfoActivity extends BaseActivity {
-
-    private static final int WRITE_PERMISSION = 0x01;
-
     @BindView(R.id.tv_nick_name)
     TextView mNickNameTv;
     @BindView(R.id.tv_wx_id)
@@ -65,7 +62,9 @@ public class MyUserInfoActivity extends BaseActivity {
         PreferencesUtil.getInstance().init(this);
         user = PreferencesUtil.getInstance().getUser();
         dialog = new LoadingDialog(MyUserInfoActivity.this);
+    }
 
+    void initView() {
         HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,6 +79,12 @@ public class MyUserInfoActivity extends BaseActivity {
                         mSexTv.setText(a.getGenderName());
                     }
                 });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     public void back(View view) {

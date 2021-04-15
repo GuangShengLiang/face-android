@@ -6,7 +6,7 @@ import lombok.Data;
 public class ActInviteResp {
     private int id;
     private int uid;
-    private Integer status;
+    private int status;
 
     private int iuid;
     private String nickName;

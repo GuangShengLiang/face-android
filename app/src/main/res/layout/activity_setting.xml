@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 app:backButton="true"
                 app:barStyle="light"
-                app:title="活动详情"
+                app:title="设置"
                 app:titleSize="14dp"
                 app:titleColor="@color/black"/>
     </RelativeLayout>
@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+<!--
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -193,6 +194,7 @@
                         android:visibility="invisible" />
                 </RelativeLayout>
             </LinearLayout>
+-->
 
             <Button
                 android:id="@+id/btn_logout"

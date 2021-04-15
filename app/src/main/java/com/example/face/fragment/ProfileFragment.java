@@ -45,20 +45,15 @@ public class ProfileFragment extends Fragment {
     TextView mWxIdTv;
     User user;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
+        initView();
         return view;
     }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        PreferencesUtil.getInstance().init(getActivity());
-        user = PreferencesUtil.getInstance().getUser();
+    void initView(){
         HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -70,7 +65,6 @@ public class ProfileFragment extends Fragment {
                         CommonUtil.loadAvatar(getContext(), mAvatarSdv, a.getAvatar());
                     }
                 });
-
     }
 
     @OnClick(R.id.rl_myinfo)
@@ -96,9 +90,8 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.rl_my_join)
+//    @OnClick(R.id.rl_my_join)
     void myJoinList() {
-//        Intent intent = new Intent(getActivity(), MyJoinListActivity.class);
         Intent intent = new Intent(getActivity(), ActTabsActivity.class);
         startActivity(intent);
     }
@@ -110,13 +103,13 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.rl_my_apply)
+//    @OnClick(R.id.rl_my_apply)
     void myApplyList() {
         Intent intent = new Intent(getActivity(), MyApplyListActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.rl_my_invited)
+//    @OnClick(R.id.rl_my_invited)
     void myInvitedList() {
         Intent intent = new Intent(getActivity(), MyInvitedListActivity.class);
         startActivity(intent);
@@ -125,11 +118,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Account acc = PreferencesUtil.getAccount(this.getContext());
-//        Optional.ofNullable(acc).ifPresent(e -> {
-//            mNickNameTv.setText(Optional.ofNullable(e.getNickName()).orElse(""));
-//            mWxIdTv.setText("ID:" + e.getUid());
-//            CommonUtil.loadAvatar(this.getContext(), mAvatarSdv, acc.getAvatar());
-//        });
+        initView();
     }
 }

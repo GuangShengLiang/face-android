@@ -47,7 +47,6 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
                     @Override
                     public void onNext(List<Account> l) {
                         mList.addAll(l);
-                        mList.add(new Account());
                         notifyDataSetChanged();
                     }
                 });
@@ -63,14 +62,13 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
         //最后一个，+邀请链接
-        if (position == mList.size() - 1) {
+        if (position == mList.size()) {
             int uid = PreferencesUtil.getAccount(mContext).getUid();
             if (mList.stream().noneMatch(e -> e.getUid() == uid)) {
                 return;
             }
             holder.imAvatar.setImageResource(R.mipmap.icon_add_user_to_group);
             holder.itemView.setOnClickListener(v -> {
-                Log.d("", "invite");
                 Intent intent = new Intent(mContext, FriendSelectionActivity.class);
                 intent.putExtra("aid", aid);
                 mContext.startActivity(intent);
@@ -87,7 +85,12 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
 
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        int add=0;
+        int uid = PreferencesUtil.getAccount(mContext).getUid();
+        if (mList.stream().anyMatch(e -> e.getUid() == uid)) {
+            add++;
+        }
+        return mList == null ? 0 : mList.size()+add;
     }
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder {
