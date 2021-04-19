@@ -8,6 +8,7 @@ import com.example.face.model.act.ActivityDetail;
 
 import java.util.List;
 
+import com.example.face.model.act.AidReq;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -45,6 +46,15 @@ public interface ActivityHTTP {
 
     @POST("v1/activities/update")
     Observable<Response> modify(@Body ActReq req);
+
+    @POST("v1/activities/apply-stop")
+    Observable<Response> applyStop(@Body AidReq req);
+
+    @POST("v1/activities/start")
+    Observable<Response> start(@Body AidReq req);
+
+    @POST("v1/activities/finish")
+    Observable<Response> finish(@Body AidReq req);
 
     @GET("v1/activities/members/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);

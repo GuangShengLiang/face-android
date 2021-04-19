@@ -165,8 +165,8 @@
 
         </LinearLayout>
 
-        <TextView
-                android:id="@+id/btn_add_shopping_cart"
+        <Button
+                android:id="@+id/btn_action"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="19"
@@ -175,6 +175,5 @@
                 android:text="停止报名"
                 android:textColor="#ffffff"
                 android:textSize="15sp"/>
-
     </LinearLayout>
 </RelativeLayout>

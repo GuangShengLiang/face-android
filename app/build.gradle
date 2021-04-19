@@ -26,7 +26,7 @@ buildscript {
 }
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.0'
+    buildToolsVersion '29.0.2'
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -71,7 +71,7 @@ dependencies {
     implementation 'me.relex:photodraweeview:1.1.2'
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
-    implementation 'com.amap.api:search:latest.integration'
+    implementation 'com.amap.api:search:7.9.0'
     implementation 'com.github.satyan:sugar:1.5'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.alibaba:fastjson:1.2.55'

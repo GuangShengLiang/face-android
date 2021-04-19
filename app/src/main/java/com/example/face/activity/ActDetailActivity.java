@@ -52,32 +52,6 @@ public class ActDetailActivity extends BaseActivity {
         setContentView(R.layout.act_detail);
         ButterKnife.bind(this);
         initView();
-        HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetail>() {
-                    @Override
-                    public void onNext(ActivityDetail a) {
-                        d = a;
-                        title.setText(a.getTitle());
-                        time.setText(a.getStime());
-                        address.setText(a.getAddress());
-                    }
-                });
-        HTTP.apply.isNeedApply(getIntent().getExtras().getLong("aid"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean b) {
-                        if (b) {
-                            appbtn.setText("立即申请");
-                        } else {
-                            appbtn.setClickable(false);
-                            appbtn.setText("已申请");
-                        }
-                    }
-                });
 
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
@@ -129,13 +103,37 @@ public class ActDetailActivity extends BaseActivity {
 
     private void initView() {
         PartnerAdapter adapter = new PartnerAdapter(this);
-
         LinearLayoutManager managerHorizontal = new LinearLayoutManager(this);
         managerHorizontal.setOrientation(RecyclerView.HORIZONTAL);
-
         partnerView.setLayoutManager(managerHorizontal);
         partnerView.setHasFixedSize(true);
         partnerView.setAdapter(adapter);
-        adapter.setHorizontalDataList(d.getAid());
+        HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<ActivityDetail>() {
+                    @Override
+                    public void onNext(ActivityDetail a) {
+                        d = a;
+                        adapter.setHorizontalDataList(a.getAid());
+                        title.setText(a.getTitle());
+                        time.setText(a.getStime());
+                        address.setText(a.getAddress());
+                    }
+                });
+        HTTP.apply.isNeedApply(getIntent().getExtras().getLong("aid"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean b) {
+                        if (b) {
+                            appbtn.setText("立即申请");
+                        } else {
+                            appbtn.setClickable(false);
+                            appbtn.setText("已申请");
+                        }
+                    }
+                });
     }
 }

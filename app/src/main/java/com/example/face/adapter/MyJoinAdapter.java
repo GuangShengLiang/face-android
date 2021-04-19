@@ -15,8 +15,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.activity.ActDetailActivity;
+import com.example.face.activity.ActManageActivity;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
+import com.example.face.model.Account;
 import com.example.face.model.act.ActivityDetail;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.face.util.PreferencesUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -69,8 +72,17 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
         holder.uname.setText(d.getUname());
         holder.time.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, ActDetailActivity.class);
-            intent.putExtra("aid", mList.get(position).getAid());
+//            Intent intent = new Intent(mContext, ActDetailActivity.class);
+//            intent.putExtra("aid", mList.get(position).getAid());
+//            mContext.startActivity(intent);
+            Account acc = PreferencesUtil.getAccount(mContext);
+            Intent intent;
+            if (acc != null && acc.getUid() == d.getUid()) {
+                intent = new Intent(mContext, ActManageActivity.class);
+            } else {
+                intent = new Intent(mContext, ActDetailActivity.class);
+            }
+            intent.putExtra("aid", d.getAid());
             mContext.startActivity(intent);
         });
     }
