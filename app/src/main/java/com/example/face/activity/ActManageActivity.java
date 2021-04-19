@@ -1,22 +1,33 @@
 package com.example.face.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.example.face.FLinkApplication;
 import com.example.face.R;
 import com.example.face.adapter.ApplyAdapter;
 import com.example.face.adapter.InviteAdapter;
 import com.example.face.adapter.PartnerAdapter;
+import com.example.face.enums.ActivityStatusEnum;
+import com.example.face.http.ActivityHTTP;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
+import com.example.face.model.Response;
 import com.example.face.model.act.ActivityDetail;
+import com.example.face.model.act.AidReq;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -34,10 +45,12 @@ public class ActManageActivity extends BaseActivity {
     RecyclerView applyView;
     @BindView(R.id.rcv_invite)
     RecyclerView inviteView;
+    @BindView(R.id.btn_action)
+    Button action;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
-    ActivityDetail d=null;
-
+    ActivityDetail d = null;
+    ActivityStatusEnum status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +93,90 @@ public class ActManageActivity extends BaseActivity {
                 .subscribe(new BaseObserver<ActivityDetail>() {
                     @Override
                     public void onNext(ActivityDetail a) {
-                        d=a;
+                        d = a;
                         title.setText(a.getTitle());
                         time.setText(a.getStime());
                         address.setText(a.getAddress());
                         adapter.setHorizontalDataList(d.getAid());
+                        status = ActivityStatusEnum.get(a.getStatus());
+                        actionView();
+
                     }
                 });
         initApply();
         initInvite();
+    }
+    private void actionView(){
+        switch (status) {
+            case 报名中:
+                action.setText("停止报名");
+                break;
+            case 报名结束:
+                action.setText("开始");
+                break;
+            case 活动进行中:
+                action.setText("结束");
+                break;
+            case 活动结束:
+                action.setText("已结束");
+                action.setBackgroundColor(Color.GRAY);
+                action.setClickable(false);
+                break;
+        }
+    }
+
+    @OnClick(R.id.btn_action)
+    public void action() {
+        AidReq r =new AidReq(d.getAid());
+        switch (status) {
+            case 报名中:
+                HTTP.activity.applyStop(r).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<Response>(){
+                            @Override
+                            public void onNext(Response v) {
+                                status=ActivityStatusEnum.报名结束;
+                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
+                                        Toast.LENGTH_SHORT, true);
+                                t.setGravity(Gravity.CENTER, 0, 0);
+                                t.show();
+                            }
+                        });
+                break;
+            case 报名结束:
+                HTTP.activity.start(r).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<Response>(){
+                            @Override
+                            public void onNext(Response v) {
+                                status=ActivityStatusEnum.活动进行中;
+                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
+                                        Toast.LENGTH_SHORT, true);
+                                t.setGravity(Gravity.CENTER, 0, 0);
+                                t.show();
+                            }
+                        });
+                break;
+            case 活动进行中:
+                HTTP.activity.finish(r).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<Response>(){
+                            @Override
+                            public void onNext(Response v) {
+                                status=ActivityStatusEnum.活动结束;
+                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
+                                        Toast.LENGTH_SHORT, true);
+                                t.setGravity(Gravity.CENTER, 0, 0);
+                                t.show();
+                            }
+                        });
+                break;
+            case 活动结束:
+                action.setVisibility(View.GONE);
+                break;
+            default:break;
+        }
+        actionView();
     }
 
     void initApply() {

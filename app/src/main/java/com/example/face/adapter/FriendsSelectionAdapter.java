@@ -15,14 +15,15 @@ import com.example.face.util.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+import java.util.Set;
 
 public class FriendsSelectionAdapter extends ArrayAdapter<Friend> {
     List<Friend> mFriendList;
-    List<Integer> uids;
+    Set<Integer> uids;
     int mResource;
     private LayoutInflater mLayoutInflater;
 
-    public FriendsSelectionAdapter(Context context, int resource, List<Friend> friendList, List<Integer> uids) {
+    public FriendsSelectionAdapter(Context context, int resource, List<Friend> friendList, Set<Integer> uids) {
         super(context, resource, friendList);
         this.mResource = resource;
         this.mFriendList = friendList;

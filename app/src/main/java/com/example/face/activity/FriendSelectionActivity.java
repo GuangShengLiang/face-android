@@ -24,7 +24,9 @@ import io.reactivex.schedulers.Schedulers;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FriendSelectionActivity extends BaseActivity {
     //    @BindView(R.id.recyclerView)
@@ -34,7 +36,7 @@ public class FriendSelectionActivity extends BaseActivity {
     @BindView(R.id.lv_friends)
     ListView mFriendsLv;
     private long aid = 0;
-    private List<Integer> uids = new ArrayList<>();
+    private Set<Integer> uids = new HashSet<>();
 
 
     @Override
