@@ -17,6 +17,7 @@ import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Account;
+import com.example.face.model.AccountDetail;
 import com.example.face.util.ActivityUtils;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.widget.LoadingDialog;

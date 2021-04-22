@@ -1,11 +1,11 @@
-package com.example.face.model;
+package com.example.face.model.param;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class AccountReq {
+public class AccountParam {
     private String nickName;
     private String avatarUrl;
     private Date birthday;

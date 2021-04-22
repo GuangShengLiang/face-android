@@ -14,10 +14,9 @@ import com.example.face.MainActivity;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.Account;
-import com.example.face.model.LoginReq;
-import com.example.face.model.LoginResp;
-import com.example.face.util.CommonUtil;
+import com.example.face.model.AccountDetail;
+import com.example.face.model.param.LoginParam;
+import com.example.face.model.vo.LoginVo;
 import com.example.face.util.PreferencesUtil;
 import com.example.face.widget.LoadingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -54,13 +53,13 @@ public class LoginActivity extends BaseActivity {
         mDialog.show();
         final String phone = mPhoneEt.getText().toString().trim();
         final String password = mPasswordEt.getText().toString().trim();
-        LoginReq r = new LoginReq(phone, password);
+        LoginParam r = new LoginParam(phone, password);
         HTTP.passport.login(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<LoginResp>() {
+                .subscribe(new BaseObserver<LoginVo>() {
                     @Override
-                    public void onNext(LoginResp resp) {
+                    public void onNext(LoginVo resp) {
                         mDialog.dismiss();
                         PreferencesUtil.saveToken(LoginActivity.this, resp.getToken());
                         loadUserInfo();
@@ -74,9 +73,9 @@ public class LoginActivity extends BaseActivity {
         HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Account>() {
+                .subscribe(new BaseObserver<AccountDetail>() {
                     @Override
-                    public void onNext(Account a) {
+                    public void onNext(AccountDetail a) {
                         PreferencesUtil.saveAccount(mContext, a);
                     }
                 });

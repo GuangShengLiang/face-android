@@ -17,8 +17,8 @@ import com.example.face.adapter.PartnerAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActivityDetail;
-import com.example.face.model.act.AidReq;
+import com.example.face.model.param.AidParam;
+import com.example.face.model.vo.ActivityDetailVo;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 
@@ -43,7 +43,7 @@ public class ActDetailActivity extends BaseActivity {
     Button appbtn;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
-    ActivityDetail d;
+    ActivityDetailVo d;
 
 
     @Override
@@ -73,7 +73,7 @@ public class ActDetailActivity extends BaseActivity {
 
     @OnClick({R.id.btn_apply})
     void apply() {
-        AidReq r = AidReq.builder().aid(d.getAid()).build();
+        AidParam r = AidParam.builder().aid(d.getAid()).build();
 //        HTTP.apply.apply(r)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread()).doOnComplete(new Action() {
@@ -111,9 +111,9 @@ public class ActDetailActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetail>() {
+                .subscribe(new BaseObserver<ActivityDetailVo>() {
                     @Override
-                    public void onNext(ActivityDetail a) {
+                    public void onNext(ActivityDetailVo a) {
                         d = a;
                         adapter.setHorizontalDataList(a.getAid());
                         title.setText(a.getTitle());

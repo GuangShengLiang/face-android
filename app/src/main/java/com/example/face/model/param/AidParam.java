@@ -1,4 +1,4 @@
-package com.example.face.model.act;
+package com.example.face.model.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AidReq {
+public class AidParam {
     private Long aid;
 }

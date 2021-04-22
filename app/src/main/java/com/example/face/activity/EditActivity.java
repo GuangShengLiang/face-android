@@ -5,26 +5,26 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.face.FLinkApplication;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActReq;
-import com.example.face.model.act.ActivityDetail;
+import com.example.face.model.param.ActivityParam;
+import com.example.face.model.vo.ActivityDetailVo;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -48,7 +48,7 @@ public class EditActivity extends BaseActivity {
     @BindView(R.id.title_bar)
     TitleBar titleBar;
     TimePickerView pvTime;
-    ActivityDetail d;
+    ActivityDetailVo d;
     //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
     //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
     Calendar selectedDate = Calendar.getInstance();
@@ -97,7 +97,7 @@ public class EditActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                ActReq r = ActReq.builder().title(title.getText().toString())
+                ActivityParam r = ActivityParam.builder().title(title.getText().toString())
                         .startTime(stime.getText().toString())
                         .endTime(etime.getText().toString())
                         .address(address.getText().toString())
@@ -116,9 +116,9 @@ public class EditActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid", 1214775584295485519L))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetail>() {
+                .subscribe(new BaseObserver<ActivityDetailVo>() {
                     @Override
-                    public void onNext(ActivityDetail a) {
+                    public void onNext(ActivityDetailVo a) {
                         d = a;
                         title.setText(a.getTitle());
                         address.setText(a.getAddress());

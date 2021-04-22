@@ -17,9 +17,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.IdReq;
+import com.example.face.model.param.IdParam;
 import com.example.face.model.Response;
-import com.example.face.model.act.ApplyResp;
+import com.example.face.model.vo.ApplyVo;
 import com.example.face.util.ActivityUtils;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
 
     private Context mContext;
 
-    private List<ApplyResp> mList = new ArrayList<>();
+    private List<ApplyVo> mList = new ArrayList<>();
 
     public ApplyAdapter(Context context) {
         mContext = context;
@@ -44,9 +44,9 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
         HTTP.apply.listApplyByAid(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ApplyResp>>() {
+                .subscribe(new BaseObserver<List<ApplyVo>>() {
                     @Override
-                    public void onNext(List<ApplyResp> l) {
+                    public void onNext(List<ApplyVo> l) {
                         mList.addAll(l);
                         notifyDataSetChanged();
                     }
@@ -62,7 +62,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
-        ApplyResp p = mList.get(position);
+        ApplyVo p = mList.get(position);
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.boy) //这里设置占位图
                 .error(R.drawable.boy);
@@ -71,17 +71,17 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.HorizontalVi
                 .apply(options)
                 .into(holder.avatar);
         holder.statusName.setText(p.getStatusName());
-        holder.name.setText(p.getNickName());
+        holder.name.setText(p.getApplicant().getNickName());
 
         if (p.getStatus() != 0) {
             holder.approval.setClickable(false);
             holder.approval.setBackgroundColor(Color.GRAY);
         }
         holder.avatar.setOnClickListener(view -> {
-            ActivityUtils.openUserInfoActivity(mContext, p.getUid());
+            ActivityUtils.openUserInfoActivity(mContext, p.getApplicant().getUid());
         });
         holder.approval.setOnClickListener(view -> {
-            IdReq req = new IdReq();
+            IdParam req = new IdParam();
             req.setId(p.getId());
             HTTP.apply.agree(req)
                     .subscribeOn(Schedulers.io())

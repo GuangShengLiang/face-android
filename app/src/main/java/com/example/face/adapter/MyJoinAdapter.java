@@ -7,34 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.activity.ActDetailActivity;
 import com.example.face.activity.ActManageActivity;
-import com.example.face.http.BaseObserver;
-import com.example.face.http.HTTP;
-import com.example.face.model.Account;
-import com.example.face.model.act.ActivityDetail;
+import com.example.face.model.AccountDetail;
+import com.example.face.model.vo.ActivityDetailVo;
+import com.example.face.util.PreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.example.face.util.PreferencesUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.HorizontalViewHolder> {
     private Context mContext;
 
-    public List<ActivityDetail> mList = new ArrayList<>();
+    public List<ActivityDetailVo> mList = new ArrayList<>();
 
     public MyJoinAdapter(Context context) {
         mContext = context;
@@ -66,18 +59,18 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
                 .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
                 .apply(options)
                 .into(holder.avatar);
-        ActivityDetail d = mList.get(position);
+        ActivityDetailVo d = mList.get(position);
         holder.title.setText(d.getTitle());
         holder.address.setText(d.getAddress());
-        holder.uname.setText(d.getUname());
+        holder.uname.setText(d.getPublisher().getNickName());
         holder.time.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
 //            Intent intent = new Intent(mContext, ActDetailActivity.class);
 //            intent.putExtra("aid", mList.get(position).getAid());
 //            mContext.startActivity(intent);
-            Account acc = PreferencesUtil.getAccount(mContext);
+            AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
-            if (acc != null && acc.getUid() == d.getUid()) {
+            if (acc != null && acc.getUid() == d.getPublisher().getUid()) {
                 intent = new Intent(mContext, ActManageActivity.class);
             } else {
                 intent = new Intent(mContext, ActDetailActivity.class);

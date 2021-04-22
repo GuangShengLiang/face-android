@@ -19,12 +19,11 @@ import com.example.face.adapter.ApplyAdapter;
 import com.example.face.adapter.InviteAdapter;
 import com.example.face.adapter.PartnerAdapter;
 import com.example.face.enums.ActivityStatusEnum;
-import com.example.face.http.ActivityHTTP;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActivityDetail;
-import com.example.face.model.act.AidReq;
+import com.example.face.model.param.AidParam;
+import com.example.face.model.vo.ActivityDetailVo;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import es.dmoral.toasty.Toasty;
@@ -49,7 +48,7 @@ public class ActManageActivity extends BaseActivity {
     Button action;
     @BindView(R.id.title_bar)
     TitleBar titleBar;
-    ActivityDetail d = null;
+    ActivityDetailVo d = null;
     ActivityStatusEnum status;
 
     @Override
@@ -74,7 +73,7 @@ public class ActManageActivity extends BaseActivity {
             public void onRightClick(View v) {
                 Intent intent = new Intent(mContext, EditActivity.class);
                 intent.putExtra("aid", d.getAid());
-                intent.putExtra("uid", d.getUid());
+                intent.putExtra("uid", d.getPublisher().getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -90,9 +89,9 @@ public class ActManageActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetail>() {
+                .subscribe(new BaseObserver<ActivityDetailVo>() {
                     @Override
-                    public void onNext(ActivityDetail a) {
+                    public void onNext(ActivityDetailVo a) {
                         d = a;
                         title.setText(a.getTitle());
                         time.setText(a.getStime());
@@ -106,7 +105,8 @@ public class ActManageActivity extends BaseActivity {
         initApply();
         initInvite();
     }
-    private void actionView(){
+
+    private void actionView() {
         switch (status) {
             case 报名中:
                 action.setText("停止报名");
@@ -127,15 +127,15 @@ public class ActManageActivity extends BaseActivity {
 
     @OnClick(R.id.btn_action)
     public void action() {
-        AidReq r =new AidReq(d.getAid());
+        AidParam r = new AidParam(d.getAid());
         switch (status) {
             case 报名中:
                 HTTP.activity.applyStop(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Response>(){
+                        .subscribe(new BaseObserver<Response>() {
                             @Override
                             public void onNext(Response v) {
-                                status=ActivityStatusEnum.报名结束;
+                                status = ActivityStatusEnum.报名结束;
                                 Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
                                         Toast.LENGTH_SHORT, true);
                                 t.setGravity(Gravity.CENTER, 0, 0);
@@ -146,10 +146,10 @@ public class ActManageActivity extends BaseActivity {
             case 报名结束:
                 HTTP.activity.start(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Response>(){
+                        .subscribe(new BaseObserver<Response>() {
                             @Override
                             public void onNext(Response v) {
-                                status=ActivityStatusEnum.活动进行中;
+                                status = ActivityStatusEnum.活动进行中;
                                 Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
                                         Toast.LENGTH_SHORT, true);
                                 t.setGravity(Gravity.CENTER, 0, 0);
@@ -160,10 +160,10 @@ public class ActManageActivity extends BaseActivity {
             case 活动进行中:
                 HTTP.activity.finish(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Response>(){
+                        .subscribe(new BaseObserver<Response>() {
                             @Override
                             public void onNext(Response v) {
-                                status=ActivityStatusEnum.活动结束;
+                                status = ActivityStatusEnum.活动结束;
                                 Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
                                         Toast.LENGTH_SHORT, true);
                                 t.setGravity(Gravity.CENTER, 0, 0);
@@ -174,7 +174,8 @@ public class ActManageActivity extends BaseActivity {
             case 活动结束:
                 action.setVisibility(View.GONE);
                 break;
-            default:break;
+            default:
+                break;
         }
         actionView();
     }

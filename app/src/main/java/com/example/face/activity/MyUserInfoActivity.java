@@ -19,8 +19,8 @@ import com.example.face.R;
 import com.example.face.entity.User;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.Account;
-import com.example.face.model.AccountReq;
+import com.example.face.model.AccountDetail;
+import com.example.face.model.param.AccountParam;
 import com.example.face.util.CommonUtil;
 import com.example.face.util.FileUtil;
 import com.example.face.util.PreferencesUtil;
@@ -51,7 +51,7 @@ public class MyUserInfoActivity extends BaseActivity {
 
     LoadingDialog dialog;
     User user;
-    Account acc;
+    AccountDetail acc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +68,9 @@ public class MyUserInfoActivity extends BaseActivity {
         HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Account>() {
+                .subscribe(new BaseObserver<AccountDetail>() {
                     @Override
-                    public void onNext(Account a) {
+                    public void onNext(AccountDetail a) {
                         acc = a;
                         PreferencesUtil.saveAccount(context, a);
                         mNickNameTv.setText(a.getNickName());
@@ -155,7 +155,7 @@ public class MyUserInfoActivity extends BaseActivity {
         TextView mMaleTv = window.findViewById(R.id.tv_content1);
         mMaleTv.setText(getString(R.string.sex_male));
         mMaleTv.setOnClickListener(view -> {
-            AccountReq req = new AccountReq();
+            AccountParam req = new AccountParam();
             req.setGender(1);
             HTTP.account.updateInfo(req)
                     .subscribeOn(Schedulers.io())
@@ -173,7 +173,7 @@ public class MyUserInfoActivity extends BaseActivity {
         mFemaleTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountReq req = new AccountReq();
+                AccountParam req = new AccountParam();
                 req.setGender(2);
                 HTTP.account.updateInfo(req)
                         .subscribeOn(Schedulers.io())

@@ -11,19 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.face.R;
-import com.example.face.model.Friend;
+import com.example.face.model.vo.FriendVo;
 import com.example.face.util.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-public class FriendsAdapter extends ArrayAdapter<Friend> {
+public class FriendsAdapter extends ArrayAdapter<FriendVo> {
 
-    List<Friend> mFriendList;
+    List<FriendVo> mFriendList;
     int mResource;
     private LayoutInflater mLayoutInflater;
 
-    public FriendsAdapter(Context context, int resource, List<Friend> friendList) {
+    public FriendsAdapter(Context context, int resource, List<FriendVo> friendList) {
         super(context, resource, friendList);
         this.mResource = resource;
         this.mFriendList = friendList;
@@ -47,21 +47,21 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Friend friend = getItem(position);
+        FriendVo friend = getItem(position);
         String header;
         if (TextUtils.isEmpty(friend.getRemark())) {
-            header = CommonUtil.setUserHeader(friend.getRname());
+            header = CommonUtil.setUserHeader(friend.getFriend().getNickName());
         } else {
             header = CommonUtil.setUserHeader(friend.getRemark());
         }
 
         if (TextUtils.isEmpty(friend.getRemark())) {
-            viewHolder.mNameTv.setText(friend.getRname());
+            viewHolder.mNameTv.setText(friend.getFriend().getNickName());
         } else {
             viewHolder.mNameTv.setText(friend.getRemark());
         }
 
-        String avatar = friend.getAvatar();
+        String avatar = friend.getFriend().getAvatar();
         if (0 == position || null != header && !header.equals(getItem(position - 1).getHeader())) {
             if (TextUtils.isEmpty(header)) {
                 viewHolder.mHeaderTv.setVisibility(View.GONE);
@@ -84,7 +84,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
     }
 
     @Override
-    public Friend getItem(int position) {
+    public FriendVo getItem(int position) {
         return mFriendList.get(position);
     }
 
@@ -93,7 +93,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
         return mFriendList.size();
     }
 
-    public void setData(List<Friend> friendList) {
+    public void setData(List<FriendVo> friendList) {
         this.mFriendList = friendList;
     }
 

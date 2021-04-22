@@ -18,7 +18,7 @@ import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActReq;
+import com.example.face.model.param.ActivityParam;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 
@@ -103,7 +103,7 @@ public class PublishActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                ActReq r = ActReq.builder().title(title.getText().toString())
+                ActivityParam r = ActivityParam.builder().title(title.getText().toString())
                         .startTime(stime.getText().toString())
                         .endTime(etime.getText().toString())
                         .address(address.getText().toString())

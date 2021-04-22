@@ -1,4 +1,4 @@
-package com.example.face.model.act;
+package com.example.face.model.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ActReq {
+public class ActivityParam {
     private String title;
     private String address;
     private String detail;

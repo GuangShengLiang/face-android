@@ -7,7 +7,7 @@ import java.io.IOException;
 import android.view.Gravity;
 import android.widget.Toast;
 import com.example.face.FLinkApplication;
-import com.example.face.model.ErrorResponse;
+import com.example.face.model.Response;
 import com.google.gson.Gson;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
@@ -35,7 +35,7 @@ public class BaseObserver<T> implements Observer<T> {
             if (he.code() == 600) {
                 try {
                     String body = he.response().errorBody().string();
-                    ErrorResponse err = new Gson().fromJson(body, ErrorResponse.class);
+                    Response err = new Gson().fromJson(body, Response.class);
 //                    Toast t = Toast.makeText(FLinkApplication.getContext(),err.getMsg(),Toast.LENGTH_LONG);
 //                    t.setGravity(Gravity.CENTER,0,0);
 //                    t.show();

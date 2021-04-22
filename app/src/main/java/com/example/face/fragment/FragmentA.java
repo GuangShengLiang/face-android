@@ -17,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.act.ActivityDetail;
+import com.example.face.model.vo.ActivityDetailVo;
+import com.example.face.model.vo.ApplyVo;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -48,45 +49,50 @@ public class FragmentA extends Fragment {
                 HTTP.activity.listWaiting()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
                             @Override
-                            public void onNext(List<ActivityDetail> ls) {
+                            public void onNext(List<ActivityDetailVo> ls) {
                                 adapter.mList.addAll(ls);
                                 adapter.notifyDataSetChanged();
                             }
                         });
                 break;
             case "invited":
-                HTTP.invited.listInvited()
+       /*         HTTP.invited.listInvited()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        .subscribe(new BaseObserver<List<ApplyVo>>() {
                             @Override
-                            public void onNext(List<ActivityDetail> ls) {
+                            public void onNext(List<ApplyVo> ls) {
+                                ls.stream().map(e->{
+                                    ActivityDetailVo v =new ActivityDetailVo();
+                                    v.setp
+                                    return v;
+                                });
                                 adapter.mList.addAll(ls);
                                 adapter.notifyDataSetChanged();
                             }
-                        });
+                        });*/
                 break;
             case "apply":
-                HTTP.apply.listApply()
+               /* HTTP.apply.listApply()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        .subscribe(new BaseObserver<List<ApplyVo>>() {
                             @Override
-                            public void onNext(List<ActivityDetail> ls) {
+                            public void onNext(List<ApplyVo> ls) {
                                 adapter.mList.addAll(ls);
                                 adapter.notifyDataSetChanged();
                             }
-                        });
+                        });*/
                 break;
             case "publish":
                 HTTP.activity.listPublish()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
                             @Override
-                            public void onNext(List<ActivityDetail> ls) {
+                            public void onNext(List<ActivityDetailVo> ls) {
                                 adapter.mList.addAll(ls);
                                 adapter.notifyDataSetChanged();
                             }
@@ -96,9 +102,9 @@ public class FragmentA extends Fragment {
                 HTTP.activity.listFinish()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
                             @Override
-                            public void onNext(List<ActivityDetail> ls) {
+                            public void onNext(List<ActivityDetailVo> ls) {
                                 adapter.mList.addAll(ls);
                                 adapter.notifyDataSetChanged();
                             }

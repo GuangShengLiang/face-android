@@ -21,9 +21,8 @@ import com.example.face.activity.SettingActivity;
 import com.example.face.entity.User;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.Account;
+import com.example.face.model.AccountDetail;
 import com.example.face.util.CommonUtil;
-import com.example.face.util.PreferencesUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
@@ -57,9 +56,9 @@ public class ProfileFragment extends Fragment {
         HTTP.account.baseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Account>() {
+                .subscribe(new BaseObserver<AccountDetail>() {
                     @Override
-                    public void onNext(Account a) {
+                    public void onNext(AccountDetail a) {
                         mNickNameTv.setText(a.getNickName());
                         mWxIdTv.setText("ID:" + a.getUid());
                         CommonUtil.loadAvatar(getContext(), mAvatarSdv, a.getAvatar());

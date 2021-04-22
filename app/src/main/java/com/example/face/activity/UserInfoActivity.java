@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.Account;
-import com.example.face.model.FriendReq;
-import com.example.face.model.Relation;
-import com.example.face.model.RuidReq;
+import com.example.face.model.AccountDetail;
+import com.example.face.model.param.FriendParam;
+import com.example.face.model.param.UidParam;
+import com.example.face.model.vo.RelationVo;
 import com.example.face.util.CommonUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -50,9 +50,9 @@ public class UserInfoActivity extends BaseActivity {
         HTTP.relation.relation(ruid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Relation>() {
+                .subscribe(new BaseObserver<RelationVo>() {
                     @Override
-                    public void onNext(Relation r) {
+                    public void onNext(RelationVo r) {
                         if (r != null) {
                             if (r.getType() == 1) {
                                 addFriend.setVisibility(View.GONE);
@@ -64,9 +64,9 @@ public class UserInfoActivity extends BaseActivity {
         HTTP.account.info(ruid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Account>() {
+                .subscribe(new BaseObserver<AccountDetail>() {
                     @Override
-                    public void onNext(Account a) {
+                    public void onNext(AccountDetail a) {
                         name.setText(a.getNickName());
                         birthday.setText(a.getYear());
                         city.setText("北京");
@@ -94,8 +94,8 @@ public class UserInfoActivity extends BaseActivity {
 
     @OnClick(R.id.b_fd_add)
     public void addFriend() {
-        FriendReq req = new FriendReq();
-        req.setRuid(getIntent().getIntExtra("ruid", 0));
+        FriendParam req = new FriendParam();
+        req.setUid(getIntent().getIntExtra("ruid", 0));
         HTTP.relation.friendApply(req)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -104,9 +104,9 @@ public class UserInfoActivity extends BaseActivity {
 
     @OnClick(R.id.b_fd_agree)
     public void agree() {
-        RuidReq r = new RuidReq();
+        UidParam r = new UidParam();
         int ruid = getIntent().getExtras().getInt("ruid", 93);
-        r.setRuid(ruid);
+        r.setUid(ruid);
         HTTP.relation.friendAgree(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

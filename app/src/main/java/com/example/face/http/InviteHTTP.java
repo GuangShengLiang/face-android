@@ -1,10 +1,10 @@
 package com.example.face.http;
 
 
-import com.example.face.model.IdReq;
+import com.example.face.model.param.IdParam;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActInviteResp;
-import com.example.face.model.act.InviteReq;
+import com.example.face.model.param.InviteParam;
+import com.example.face.model.vo.InviteVo;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -16,11 +16,11 @@ import java.util.List;
 public interface InviteHTTP {
 
     @POST("v1/invites/invite")
-    Observable<Response> invite(@Body InviteReq req);
+    Observable<Response> invite(@Body InviteParam req);
 
     @POST("v1/invites/cancel")
-    Observable<Response> cancel(@Body IdReq id);
+    Observable<Response> cancel(@Body IdParam id);
 
     @GET("v1/invites/list/aid")
-    Observable<List<ActInviteResp>> listInviteByAid(@Query("aid") long aid);
+    Observable<List<InviteVo>> listInviteByAid(@Query("aid") long aid);
 }

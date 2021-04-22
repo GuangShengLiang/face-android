@@ -11,24 +11,24 @@ import android.widget.TextView;
 import com.example.face.Constant;
 import com.example.face.R;
 import com.example.face.activity.UserInfoActivity;
-import com.example.face.entity.FriendApply;
+import com.example.face.model.vo.FriendApplyVo;
 import com.example.face.util.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
+public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApplyVo> {
     Context mContext;
-    List<FriendApply> ls;
+    List<FriendApplyVo> ls;
 
-    public NewFriendsMsgAdapter(Context context, List<FriendApply> ls) {
+    public NewFriendsMsgAdapter(Context context, List<FriendApplyVo> ls) {
         super(context, R.layout.item_new_friends_msg, ls);
         this.mContext = context;
         this.ls = ls;
     }
 
-    public void setData(List<FriendApply> friendApplyList) {
-        this.ls = friendApplyList;
+    public void setData(List<FriendApplyVo> FriendApplyVoList) {
+        this.ls = FriendApplyVoList;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
     }
 
     @Override
-    public FriendApply getItem(int position) {
+    public FriendApplyVo getItem(int position) {
         return ls.get(position);
     }
 
@@ -48,7 +48,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final FriendApply p = ls.get(position);
+        final FriendApplyVo p = ls.get(position);
         convertView = View.inflate(mContext, R.layout.item_new_friends_msg, null);
 
         TextView mNickNameTv = convertView.findViewById(R.id.tv_nick_name);
@@ -57,9 +57,9 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
         Button mAddBtn = convertView.findViewById(R.id.btn_add);
         TextView mAddTv = convertView.findViewById(R.id.tv_added);
 
-        mNickNameTv.setText(p.getNickName());
+        mNickNameTv.setText(p.getSender().getNickName());
         mApplyReasonTv.setText(p.getReason());
-        CommonUtil.loadAvatar(mContext, mAvatarSdv, p.getAvatar());
+        CommonUtil.loadAvatar(mContext, mAvatarSdv, p.getSender().getAvatar());
         if (Constant.FRIEND_APPLY_STATUS_ACCEPT.equals(p.getStatus())) {
             mAddTv.setVisibility(View.VISIBLE);
             mAddBtn.setVisibility(View.GONE);
@@ -71,7 +71,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<FriendApply> {
         convertView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, UserInfoActivity.class);
             intent.putExtra("applyId", p.getId());
-            intent.putExtra("ruid", p.getUid());
+            intent.putExtra("ruid", p.getSender().getUid());
             mContext.startActivity(intent);
         });
         return convertView;

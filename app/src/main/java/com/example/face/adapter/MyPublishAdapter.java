@@ -17,13 +17,13 @@ import com.example.face.R;
 import com.example.face.activity.ActManageActivity;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.act.ActivityDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.face.model.vo.ActivityDetailVo;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -32,16 +32,16 @@ public class MyPublishAdapter extends RecyclerView.Adapter<MyPublishAdapter.Hori
 
     private Context mContext;
 
-    private List<ActivityDetail> mList = new ArrayList<>();
+    private List<ActivityDetailVo> mList = new ArrayList<>();
 
     public MyPublishAdapter(Context context) {
         mContext = context;
         HTTP.activity.listPublish()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActivityDetail>>() {
+                .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
                     @Override
-                    public void onNext(List<ActivityDetail> ls) {
+                    public void onNext(List<ActivityDetailVo> ls) {
                         mList.addAll(ls);
                         notifyDataSetChanged();
                     }
@@ -64,10 +64,10 @@ public class MyPublishAdapter extends RecyclerView.Adapter<MyPublishAdapter.Hori
                 .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
                 .apply(options)
                 .into(holder.avatar);
-        ActivityDetail d = mList.get(position);
+        ActivityDetailVo d = mList.get(position);
         holder.title.setText(d.getTitle());
         holder.address.setText(d.getAddress());
-        holder.uname.setText(d.getUname());
+//        holder.uname.setText(d.getPublisher().getNickName());
         holder.time.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, ActManageActivity.class);

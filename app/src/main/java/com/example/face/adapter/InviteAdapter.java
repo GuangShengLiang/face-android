@@ -17,9 +17,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.face.R;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.IdReq;
+import com.example.face.model.param.IdParam;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActInviteResp;
+import com.example.face.model.vo.InviteVo;
 import com.example.face.util.ActivityUtils;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
 
     private Context mContext;
 
-    private List<ActInviteResp> mList = new ArrayList<>();
+    private List<InviteVo> mList = new ArrayList<>();
 
     public InviteAdapter(Context context) {
         mContext = context;
@@ -44,9 +44,9 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
         HTTP.invite.listInviteByAid(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActInviteResp>>() {
+                .subscribe(new BaseObserver<List<InviteVo>>() {
                     @Override
-                    public void onNext(List<ActInviteResp> l) {
+                    public void onNext(List<InviteVo> l) {
                         mList.addAll(l);
                         notifyDataSetChanged();
                     }
@@ -62,8 +62,8 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
-        ActInviteResp p = mList.get(position);
-        holder.name.setText(p.getNickName());
+        InviteVo p = mList.get(position);
+        holder.name.setText(p.getInvitee().getNickName());
         holder.status.setText(p.getStatusName());
         if (p.getStatus() != 0) {
             holder.cancel.setClickable(false);
@@ -77,10 +77,10 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
                 .apply(options)
                 .into(holder.avatar);
         holder.avatar.setOnClickListener(view -> {
-            ActivityUtils.openUserInfoActivity(mContext, p.getUid());
+            ActivityUtils.openUserInfoActivity(mContext, p.getInvitee().getUid());
         });
         holder.cancel.setOnClickListener(view -> {
-            IdReq req = new IdReq();
+            IdParam req = new IdParam();
             req.setId(p.getId());
             HTTP.invite.cancel(req)
                     .subscribeOn(Schedulers.io())

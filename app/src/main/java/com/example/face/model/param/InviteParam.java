@@ -1,16 +1,15 @@
-package com.example.face.model.act;
-
-import java.util.List;
-import java.util.Set;
+package com.example.face.model.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InviteReq {
+public class InviteParam {
     private long aid;
-    private Set<Integer> iuid;
+    private Set<Integer> uids;
 }

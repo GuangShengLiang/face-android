@@ -1,7 +1,6 @@
 package com.example.face.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
@@ -13,9 +12,9 @@ import com.example.face.R;
 import com.example.face.adapter.FriendsSelectionAdapter;
 import com.example.face.http.BaseObserver;
 import com.example.face.http.HTTP;
-import com.example.face.model.Friend;
+import com.example.face.model.vo.FriendVo;
 import com.example.face.model.Response;
-import com.example.face.model.act.InviteReq;
+import com.example.face.model.param.InviteParam;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import es.dmoral.toasty.Toasty;
@@ -60,7 +59,7 @@ public class FriendSelectionActivity extends BaseActivity {
             @Override
             public void onRightClick(View v) {
                 if (!uids.isEmpty()) {
-                    InviteReq r = new InviteReq(aid, uids);
+                    InviteParam r = new InviteParam(aid, uids);
                     HTTP.invite.invite(r)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
@@ -82,16 +81,16 @@ public class FriendSelectionActivity extends BaseActivity {
 
 
     private void initView() {
-        List<Friend> flist = new ArrayList<>();
+        List<FriendVo> flist = new ArrayList<>();
         FriendsSelectionAdapter adapter = new FriendsSelectionAdapter(mContext, R.layout.friend_selection_list_item,
                 flist, uids);
         mFriendsLv.setAdapter(adapter);
         HTTP.relation.friendList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<Friend>>() {
+                .subscribe(new BaseObserver<List<FriendVo>>() {
                     @Override
-                    public void onNext(@NotNull List<Friend> fl) {
+                    public void onNext(@NotNull List<FriendVo> fl) {
                         flist.addAll(fl);
                         adapter.notifyDataSetChanged();
                     }

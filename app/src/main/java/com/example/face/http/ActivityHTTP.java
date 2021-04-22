@@ -3,58 +3,54 @@ package com.example.face.http;
 
 import com.example.face.model.Account;
 import com.example.face.model.Response;
-import com.example.face.model.act.ActReq;
-import com.example.face.model.act.ActivityDetail;
-
-import java.util.List;
-
-import com.example.face.model.act.AidReq;
+import com.example.face.model.param.ActivityParam;
+import com.example.face.model.param.AidParam;
+import com.example.face.model.vo.ActivityDetailVo;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+import java.util.List;
+
 public interface ActivityHTTP {
 
-    @GET("v1/activities/list/friend")
-    Observable<List<ActivityDetail>> listFriendRefresh(@Query("aid") long aid);
+    @GET("v1/activities/list/friend-join/previous")
+    Observable<List<ActivityDetailVo>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
 
-    @GET("v1/activities/list/friend-next-page")
-    Observable<List<ActivityDetail>> listFriendNext(@Query("aid") long aid);
-
-    @GET("v1/activities/search")
-    Observable<Object> search(int fromId);
+    @GET("v1/activities/list/friend-join/next")
+    Observable<List<ActivityDetailVo>> listActivitiesFriendJoinNext(@Query("startAid") long startAid);
 
     @GET("v1/activities/list/publish")
-    Observable<List<ActivityDetail>> listPublish();
+    Observable<List<ActivityDetailVo>> listPublish();
 
     @GET("v1/activities/list/waiting")
-    Observable<List<ActivityDetail>> listWaiting();
+    Observable<List<ActivityDetailVo>> listWaiting();
 
     @GET("v1/activities/list/finish")
-    Observable<List<ActivityDetail>> listFinish();
+    Observable<List<ActivityDetailVo>> listFinish();
 
     @GET("v1/activities/list/join")
-    Observable<List<ActivityDetail>> listJoin();
+    Observable<List<ActivityDetailVo>> listJoin();
 
     @GET("v1/activities/detail")
-    Observable<ActivityDetail> detail(@Query("aid") long aid);
+    Observable<ActivityDetailVo> detail(@Query("aid") long aid);
 
     @POST("v1/activities/create")
-    Observable<Response> create(@Body ActReq r);
+    Observable<Response> create(@Body ActivityParam r);
 
     @POST("v1/activities/update")
-    Observable<Response> modify(@Body ActReq req);
+    Observable<Response> modify(@Body ActivityParam req);
 
     @POST("v1/activities/apply-stop")
-    Observable<Response> applyStop(@Body AidReq req);
+    Observable<Response> applyStop(@Body AidParam req);
 
     @POST("v1/activities/start")
-    Observable<Response> start(@Body AidReq req);
+    Observable<Response> start(@Body AidParam req);
 
     @POST("v1/activities/finish")
-    Observable<Response> finish(@Body AidReq req);
+    Observable<Response> finish(@Body AidParam req);
 
     @GET("v1/activities/members/list")
     Observable<List<Account>> listMember(@Query("aid") long aid);
