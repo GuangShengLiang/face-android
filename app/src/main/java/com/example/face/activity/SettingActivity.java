@@ -8,6 +8,8 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.example.face.MainActivity;
 import com.example.face.R;
 import com.example.face.util.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
@@ -49,9 +51,7 @@ public class SettingActivity extends BaseActivity {
         // 清除通讯录
         // 清除朋友圈
         // 跳转至登录页
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
-
     }
 }

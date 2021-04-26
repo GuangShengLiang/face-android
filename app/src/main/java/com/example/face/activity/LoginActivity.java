@@ -18,7 +18,10 @@ import com.example.face.model.AccountDetail;
 import com.example.face.model.param.LoginParam;
 import com.example.face.model.vo.LoginVo;
 import com.example.face.util.PreferencesUtil;
+import com.example.face.util.ToastUtil;
 import com.example.face.widget.LoadingDialog;
+
+import butterknife.Optional;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -65,6 +68,14 @@ public class LoginActivity extends BaseActivity {
                         loadUserInfo();
                         PreferencesUtil.getInstance().setLogin(true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        LoginActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mDialog.dismiss();
+                        ToastUtil.showLong(e.getMessage() != null ? "登录请求失败：" +e.getMessage() : "登录请求失败");
                     }
                 });
     }

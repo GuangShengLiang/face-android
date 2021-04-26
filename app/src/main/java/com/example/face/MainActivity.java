@@ -57,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!PreferencesUtil.getInstance().isLogin()) {
-            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
-            this.startActivity(intent);
+        if(!isLogin()){
+            toLogin();
             return;
         }
         setContentView(R.layout.weibo);
@@ -108,6 +107,24 @@ public class MainActivity extends AppCompatActivity {
 
 //        navigationBar.setAddViewLayout(createWeiboView());
 
+    }
+
+    private boolean isLogin(){
+       return PreferencesUtil.getInstance().isLogin();
+    }
+
+    private void toLogin(){
+        Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+        this.startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if(!isLogin()){
+            toLogin();
+        }
     }
 
     //仿微博弹出菜单

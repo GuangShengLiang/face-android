@@ -49,3 +49,4 @@ fastlane/readme.md
 .DS_Store
 debug/
 release/
+gradle.properties
