@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.FLinkApplication;
-import com.example.face.R;
+import com.face.FLinkApplication;
+import face.R;
 import com.face.adapter.ApplyAdapter;
 import com.face.adapter.InviteAdapter;
 import com.face.adapter.PartnerAdapter;
@@ -89,15 +89,15 @@ public class ActManageActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetailVo>() {
+                .subscribe(new BaseObserver<JsonResponse<ActivityDetailVo>>() {
                     @Override
-                    public void onNext(ActivityDetailVo a) {
-                        d = a;
-                        title.setText(a.getTitle());
-                        time.setText(a.getStime());
-                        address.setText(a.getAddress());
+                    public void onNext(JsonResponse<ActivityDetailVo> a) {
+                        d = a.getData();
+                        title.setText(d.getTitle());
+                        time.setText(d.getStime());
+                        address.setText(d.getAddress());
                         adapter.setHorizontalDataList(d.getAid());
-                        status = ActivityStatusEnum.get(a.getStatus());
+                        status = ActivityStatusEnum.get(d.getStatus());
                         actionView();
 
                     }

@@ -5,7 +5,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.face.R;
+import face.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

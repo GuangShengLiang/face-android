@@ -18,19 +18,19 @@ import retrofit2.http.Query;
 public interface RelationHTTP {
 
     @GET("v1/relations/detail")
-    Observable<RelationVo> relation(@Query("ruid") int ruid);
+    Observable<JsonResponse<RelationVo>> relation(@Query("ruid") int ruid);
 
     @POST("v1/relations/black")
     Observable<JsonResponse> black(@Query("ruid") int ruid);
 
     @GET("v1/friends/list")
-    Observable<List<FriendVo>> friendList();
+    Observable<JsonResponse<List<FriendVo>>> friendList();
 
     @POST("v1/friends/delete")
     Observable<Void> friendRemove(@Query("ruid") int ruid);
 
     @GET("v1/friend/applies/detail")
-    Observable<Void> applyDetail(@Query("uid") int ruid);
+    Observable<JsonResponse> applyDetail(@Query("uid") int ruid);
 
     @POST("v1/friend/applies/apply")
     Observable<JsonResponse> friendApply(@Body FriendParam r);
@@ -39,6 +39,6 @@ public interface RelationHTTP {
     Observable<JsonResponse> friendAgree(@Body UidParam r);
 
     @GET("v1/friend/applies/list")
-    Observable<List<FriendApplyVo>> friendApplyList();
+    Observable<JsonResponse<List<FriendApplyVo>>> friendApplyList();
 
 }

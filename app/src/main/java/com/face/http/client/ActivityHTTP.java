@@ -17,25 +17,25 @@ import java.util.List;
 public interface ActivityHTTP {
 
     @GET("v1/activities/list/friend-join/previous")
-    Observable<List<ActivityDetailVo>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
+    Observable<JsonResponse<List<ActivityDetailVo>>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
 
     @GET("v1/activities/list/friend-join/next")
     Observable<JsonResponse<List<ActivityDetailVo>>> listActivitiesFriendJoinNext(@Query("startAid") long startAid);
 
     @GET("v1/activities/list/publish")
-    Observable<List<ActivityDetailVo>> listPublish();
+    Observable<JsonResponse<List<ActivityDetailVo>>> listPublish();
 
     @GET("v1/activities/list/waiting")
-    Observable<List<ActivityDetailVo>> listWaiting();
+    Observable<JsonResponse<List<ActivityDetailVo>>> listWaiting();
 
     @GET("v1/activities/list/finish")
-    Observable<List<ActivityDetailVo>> listFinish();
+    Observable<JsonResponse<List<ActivityDetailVo>>> listFinish();
 
     @GET("v1/activities/list/join")
-    Observable<List<ActivityDetailVo>> listJoin();
+    Observable<JsonResponse<List<ActivityDetailVo>>> listJoin();
 
     @GET("v1/activities/detail")
-    Observable<ActivityDetailVo> detail(@Query("aid") long aid);
+    Observable<JsonResponse<ActivityDetailVo>> detail(@Query("aid") long aid);
 
     @POST("v1/activities/create")
     Observable<JsonResponse> create(@Body ActivityParam r);
@@ -53,5 +53,5 @@ public interface ActivityHTTP {
     Observable<JsonResponse> finish(@Body AidParam req);
 
     @GET("v1/activities/members/list")
-    Observable<List<Account>> listMember(@Query("aid") long aid);
+    Observable<JsonResponse<List<Account>>> listMember(@Query("aid") long aid);
 }

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.face.Constant;
-import com.example.face.R;
+import face.R;
 import com.face.activity.UserInfoActivity;
 import com.face.http.model.vo.FriendApplyVo;
 import com.face.util.CommonUtil;

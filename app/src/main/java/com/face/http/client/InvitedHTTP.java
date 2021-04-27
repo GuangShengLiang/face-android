@@ -20,5 +20,5 @@ public interface InvitedHTTP {
     Observable<JsonResponse> reject(@Body IdParam id);
 
     @GET("v1/invited/list")
-    Observable<List<InviteVo>> listInvited();
+    Observable<JsonResponse<List<InviteVo>>> listInvited();
 }

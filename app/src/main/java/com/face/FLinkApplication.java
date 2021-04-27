@@ -1,4 +1,4 @@
-package com;
+package com.face;
 
 import android.app.Application;
 

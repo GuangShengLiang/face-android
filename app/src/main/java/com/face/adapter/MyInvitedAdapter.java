@@ -13,7 +13,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.activity.ActManageActivity;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -36,10 +37,10 @@ public class MyInvitedAdapter extends RecyclerView.Adapter<MyInvitedAdapter.Hori
         HTTP.invited.listInvited()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<InviteVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<InviteVo>>>() {
                     @Override
-                    public void onNext(List<InviteVo> ls) {
-                        mList.addAll(ls);
+                    public void onNext(JsonResponse<List<InviteVo>> ls) {
+                        mList.addAll(ls.getData());
                         notifyDataSetChanged();
                     }
                 });

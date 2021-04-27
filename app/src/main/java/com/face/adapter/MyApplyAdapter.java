@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.activity.ActDetailActivity;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -38,10 +39,10 @@ public class MyApplyAdapter extends RecyclerView.Adapter<MyApplyAdapter.Horizont
         HTTP.apply.listApply()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ApplyVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<ApplyVo>>>() {
                     @Override
-                    public void onNext(List<ApplyVo> ls) {
-                        mList.addAll(ls);
+                    public void onNext(JsonResponse<List<ApplyVo>> ls) {
+                        mList.addAll(ls.getData());
                         notifyDataSetChanged();
                     }
                 });

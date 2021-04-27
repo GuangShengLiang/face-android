@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.alibaba.fastjson.JSON;
-import com.example.face.R;
+import face.R;
 import com.face.dao.entity.User;
 import com.face.http.model.QrCodeContent;
 import com.face.util.PreferencesUtil;

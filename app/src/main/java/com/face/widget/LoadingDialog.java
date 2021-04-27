@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.face.R;
+import face.R;
 
 public class LoadingDialog extends Dialog {
     private TextView mLoadingTv;

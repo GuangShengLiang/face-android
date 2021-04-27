@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.adapter.NewFriendsMsgAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -59,10 +60,10 @@ public class NewFriendsMsgActivity extends BaseActivity {
         HTTP.relation.friendApplyList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<FriendApplyVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<FriendApplyVo>>>() {
                     @Override
-                    public void onNext(List<FriendApplyVo> fls) {
-                        friendApplyList.addAll(fls);
+                    public void onNext(JsonResponse<List<FriendApplyVo>> fls) {
+                        friendApplyList.addAll(fls.getData());
                         newFriendsMsgAdapter.notifyDataSetChanged();
                     }
                 });

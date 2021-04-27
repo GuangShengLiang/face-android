@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.face.Constant;
-import com.example.face.R;
+import face.R;
 import com.face.dao.entity.User;
 import com.face.util.PreferencesUtil;
 import com.facebook.drawee.view.SimpleDraweeView;

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import android.view.Gravity;
 import android.widget.Toast;
-import com.FLinkApplication;
+import com.face.FLinkApplication;
 import com.face.http.model.JsonResponse;
 import com.google.gson.Gson;
 import es.dmoral.toasty.Toasty;

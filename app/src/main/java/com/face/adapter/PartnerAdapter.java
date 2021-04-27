@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.activity.FriendSelectionActivity;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -41,10 +42,10 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.Horizont
         HTTP.activity.listMember(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<Account>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<Account>>>() {
                     @Override
-                    public void onNext(List<Account> l) {
-                        mList.addAll(l);
+                    public void onNext(JsonResponse<List<Account>> l) {
+                        mList.addAll(l.getData());
                         notifyDataSetChanged();
                     }
                 });

@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.face.R;
+import face.R;
 
 public class MessageFragment extends Fragment {
 

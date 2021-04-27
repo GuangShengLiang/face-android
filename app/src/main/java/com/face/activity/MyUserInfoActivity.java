@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.Constant;
-import com.example.face.R;
+import face.R;
 import com.face.dao.entity.User;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;

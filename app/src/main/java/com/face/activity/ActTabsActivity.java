@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.face.R;
+import face.R;
 import com.face.fragment.FragmentA;
 import com.google.android.material.tabs.TabLayout;
 import com.hjq.bar.OnTitleBarListener;

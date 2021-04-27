@@ -20,7 +20,7 @@ public interface AccountHTTP {
     Observable<JsonResponse> updateInfo(@Body AccountParam r);
 
     @GET("v1/account/search-mobile")
-    Observable<Account> searchByMobile(@Query("mobile") String mobile);
+    Observable<JsonResponse<Account>> searchByMobile(@Query("mobile") String mobile);
 
     @GET("v1/account/info/base")
     Observable<JsonResponse<AccountDetail>> info(@Query("uid") int uid);

@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.face.Constant;
-import com.example.face.R;
+import face.R;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;

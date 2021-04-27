@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.face.R;
+import face.R;
 import com.face.activity.ActDetailActivity;
 import com.face.http.model.Message;
 

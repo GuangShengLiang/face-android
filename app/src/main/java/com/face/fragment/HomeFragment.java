@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.face.R;
+import face.R;
 import com.face.adapter.ActAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -71,10 +71,10 @@ public class HomeFragment extends Fragment {
             actHTTP.listActivitiesFriendJoinPrevious(0)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
+                    .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
                         @Override
-                        public void onNext(List<ActivityDetailVo> ls) {
-                            mAdapter.refresh(ls);
+                        public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                            mAdapter.refresh(ls.getData());
                         }
 
                     });

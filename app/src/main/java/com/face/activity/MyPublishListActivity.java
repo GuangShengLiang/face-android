@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.face.R;
+import face.R;
 import com.face.adapter.MyPublishAdapter;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;

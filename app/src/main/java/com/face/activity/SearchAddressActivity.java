@@ -7,7 +7,7 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.face.R;
+import face.R;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 

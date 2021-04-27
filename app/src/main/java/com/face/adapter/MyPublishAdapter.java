@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.activity.ActManageActivity;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -39,10 +40,10 @@ public class MyPublishAdapter extends RecyclerView.Adapter<MyPublishAdapter.Hori
         HTTP.activity.listPublish()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
                     @Override
-                    public void onNext(List<ActivityDetailVo> ls) {
-                        mList.addAll(ls);
+                    public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                        mList.addAll(ls.getData());
                         notifyDataSetChanged();
                     }
                 });

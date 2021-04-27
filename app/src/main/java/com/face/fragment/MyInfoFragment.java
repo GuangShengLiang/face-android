@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.face.R;
+import face.R;
 import com.face.activity.NickNameActivity;
 
 import butterknife.BindView;

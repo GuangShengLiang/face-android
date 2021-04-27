@@ -26,7 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.face.Constant;
 import com.face.MainActivity;
-import com.example.face.R;
+import face.R;
 import com.face.dao.UserDao;
 import com.face.dao.entity.User;
 import com.face.util.MD5Util;

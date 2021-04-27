@@ -1,7 +1,7 @@
 package com.face.http;
 
 import android.util.Log;
-import com.FLinkApplication;
+import com.face.FLinkApplication;
 import com.face.http.client.*;
 import com.face.util.PreferencesUtil;
 import com.google.gson.Gson;

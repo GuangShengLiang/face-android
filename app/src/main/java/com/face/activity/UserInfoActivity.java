@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.face.R;
+import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
@@ -51,11 +51,11 @@ public class UserInfoActivity extends BaseActivity {
         HTTP.relation.relation(ruid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<RelationVo>() {
+                .subscribe(new BaseObserver<JsonResponse<RelationVo>>() {
                     @Override
-                    public void onNext(RelationVo r) {
+                    public void onNext(JsonResponse<RelationVo> r) {
                         if (r != null) {
-                            if (r.getType() == 1) {
+                            if (r.getData().getType() == 1) {
                                 addFriend.setVisibility(View.GONE);
                                 bagree.setVisibility(View.GONE);
                             }

@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.vo.Account;
@@ -95,7 +96,7 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
         HTTP.account.searchByMobile(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Account>() {
+                .subscribe(new BaseObserver<JsonResponse<Account>>() {
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
@@ -106,9 +107,9 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
                     }
 
                     @Override
-                    public void onNext(Account a) {
+                    public void onNext(JsonResponse<Account> a) {
                         mDialog.dismiss();
-                        ActivityUtils.openUserInfoActivity(context, a.getUid());
+                        ActivityUtils.openUserInfoActivity(context, a.getData().getUid());
                     }
                 });
        /* return;

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.face.R;
+import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
@@ -44,10 +44,10 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.Horizontal
         HTTP.invite.listInviteByAid(aid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<InviteVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<InviteVo>>>() {
                     @Override
-                    public void onNext(List<InviteVo> l) {
-                        mList.addAll(l);
+                    public void onNext(JsonResponse<List<InviteVo>> l) {
+                        mList.addAll(l.getData());
                         notifyDataSetChanged();
                     }
                 });

@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.face.activity.LoginActivity;
 import com.face.activity.PublishActivity;
-import com.example.face.R;
+import face.R;
 import com.face.fragment.FriendFragment;
 import com.face.fragment.HomeFragment;
 import com.face.fragment.MessageFragment;

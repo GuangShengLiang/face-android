@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.adapter.MyJoinAdapter;
 
 import butterknife.BindView;
@@ -48,10 +49,10 @@ public class FragmentA extends Fragment {
                 HTTP.activity.listWaiting()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
+                        .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
                             @Override
-                            public void onNext(List<ActivityDetailVo> ls) {
-                                adapter.mList.addAll(ls);
+                            public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                                adapter.mList.addAll(ls.getData());
                                 adapter.notifyDataSetChanged();
                             }
                         });
@@ -89,10 +90,10 @@ public class FragmentA extends Fragment {
                 HTTP.activity.listPublish()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
+                        .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
                             @Override
-                            public void onNext(List<ActivityDetailVo> ls) {
-                                adapter.mList.addAll(ls);
+                            public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                                adapter.mList.addAll(ls.getData());
                                 adapter.notifyDataSetChanged();
                             }
                         });
@@ -101,10 +102,10 @@ public class FragmentA extends Fragment {
                 HTTP.activity.listFinish()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<List<ActivityDetailVo>>() {
+                        .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
                             @Override
-                            public void onNext(List<ActivityDetailVo> ls) {
-                                adapter.mList.addAll(ls);
+                            public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                                adapter.mList.addAll(ls.getData());
                                 adapter.notifyDataSetChanged();
                             }
                         });

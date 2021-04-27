@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.MainActivity;
-import com.example.face.R;
+import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
@@ -58,11 +58,11 @@ public class LoginActivity extends BaseActivity {
         HTTP.passport.login(r)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<LoginVo>() {
+                .subscribe(new BaseObserver<JsonResponse<LoginVo>>() {
                     @Override
-                    public void onNext(LoginVo resp) {
+                    public void onNext(JsonResponse<LoginVo> resp) {
                         mDialog.dismiss();
-                        PreferencesUtil.saveToken(LoginActivity.this, resp.getToken());
+                        PreferencesUtil.saveToken(LoginActivity.this, resp.getData().getToken());
                         loadUserInfo();
                         PreferencesUtil.getInstance().setLogin(true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));

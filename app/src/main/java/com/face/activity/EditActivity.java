@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.face.R;
+import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
@@ -116,13 +116,13 @@ public class EditActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid", 1214775584295485519L))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetailVo>() {
+                .subscribe(new BaseObserver<JsonResponse<ActivityDetailVo>>() {
                     @Override
-                    public void onNext(ActivityDetailVo a) {
-                        d = a;
-                        title.setText(a.getTitle());
-                        address.setText(a.getAddress());
-                        detail.setText(a.getDetail());
+                    public void onNext(JsonResponse<ActivityDetailVo> a) {
+                        d = a.getData();
+                        title.setText(d.getTitle());
+                        address.setText(d.getAddress());
+                        detail.setText(d.getDetail());
 //                        stime.setText(getTimes(a.getStartTime()));
 //                        etime.setText(getTimes(a.getEndTime()));
 

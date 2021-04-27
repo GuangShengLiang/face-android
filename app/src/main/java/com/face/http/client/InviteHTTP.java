@@ -22,5 +22,5 @@ public interface InviteHTTP {
     Observable<JsonResponse> cancel(@Body IdParam id);
 
     @GET("v1/invites/list/aid")
-    Observable<List<InviteVo>> listInviteByAid(@Query("aid") long aid);
+    Observable<JsonResponse<List<InviteVo>>> listInviteByAid(@Query("aid") long aid);
 }

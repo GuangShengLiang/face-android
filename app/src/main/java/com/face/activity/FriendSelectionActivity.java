@@ -7,8 +7,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.FLinkApplication;
-import com.example.face.R;
+import com.face.FLinkApplication;
+import face.R;
 import com.face.adapter.FriendsSelectionAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -88,10 +88,10 @@ public class FriendSelectionActivity extends BaseActivity {
         HTTP.relation.friendList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<FriendVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
                     @Override
-                    public void onNext(@NotNull List<FriendVo> fl) {
-                        flist.addAll(fl);
+                    public void onNext(@NotNull JsonResponse<List<FriendVo>> fl) {
+                        flist.addAll(fl.getData());
                         adapter.notifyDataSetChanged();
                     }
                 });

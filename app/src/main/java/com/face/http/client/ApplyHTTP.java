@@ -19,10 +19,10 @@ public interface ApplyHTTP {
     Observable<JsonResponse<List<ApplyVo>>> listApplyByAid(@Query("aid") long aid);
 
     @GET("v1/applies/is-need-apply")
-    Observable<Boolean> isNeedApply(@Query("aid") long aid);
+    Observable<JsonResponse<Boolean>> isNeedApply(@Query("aid") long aid);
 
     @GET("v1/applies/list")
-    Observable<List<ApplyVo>> listApply();
+    Observable<JsonResponse<List<ApplyVo>>> listApply();
 
     @POST("v1/applies/apply")
     Observable<JsonResponse> apply(@Body AidParam r);

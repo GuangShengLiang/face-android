@@ -8,7 +8,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.face.R;
+import face.R;
 
 public class WebViewActivity extends Activity {
     private WebView mContentWv;

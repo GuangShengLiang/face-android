@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import com.example.face.R;
+import face.R;
 import com.face.http.model.vo.FriendVo;
 import com.face.util.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;

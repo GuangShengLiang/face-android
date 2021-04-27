@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.face.R;
+import face.R;
 import com.face.adapter.MyApplyAdapter;
 
 import butterknife.BindView;

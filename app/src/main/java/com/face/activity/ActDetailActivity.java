@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.FLinkApplication;
-import com.example.face.R;
+import com.face.FLinkApplication;
+import face.R;
 import com.face.adapter.PartnerAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -111,23 +111,23 @@ public class ActDetailActivity extends BaseActivity {
         HTTP.activity.detail(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<ActivityDetailVo>() {
+                .subscribe(new BaseObserver<JsonResponse<ActivityDetailVo>>() {
                     @Override
-                    public void onNext(ActivityDetailVo a) {
-                        d = a;
-                        adapter.setHorizontalDataList(a.getAid());
-                        title.setText(a.getTitle());
-                        time.setText(a.getStime());
-                        address.setText(a.getAddress());
+                    public void onNext(JsonResponse<ActivityDetailVo> a) {
+                        d = a.getData();
+                        adapter.setHorizontalDataList(d.getAid());
+                        title.setText(d.getTitle());
+                        time.setText(d.getStime());
+                        address.setText(d.getAddress());
                     }
                 });
         HTTP.apply.isNeedApply(getIntent().getExtras().getLong("aid"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Boolean>() {
+                .subscribe(new BaseObserver<JsonResponse<Boolean>>() {
                     @Override
-                    public void onNext(Boolean b) {
-                        if (b) {
+                    public void onNext(JsonResponse<Boolean> b) {
+                        if (b.getData()) {
                             appbtn.setText("立即申请");
                         } else {
                             appbtn.setClickable(false);

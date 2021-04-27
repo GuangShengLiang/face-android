@@ -7,12 +7,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.face.R;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import face.R;
 
 public class AboutAddressActivity extends AppCompatActivity {
 

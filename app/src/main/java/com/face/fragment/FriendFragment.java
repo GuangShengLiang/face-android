@@ -10,7 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
-import com.example.face.R;
+import com.face.http.model.JsonResponse;
+import face.R;
 import com.face.activity.NewFriendsMsgActivity;
 import com.face.adapter.FriendsAdapter;
 import com.face.http.BaseObserver;
@@ -70,10 +71,10 @@ public class FriendFragment extends Fragment {
         HTTP.relation.friendList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<List<FriendVo>>() {
+                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
                     @Override
-                    public void onNext(List<FriendVo> fl) {
-                        flist.addAll(fl);
+                    public void onNext(JsonResponse<List<FriendVo>> fl) {
+                        flist.addAll(fl.getData());
                         mFriendsAdapter.notifyDataSetChanged();
 //                        Collections.sort(fl, new PinyinComparator() {
 //                        });
