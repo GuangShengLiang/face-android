@@ -74,7 +74,7 @@ public class LoginActivity extends BaseActivity {
                     public void onError(Throwable e) {
                         super.onError(e);
                         mDialog.dismiss();
-                        ToastUtil.showLong(e.getMessage() != null ? "登录请求失败：" +e.getMessage() : "登录请求失败");
+                        ToastUtil.showLong(e.getMessage() != null ? getString(R.string.login_failed) + "：" + e.getMessage() : getString(R.string.login_failed));
                     }
                 });
     }

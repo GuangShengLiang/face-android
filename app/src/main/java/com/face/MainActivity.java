@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toLogin(){
-        Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         this.startActivity(intent);
         finish();
     }
