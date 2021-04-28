@@ -1,41 +1,18 @@
 package com.face.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Html;
-import android.text.Selection;
-import android.text.Spannable;
-import android.text.TextWatcher;
+import android.text.*;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.fragment.app.FragmentActivity;
-
-import com.alibaba.fastjson.JSON;
-import com.android.volley.NetworkError;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.face.Constant;
-import com.face.MainActivity;
-import face.R;
 import com.face.dao.UserDao;
-import com.face.dao.entity.User;
-import com.face.util.MD5Util;
-import com.face.util.PreferencesUtil;
-import com.face.util.VolleyUtil;
 import com.face.widget.LoadingDialog;
+import face.R;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,7 +31,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private static final String TAG = "RegisterActivity";
     public static int sequence = 1;
 
-    private VolleyUtil volleyUtil;
     TextView mAgreementTv;
     EditText mNickNameEt;
     EditText mPhoneEt;
@@ -72,7 +48,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        volleyUtil = VolleyUtil.getInstance(this);
         dialog = new LoadingDialog(RegisterActivity.this);
         mUserDao = new UserDao();
         initView();
@@ -195,62 +170,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("nickName", nickName);
         paramMap.put("phone", phone);
-        paramMap.put("password", MD5Util.encode(password, "utf8"));
-
-        volleyUtil.httpPostRequest(url, paramMap, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                dialog.dismiss();
-                Log.d(TAG, "server response: " + response);
-                final User user = JSON.parseObject(response, User.class);
-                Log.d(TAG, "userId:" + user.getUserId());
-                // 登录成功后设置user和isLogin至sharedpreferences中
-                PreferencesUtil.getInstance().setUser(user);
-                PreferencesUtil.getInstance().setLogin(true);
-                // 注册jpush
-//                JPushInterface.setAlias(RegisterActivity.this, sequence, user.getUserId());
-                List<User> friendList = user.getFriendList();
-                if (null != friendList && friendList.size() > 0) {
-                    for (User userFriend : friendList) {
-                        if (null != userFriend) {
-                            mUserDao.saveUser(userFriend);
-                        }
-                    }
-                }
-
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                finish();
-                // 登录极光im
-//                JMessageClient.login(user.getUserId(), user.getUserImPassword(), new BasicCallback() {
-//                    @Override
-//                    public void gotResult(int responseCode, String responseMessage) {
-//                        Log.d(TAG, "responseCode: " + responseCode + ", responseMessage: " + responseMessage);
-//                    }
-//                });
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                dialog.dismiss();
-                if (volleyError instanceof NetworkError) {
-                    Toast.makeText(RegisterActivity.this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (volleyError instanceof TimeoutError) {
-                    Toast.makeText(RegisterActivity.this, R.string.network_time_out, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                int errorCode = volleyError.networkResponse.statusCode;
-                switch (errorCode) {
-                    case 400:
-                        Toast.makeText(RegisterActivity.this,
-                                R.string.username_or_password_error, Toast.LENGTH_SHORT)
-                                .show();
-                        break;
-                }
-            }
-        });
     }
 
     /**
