@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.face">
+          package="face">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-            android:name=".FLinkApplication"
+            android:name="com.face.FLinkApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="com.example.face.MainActivity"
+                android:name="com.face.MainActivity"
                 android:label="@string/app_name"
                 android:launchMode="singleTask"
             >
@@ -20,31 +20,31 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name="com.face.activity.LoginActivity"/>
 <!--        <activity android:name=".MainActivity"/>-->
-        <activity android:name=".activity.NickNameActivity"/>
-        <activity android:name=".activity.FriendSelectionActivity"/>
-        <activity android:name=".activity.EditActivity"/>
-        <activity android:name=".activity.ActDetailActivity"/>
-        <activity android:name=".activity.ActManageActivity"/>
-        <activity android:name=".activity.UserInfoActivity"/>
-        <activity android:name=".activity.PublishActivity"/>
-        <activity android:name=".activity.SearchAddressActivity"/>
-        <activity android:name=".activity.AboutAddressActivity"/>
-        <activity android:name=".activity.NewFriendsMsgActivity"/>
-        <activity android:name=".activity.AddFriendsBySearchActivity"/>
-        <activity android:name=".activity.AddFriendsActivity"/>
-        <activity android:name=".activity.WebViewActivity"/>
-        <activity android:name=".activity.QrCodeActivity"/>
-        <activity android:name=".activity.BigImageActivity"/>
-        <activity android:name=".activity.SettingActivity"/>
-        <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.MyUserInfoActivity"/>
-        <activity android:name=".activity.MyPublishListActivity"/>
-        <activity android:name=".activity.MyJoinListActivity"/>
-        <activity android:name=".activity.MyApplyListActivity"/>
-        <activity android:name=".activity.MyInvitedListActivity"/>
-        <activity android:name=".activity.ActTabsActivity"/>
+        <activity android:name="com.face.activity.NickNameActivity"/>
+        <activity android:name="com.face.activity.FriendSelectionActivity"/>
+        <activity android:name="com.face.activity.EditActivity"/>
+        <activity android:name="com.face.activity.ActDetailActivity"/>
+        <activity android:name="com.face.activity.ActManageActivity"/>
+        <activity android:name="com.face.activity.UserInfoActivity"/>
+        <activity android:name="com.face.activity.PublishActivity"/>
+        <activity android:name="com.face.activity.SearchAddressActivity"/>
+        <activity android:name="com.face.activity.AboutAddressActivity"/>
+        <activity android:name="com.face.activity.NewFriendsMsgActivity"/>
+        <activity android:name="com.face.activity.AddFriendsBySearchActivity"/>
+        <activity android:name="com.face.activity.AddFriendsActivity"/>
+        <activity android:name="com.face.activity.WebViewActivity"/>
+        <activity android:name="com.face.activity.QrCodeActivity"/>
+        <activity android:name="com.face.activity.BigImageActivity"/>
+        <activity android:name="com.face.activity.SettingActivity"/>
+        <activity android:name="com.face.activity.RegisterActivity"/>
+        <activity android:name="com.face.activity.MyUserInfoActivity"/>
+        <activity android:name="com.face.activity.MyPublishListActivity"/>
+        <activity android:name="com.face.activity.MyJoinListActivity"/>
+        <activity android:name="com.face.activity.MyApplyListActivity"/>
+        <activity android:name="com.face.activity.MyInvitedListActivity"/>
+        <activity android:name="com.face.activity.ActTabsActivity"/>
         <meta-data
                 android:name="com.amap.api.v2.apikey"
                 android:value="f8c81c2ebb3604034c503298d1581cbc"/>
