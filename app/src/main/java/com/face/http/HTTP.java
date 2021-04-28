@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class HTTP {
 
     //    private static final String base_url = "http://192.168.0.118:8080/api/";
-//    private static final String base_url = "http://39.101.138.75/api/";
-        private static final String base_url = "http://192.168.0.105/api/";
+    private static final String base_url = "http://39.101.138.75/api/";
+//        private static final String base_url = "http://192.168.0.105/api/";
     //        private static final String base_url="http://172.19.231.191:8080/api/";
     public static final AccountHTTP account;
     public static final PassportHTTP passport;

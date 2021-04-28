@@ -18,6 +18,7 @@ import com.face.http.model.JsonResponse;
 import com.face.http.model.vo.AccountDetail;
 import com.face.http.model.param.LoginParam;
 import com.face.http.model.vo.LoginVo;
+import com.face.http.util.ToastUtil;
 import com.face.util.PreferencesUtil;
 import com.face.widget.LoadingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -66,6 +67,14 @@ public class LoginActivity extends BaseActivity {
                         loadUserInfo();
                         PreferencesUtil.getInstance().setLogin(true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        LoginActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mDialog.dismiss();
+                        ToastUtil.showLong(e.getMessage() != null ? getString(R.string.login_failed) + "：" + e.getMessage() : getString(R.string.login_failed));
                     }
                 });
     }

@@ -9,6 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import face.R;
+import com.face.MainActivity;
 import com.face.util.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -49,9 +50,7 @@ public class SettingActivity extends BaseActivity {
         // 清除通讯录
         // 清除朋友圈
         // 跳转至登录页
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
-
     }
 }
