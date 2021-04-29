@@ -1,4 +1,4 @@
-package com.face.http.util;
+package com.face.utils;
 
 import android.view.Gravity;
 import android.widget.Toast;

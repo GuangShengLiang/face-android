@@ -22,7 +22,7 @@ import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.vo.AccountDetail;
-import com.face.util.CommonUtil;
+import com.face.utils.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;

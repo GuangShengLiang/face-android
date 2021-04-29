@@ -14,7 +14,7 @@ import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
 import com.face.http.model.vo.AccountDetail;
 import com.face.http.model.vo.ActivityDetailVo;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;

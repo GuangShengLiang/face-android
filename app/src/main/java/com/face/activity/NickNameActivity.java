@@ -10,7 +10,7 @@ import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.vo.AccountDetail;
 import com.face.http.model.param.AccountParam;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 

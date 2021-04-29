@@ -23,7 +23,7 @@ import com.face.fragment.FriendFragment;
 import com.face.fragment.HomeFragment;
 import com.face.fragment.MessageFragment;
 import com.face.fragment.ProfileFragment;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import com.face.view.KickBackAnimator;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.utils.NavigationUtil;

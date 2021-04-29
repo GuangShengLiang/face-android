@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.face.Constant;
 import face.R;
 import com.face.dao.entity.User;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class QrCodeActivity extends BaseActivity {

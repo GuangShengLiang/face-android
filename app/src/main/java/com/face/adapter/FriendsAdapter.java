@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 
 import face.R;
 import com.face.http.model.vo.FriendVo;
-import com.face.util.CommonUtil;
+import com.face.utils.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;

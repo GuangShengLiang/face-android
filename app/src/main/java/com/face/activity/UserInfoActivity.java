@@ -15,7 +15,7 @@ import com.face.http.model.vo.AccountDetail;
 import com.face.http.model.param.FriendParam;
 import com.face.http.model.param.UidParam;
 import com.face.http.model.vo.RelationVo;
-import com.face.util.CommonUtil;
+import com.face.utils.CommonUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 

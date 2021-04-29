@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.face.dao.MessageDao;
 import com.face.dao.entity.User;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 
 public class BaseActivity extends FragmentActivity {
     private MessageDao mMessageDao;

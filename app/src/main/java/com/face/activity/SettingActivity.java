@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import face.R;
 import com.face.MainActivity;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 

@@ -12,7 +12,7 @@ import com.face.Constant;
 import face.R;
 import com.face.activity.UserInfoActivity;
 import com.face.http.model.vo.FriendApplyVo;
-import com.face.util.CommonUtil;
+import com.face.utils.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;

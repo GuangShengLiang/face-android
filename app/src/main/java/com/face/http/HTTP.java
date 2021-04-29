@@ -3,7 +3,7 @@ package com.face.http;
 import android.util.Log;
 import com.face.FLinkApplication;
 import com.face.http.client.*;
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import com.google.gson.Gson;
 import okhttp3.*;
 import okio.Buffer;

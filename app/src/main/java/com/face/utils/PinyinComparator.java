@@ -1,4 +1,4 @@
-package com.face.util;
+package com.face.utils;
 
 import com.face.dao.entity.User;
 

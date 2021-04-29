@@ -17,13 +17,13 @@ import com.face.activity.FriendSelectionActivity;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.vo.Account;
-import com.face.util.ActivityUtils;
-import com.face.util.CommonUtil;
+import com.face.utils.ActivityUtils;
+import com.face.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.face.util.PreferencesUtil;
+import com.face.utils.PreferencesUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

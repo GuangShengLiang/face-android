@@ -1,4 +1,4 @@
-package com.face.util;
+package com.face.utils;
 
 import android.content.ContentUris;
 import android.content.Context;

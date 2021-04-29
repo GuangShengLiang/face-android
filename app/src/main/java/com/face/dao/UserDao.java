@@ -2,8 +2,8 @@ package com.face.dao;
 
 import com.face.Constant;
 import com.face.dao.entity.User;
-import com.face.util.CommonUtil;
-import com.face.util.PinyinComparator;
+import com.face.utils.CommonUtil;
+import com.face.utils.PinyinComparator;
 
 import java.util.Collections;
 import java.util.List;

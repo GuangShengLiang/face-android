@@ -1,4 +1,4 @@
-package com.face.util;
+package com.face.utils;
 
 import android.content.Context;
 import android.content.Intent;

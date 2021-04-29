@@ -20,7 +20,7 @@ import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.param.IdParam;
 import com.face.http.model.vo.ApplyVo;
-import com.face.util.ActivityUtils;
+import com.face.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
