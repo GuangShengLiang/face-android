@@ -47,11 +47,7 @@ public class FriendsSelectionAdapter extends ArrayAdapter<FriendVo> {
         }
 
         FriendVo friend = getItem(position);
-        if (TextUtils.isEmpty(friend.getRemark())) {
-            viewHolder.mNameTv.setText(friend.getFriend().getNickName());
-        } else {
-            viewHolder.mNameTv.setText(friend.getRemark());
-        }
+        viewHolder.mNameTv.setText(friend.getDisplayName());
 
         String avatar = friend.getFriend().getAvatar();
         if (!TextUtils.isEmpty(avatar)) {

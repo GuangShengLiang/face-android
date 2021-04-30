@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import face.R;
 import com.face.adapter.ActAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.client.ActivityHTTP;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.vo.ActivityDetailVo;
+import com.face.http.model.vo.ActivityFeedVo;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import face.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -58,9 +58,9 @@ public class HomeFragment extends Fragment {
             actHTTP.listActivitiesFriendJoinNext(0)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
+                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
                         @Override
-                        public void onNext(JsonResponse<List<ActivityDetailVo>> resp) {
+                        public void onNext(JsonResponse<List<ActivityFeedVo>> resp) {
                             mAdapter.refresh(resp.getData());
                         }
 
@@ -71,9 +71,9 @@ public class HomeFragment extends Fragment {
             actHTTP.listActivitiesFriendJoinPrevious(0)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
+                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
                         @Override
-                        public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
                             mAdapter.refresh(ls.getData());
                         }
 
@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment {
             actHTTP.listActivitiesFriendJoinNext(sid)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
+                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
                         @Override
-                        public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
+                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
                             mAdapter.loadMore(ls.getData());
                         }
                     });

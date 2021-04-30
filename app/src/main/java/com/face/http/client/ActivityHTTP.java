@@ -6,6 +6,7 @@ import com.face.http.model.vo.Account;
 import com.face.http.model.param.ActivityParam;
 import com.face.http.model.param.AidParam;
 import com.face.http.model.vo.ActivityDetailVo;
+import com.face.http.model.vo.ActivityFeedVo;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,10 +18,10 @@ import java.util.List;
 public interface ActivityHTTP {
 
     @GET("v1/activities/list/friend-join/previous")
-    Observable<JsonResponse<List<ActivityDetailVo>>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
+    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
 
     @GET("v1/activities/list/friend-join/next")
-    Observable<JsonResponse<List<ActivityDetailVo>>> listActivitiesFriendJoinNext(@Query("startAid") long startAid);
+    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFriendJoinNext(@Query("startAid") long startAid);
 
     @GET("v1/activities/list/publish")
     Observable<JsonResponse<List<ActivityDetailVo>>> listPublish();

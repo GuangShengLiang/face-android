@@ -48,18 +48,9 @@ public class FriendsAdapter extends ArrayAdapter<FriendVo> {
         }
 
         FriendVo friend = getItem(position);
-        String header;
-        if (TextUtils.isEmpty(friend.getRemark())) {
-            header = CommonUtil.setUserHeader(friend.getFriend().getNickName());
-        } else {
-            header = CommonUtil.setUserHeader(friend.getRemark());
-        }
+        String header = CommonUtil.setUserHeader(friend.getDisplayName());
 
-        if (TextUtils.isEmpty(friend.getRemark())) {
-            viewHolder.mNameTv.setText(friend.getFriend().getNickName());
-        } else {
-            viewHolder.mNameTv.setText(friend.getRemark());
-        }
+        viewHolder.mNameTv.setText(friend.getDisplayName());
 
         String avatar = friend.getFriend().getAvatar();
         if (0 == position || null != header && !header.equals(getItem(position - 1).getHeader())) {
