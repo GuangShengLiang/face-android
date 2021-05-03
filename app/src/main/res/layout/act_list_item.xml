@@ -6,37 +6,16 @@
               android:background="@color/white">
 
     <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="3dp">
         <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:orientation="vertical"
-                android:padding="3dp">
-            <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/android_bigger"/>
-            <TextView
-                    android:id="@+id/uname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:text="jack"/>
-        </LinearLayout>
-
-        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                >
-
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
             <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -44,23 +23,49 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="起士林西饼屋"
-                    android:textSize="20sp" android:textColor="#333333"
+                    android:textSize="20sp"
+                    android:textColor="#333333"
                     android:textStyle="bold"/>
-
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+            <ImageView
+                    android:id="@+id/iv_time"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/time"/>
             <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="5dp"
-                android:text="大学城 面包西点"
-                android:textColor="#666666" />
-            <TextView
-                    android:id="@+id/time"
+                    android:id="@+id/period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="02/12 周三" android:textColor="#666666"/>
+                    android:paddingTop="5dp"
+                    android:text="大学城 面包西点"
+                    android:textColor="#666666"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+            <ImageView
+                    android:id="@+id/iv_address"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/address"/>
+            <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="02/12 周三"
+                    android:textColor="#666666"/>
 
         </LinearLayout>
     </LinearLayout>

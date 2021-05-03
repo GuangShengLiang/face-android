@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EasyNavigationBar navigationBar;
 
-    private String[] tabText = {"首页", "好友", "", "消息", "我的"};
+    private String[] tabText = {"首页", "朋友", "", "消息", "我的"};
     //未选中icon
     private int[] normalIcon = {R.mipmap.index, R.mipmap.friend1, R.mipmap.add_image, R.mipmap.message, R.mipmap.me};
     //选中时icon

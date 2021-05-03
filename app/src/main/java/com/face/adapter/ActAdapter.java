@@ -45,22 +45,12 @@ public class ActAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 //        ButterKnife.bind(,holder.itemView);
         TextView title = holder.itemView.findViewById(R.id.title);
-        TextView uname = holder.itemView.findViewById(R.id.uname);
         TextView address = holder.itemView.findViewById(R.id.address);
-        TextView time = holder.itemView.findViewById(R.id.time);
-        ImageView avatar = holder.itemView.findViewById(R.id.avatar);
-        RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.boy) //这里设置占位图
-                .error(R.drawable.boy);
-        Glide.with(mContext)
-                .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
-                .apply(options)
-                .into(avatar);
+        TextView period = holder.itemView.findViewById(R.id.period);
         ActivityFeedVo d = list.get(position);
         title.setText(d.getTitle());
         address.setText(d.getAddress());
-        uname.setText(d.getPublisher().getNickName());
-        time.setText(d.getPeriod());
+        period.setText(d.getPeriod());
         holder.itemView.setOnClickListener(view -> {
             AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;

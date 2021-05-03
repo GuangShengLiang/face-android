@@ -12,6 +12,8 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import java.io.File;
+
 public class CommonUtil {
     /**
      * 获取用户header
@@ -54,14 +56,18 @@ public class CommonUtil {
             return String.valueOf(firstChar);
         }
     }
+    public static final String PATH_HEAD = "file:///android_asset/";
 
 
     public static void loadAvatar(Context mContext, ImageView avatar, String path) {
         RequestOptions options = new RequestOptions();
+//        File file = new File(  "app/src/main/assets/header/boy_01.jpeg");
+
         options.placeholder(R.drawable.boy) //这里设置占位图
                 .error(R.drawable.boy);
         Glide.with(mContext)
-                .load(Constant.BASE_URL_PICTURE + path)
+//                .load(Constant.BASE_URL_PICTURE + path)
+                .load(PATH_HEAD+  "header/boy_01.jpeg")
                 .apply(options)
                 .into(avatar);
     }

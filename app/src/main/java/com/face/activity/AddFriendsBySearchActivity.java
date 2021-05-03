@@ -98,66 +98,16 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<Account>>() {
                     @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (e instanceof NullPointerException) {
-                            mDialog.dismiss();
-                            Toast.makeText(AddFriendsBySearchActivity.this, "未搜索到", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
                     public void onNext(JsonResponse<Account> a) {
                         mDialog.dismiss();
+                        if (a.getData() == null) {
+                            mDialog.dismiss();
+                            Toast.makeText(AddFriendsBySearchActivity.this, "未搜索到", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         ActivityUtils.openUserInfoActivity(context, a.getData().getUid());
                     }
                 });
-       /* return;
-        final String url = Constant.BASE_URL + "users/searchForAddFriends?keyword=" + keyword + "&userId=" + userId;
-        mVolleyUtil.httpGetRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "server response: " + response);
-                User user = JSON.parseObject(response, User.class);
-                mUserDao.saveUser(user);
-                Log.d(TAG, "userId:" + user.getUserId());
-//                if (Constant.IS_FRIEND.equals(user.getIsFriend())) {
-                // 好友，进入用户详情页
-                Intent intent = new Intent(AddFriendsBySearchActivity.this, UserInfoActivity.class);
-                intent.putExtra("userId", user.getUserId());
-                startActivity(intent);
-//                } else {
-//                    // 陌生人，进入陌生人详情页
-//                    Intent intent = new Intent(AddFriendsBySearchActivity.this, StrangerUserInfoActivity.class);
-//                    intent.putExtra("userId", user.getUserId());
-//                    startActivity(intent);
-//                }
-                mDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                mDialog.dismiss();
-                if (volleyError instanceof NetworkError) {
-                    Toast.makeText(AddFriendsBySearchActivity.this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (volleyError instanceof TimeoutError) {
-                    Toast.makeText(AddFriendsBySearchActivity.this, R.string.network_time_out, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                int errorCode = volleyError.networkResponse.statusCode;
-                switch (errorCode) {
-                    case 400:
-                        Toast.makeText(AddFriendsBySearchActivity.this,
-                                R.string.user_not_exists, Toast.LENGTH_SHORT)
-                                .show();
-                        break;
-                }
-
-            }
-        }显示键盘)*/
-        ;
     }
 
     /**

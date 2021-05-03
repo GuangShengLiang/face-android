@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class ActTabsActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
-    private String[] tabs = new String[]{"待参加", "申请中", " 被邀请", "发布中", "已结束"};
+    private String[] tabs = new String[]{"待参加", "申请中", " 被邀请", "已结束"};
     @BindView(R.id.title_bar)
     TitleBar titleBar;
 
@@ -52,7 +52,6 @@ public class ActTabsActivity extends BaseActivity {
         fragmentList.add(new FragmentA("waiting"));
         fragmentList.add(new FragmentA("apply"));
         fragmentList.add(new FragmentA("invited"));
-        fragmentList.add(new FragmentA("publish"));
         fragmentList.add(new FragmentA("finish"));
         initView();
 
