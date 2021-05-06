@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -12,7 +14,11 @@ public class ActivityFeedVo extends ActivityVo {
     /**
      * 发布人
      */
-    private Account publisher;
+    private MemberVo publisher;
+    /**
+     * 参加的好友列表
+     */
+    private List<FriendVo> friends;
     /**
      * 状态:报名中(0),报名结束(1),活动进行中(2),活动结束(3)
      */

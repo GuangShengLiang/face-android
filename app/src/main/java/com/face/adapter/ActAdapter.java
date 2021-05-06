@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
 import com.face.http.model.vo.AccountDetail;
@@ -54,7 +51,7 @@ public class ActAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(view -> {
             AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
-            if (acc != null && acc.getUid() == d.getPublisher().getUid()) {
+            if (acc != null && acc.getUid() == d.getPublisher().getAccount().getUid()) {
                 intent = new Intent(mContext, ActManageActivity.class);
             } else {
                 intent = new Intent(mContext, ActDetailActivity.class);

@@ -6,13 +6,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.face.FLinkApplication;
-import face.R;
 import com.face.adapter.PartnerAdapter;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -21,11 +21,8 @@ import com.face.http.model.param.AidParam;
 import com.face.http.model.vo.ActivityDetailVo;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
+import face.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -115,7 +112,7 @@ public class ActDetailActivity extends BaseActivity {
                     @Override
                     public void onNext(JsonResponse<ActivityDetailVo> a) {
                         d = a.getData();
-                        adapter.setHorizontalDataList(d.getAid());
+                        adapter.setHorizontalDataList(d);
                         title.setText(d.getTitle());
                         time.setText(d.getStime());
                         address.setText(d.getAddress());

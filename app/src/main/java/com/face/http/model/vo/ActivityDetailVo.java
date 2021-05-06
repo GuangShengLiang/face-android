@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -12,7 +14,11 @@ public class ActivityDetailVo extends ActivityVo {
     /**
      * 发布人
      */
-    private Account publisher;
+    private MemberVo publisher;
+    /**
+     *
+     */
+    private List<MemberVo> members;
     /**
      * 详情
      */

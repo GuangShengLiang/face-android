@@ -52,17 +52,9 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
 
     @Override
     public void onBindViewHolder(@NonNull MyJoinAdapter.HorizontalViewHolder holder, int position) {
-        RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.boy) //这里设置占位图
-                .error(R.drawable.boy);
-        Glide.with(mContext)
-                .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
-                .apply(options)
-                .into(holder.avatar);
         ActivityDetailVo d = mList.get(position);
         holder.title.setText(d.getTitle());
         holder.address.setText(d.getAddress());
-        holder.uname.setText(d.getPublisher().getNickName());
         holder.time.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
 //            Intent intent = new Intent(mContext, ActDetailActivity.class);
@@ -70,7 +62,7 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
 //            mContext.startActivity(intent);
             AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
-            if (acc != null && acc.getUid() == d.getPublisher().getUid()) {
+            if (acc != null && acc.getUid() == d.getPublisher().getAccount().getUid()) {
                 intent = new Intent(mContext, ActManageActivity.class);
             } else {
                 intent = new Intent(mContext, ActDetailActivity.class);
@@ -89,14 +81,10 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
 
         @BindView(R.id.title)
         TextView title;
-        @BindView(R.id.uname)
-        TextView uname;
         @BindView(R.id.address)
         TextView address;
-        @BindView(R.id.time)
+        @BindView(R.id.period)
         TextView time;
-        @BindView(R.id.avatar)
-        ImageView avatar;
 
         public HorizontalViewHolder(View itemView) {
             super(itemView);

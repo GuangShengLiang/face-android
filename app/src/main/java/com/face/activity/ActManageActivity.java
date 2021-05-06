@@ -14,7 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.FLinkApplication;
-import face.R;
 import com.face.adapter.ApplyAdapter;
 import com.face.adapter.InviteAdapter;
 import com.face.adapter.PartnerAdapter;
@@ -27,6 +26,7 @@ import com.face.http.model.vo.ActivityDetailVo;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import es.dmoral.toasty.Toasty;
+import face.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -73,7 +73,7 @@ public class ActManageActivity extends BaseActivity {
             public void onRightClick(View v) {
                 Intent intent = new Intent(mContext, EditActivity.class);
                 intent.putExtra("aid", d.getAid());
-                intent.putExtra("uid", d.getPublisher().getUid());
+                intent.putExtra("uid", d.getPublisher().getAccount().getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -96,7 +96,7 @@ public class ActManageActivity extends BaseActivity {
                         title.setText(d.getTitle());
                         time.setText(d.getStime());
                         address.setText(d.getAddress());
-                        adapter.setHorizontalDataList(d.getAid());
+                        adapter.setHorizontalDataList(d);
                         status = ActivityStatusEnum.get(d.getStatus());
                         actionView();
 
