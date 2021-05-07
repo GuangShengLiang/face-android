@@ -51,6 +51,9 @@
 <!--        <meta-data android:name="DATABASE" android:value="flink.db" />-->
         <meta-data android:name="VERSION" android:value="3" />
         <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.2"/>
     </application>
 
 </manifest>
