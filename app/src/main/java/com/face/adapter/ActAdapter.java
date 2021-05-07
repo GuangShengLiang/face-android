@@ -2,14 +2,22 @@ package com.face.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
 import com.face.http.model.vo.AccountDetail;
 import com.face.http.model.vo.ActivityFeedVo;
+import com.face.http.model.vo.FriendVo;
+import com.face.utils.CommonUtil;
 import com.face.utils.PreferencesUtil;
 import face.R;
 
@@ -44,10 +52,12 @@ public class ActAdapter extends RecyclerView.Adapter {
         TextView title = holder.itemView.findViewById(R.id.title);
         TextView address = holder.itemView.findViewById(R.id.address);
         TextView period = holder.itemView.findViewById(R.id.period);
+        LinearLayout friends = holder.itemView.findViewById(R.id.ll_friends);
         ActivityFeedVo d = list.get(position);
         title.setText(d.getTitle());
         address.setText(d.getAddress());
         period.setText(d.getPeriod());
+        bindFriendsLayout(friends, d.getFriends());
         holder.itemView.setOnClickListener(view -> {
             AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
@@ -59,6 +69,7 @@ public class ActAdapter extends RecyclerView.Adapter {
             intent.putExtra("aid", d.getAid());
             mContext.startActivity(intent);
         });
+
     }
 
     @Override
@@ -75,4 +86,23 @@ public class ActAdapter extends RecyclerView.Adapter {
         this.list.addAll(list);
         this.notifyDataSetChanged();
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void bindFriendsLayout(LinearLayout llFriend, List<FriendVo> friends){
+        llFriend.removeAllViews();
+        if(friends != null){
+            friends.forEach(friendVo -> {
+                View layout = LayoutInflater.from(mContext).inflate(R.layout.item_layout_friends, null, false);
+                ImageView ivFriend = layout.findViewById(R.id.iv_friend);
+                CommonUtil.loadAvatar(mContext, ivFriend, friendVo.getFriend().getGender() == 1);
+                TextView tvFriend = layout.findViewById(R.id.tv_friend);
+                tvFriend.setText(friendVo.getDisplayName());
+                llFriend.addView(layout);
+            });
+        }
+
+    }
+
+
 }
