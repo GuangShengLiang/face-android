@@ -17,8 +17,13 @@ public class ActivityFeedVo extends ActivityVo {
     private MemberVo publisher;
     /**
      * 参加的好友列表
+     * @deprecated
      */
-    private List<FriendVo> friends;
+    private List<MemberVo> friends;
+    /**
+     * 参与人列表
+     */
+    private List<MemberVo> members;
     /**
      * 状态:报名中(0),报名结束(1),活动进行中(2),活动结束(3)
      */

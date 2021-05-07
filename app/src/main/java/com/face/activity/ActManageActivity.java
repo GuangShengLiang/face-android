@@ -17,7 +17,7 @@ import com.face.FLinkApplication;
 import com.face.adapter.ApplyAdapter;
 import com.face.adapter.InviteAdapter;
 import com.face.adapter.PartnerAdapter;
-import com.face.enums.ActivityStatusEnum;
+import com.face.enums.activity.ActivityStatusEnum;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;

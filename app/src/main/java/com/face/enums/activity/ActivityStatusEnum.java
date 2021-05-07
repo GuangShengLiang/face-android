@@ -1,4 +1,4 @@
-package com.face.enums;
+package com.face.enums.activity;
 
 public enum ActivityStatusEnum {
     NONE(-1),

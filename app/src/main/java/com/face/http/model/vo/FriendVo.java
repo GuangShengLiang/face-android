@@ -19,6 +19,6 @@ public class FriendVo {
     /**
      * 好友
      */
-    private Account friend;
+    private Account account;
     private String header;
 }

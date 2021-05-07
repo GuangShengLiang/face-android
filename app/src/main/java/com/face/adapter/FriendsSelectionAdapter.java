@@ -49,7 +49,7 @@ public class FriendsSelectionAdapter extends ArrayAdapter<FriendVo> {
         FriendVo friend = getItem(position);
         viewHolder.mNameTv.setText(friend.getDisplayName());
 
-        String avatar = friend.getFriend().getAvatar();
+        String avatar = friend.getAccount().getAvatar();
         if (!TextUtils.isEmpty(avatar)) {
             CommonUtil.loadAvatar(getContext(), viewHolder.mAvatarSdv, avatar);
         }
@@ -57,9 +57,9 @@ public class FriendsSelectionAdapter extends ArrayAdapter<FriendVo> {
             @Override
             public void onClick(View view) {
                 if (viewHolder.checkBox.isChecked()) {
-                    uids.add(mFriendList.get(position).getFriend().getUid());
+                    uids.add(mFriendList.get(position).getAccount().getUid());
                 } else {
-                    uids.remove(mFriendList.get(position).getFriend().getUid());
+                    uids.remove(mFriendList.get(position).getAccount().getUid());
                 }
             }
         });

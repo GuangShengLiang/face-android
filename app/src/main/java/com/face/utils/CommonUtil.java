@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.face.Constant;
+import com.face.enums.account.GenderEnum;
 import face.R;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -56,6 +57,7 @@ public class CommonUtil {
             return String.valueOf(firstChar);
         }
     }
+
     public static final String PATH_HEAD = "file:///android_asset/";
 
 
@@ -67,19 +69,18 @@ public class CommonUtil {
                 .error(R.drawable.boy);
         Glide.with(mContext)
 //                .load(Constant.BASE_URL_PICTURE + path)
-                .load(PATH_HEAD+  "header/boy_01.jpeg")
+                .load(PATH_HEAD + "header/boy_01.jpeg")
                 .apply(options)
                 .into(avatar);
     }
 
-    public static void loadAvatar(Context mContext, ImageView avatar, Boolean isBoy) {
+    public static void loadAvatar(Context mContext, ImageView avatar, int gender) {
         String avatarStr = PATH_HEAD + "header/";
-        if (isBoy) {
+        if (GenderEnum.男.code == gender) {
             avatarStr += "boy_01.jpeg";
         } else {
             avatarStr += "girl_01.jpeg";
         }
-
         Glide.with(mContext)
                 .load(avatarStr)
                 .into(avatar);

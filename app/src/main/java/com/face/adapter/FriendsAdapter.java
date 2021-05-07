@@ -52,7 +52,7 @@ public class FriendsAdapter extends ArrayAdapter<FriendVo> {
 
         viewHolder.mNameTv.setText(friend.getDisplayName());
 
-        String avatar = friend.getFriend().getAvatar();
+        String avatar = friend.getAccount().getAvatar();
         if (0 == position || null != header && !header.equals(getItem(position - 1).getHeader())) {
             if (TextUtils.isEmpty(header)) {
                 viewHolder.mHeaderTv.setVisibility(View.GONE);

@@ -86,7 +86,7 @@ public class FriendFragment extends Fragment {
 
         mFriendsLv.setOnItemClickListener((parent, view, position, id) -> {
             FriendVo f = flist.get(position - 1);
-            ActivityUtils.openUserInfoActivity(getContext(), f.getFriend().getUid());
+            ActivityUtils.openUserInfoActivity(getContext(), f.getAccount().getUid());
         });
     }
 

@@ -2,6 +2,7 @@ package com.face.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,8 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
-import com.face.http.model.vo.AccountDetail;
-import com.face.http.model.vo.ActivityFeedVo;
-import com.face.http.model.vo.FriendVo;
+import com.face.enums.account.RelationTypeEnum;
+import com.face.http.model.vo.*;
 import com.face.utils.CommonUtil;
 import com.face.utils.PreferencesUtil;
 import face.R;
@@ -57,7 +57,7 @@ public class ActAdapter extends RecyclerView.Adapter {
         title.setText(d.getTitle());
         address.setText(d.getAddress());
         period.setText(d.getPeriod());
-        bindFriendsLayout(friends, d.getFriends());
+        bindMemberLayout(friends,d.getMembers());
         holder.itemView.setOnClickListener(view -> {
             AccountDetail acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
@@ -89,18 +89,19 @@ public class ActAdapter extends RecyclerView.Adapter {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void bindFriendsLayout(LinearLayout llFriend, List<FriendVo> friends){
+    private void bindMemberLayout(LinearLayout llFriend, List<MemberVo> memberVos) {
         llFriend.removeAllViews();
-        if(friends != null){
-            friends.forEach(friendVo -> {
-                View layout = LayoutInflater.from(mContext).inflate(R.layout.item_layout_friends, null, false);
-                ImageView ivFriend = layout.findViewById(R.id.iv_friend);
-                CommonUtil.loadAvatar(mContext, ivFriend, friendVo.getFriend().getGender() == 1);
-                TextView tvFriend = layout.findViewById(R.id.tv_friend);
-                tvFriend.setText(friendVo.getDisplayName());
-                llFriend.addView(layout);
-            });
-        }
+        memberVos.forEach(m -> {
+            View layout = LayoutInflater.from(mContext).inflate(R.layout.item_layout_friends, null, false);
+            ImageView ivFriend = layout.findViewById(R.id.iv_friend);
+            CommonUtil.loadAvatar(mContext, ivFriend, m.getAccount().getGender());
+            TextView tvFriend = layout.findViewById(R.id.tv_friend);
+            if (m.getRelationType() == RelationTypeEnum.friend.code) {
+                tvFriend.setTextColor(Color.RED);
+            }
+            tvFriend.setText(m.getDisplayName());
+            llFriend.addView(layout);
+        });
 
     }
 
