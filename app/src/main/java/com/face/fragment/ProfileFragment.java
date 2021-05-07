@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment {
     @OnClick(R.id.sdv_avatar)
     void showAvatar() {
         Intent intent = new Intent(getActivity(), BigImageActivity.class);
-        intent.putExtra("imgUrl", user.getUserAvatar());
+//        intent.putExtra("imgUrl", user.getUserAvatar());
         startActivity(intent);
     }
 

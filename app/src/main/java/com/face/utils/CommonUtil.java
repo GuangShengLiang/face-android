@@ -71,4 +71,17 @@ public class CommonUtil {
                 .apply(options)
                 .into(avatar);
     }
+
+    public static void loadAvatar(Context mContext, ImageView avatar, Boolean isBoy) {
+        String avatarStr = PATH_HEAD + "header/";
+        if (isBoy) {
+            avatarStr += "boy_01.jpeg";
+        } else {
+            avatarStr += "girl_01.jpeg";
+        }
+
+        Glide.with(mContext)
+                .load(avatarStr)
+                .into(avatar);
+    }
 }
