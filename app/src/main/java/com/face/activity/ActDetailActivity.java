@@ -118,19 +118,5 @@ public class ActDetailActivity extends BaseActivity {
                         address.setText(d.getAddress());
                     }
                 });
-        HTTP.apply.isNeedApply(getIntent().getExtras().getLong("aid"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<Boolean>>() {
-                    @Override
-                    public void onNext(JsonResponse<Boolean> b) {
-                        if (b.getData()) {
-                            appbtn.setText("立即申请");
-                        } else {
-                            appbtn.setClickable(false);
-                            appbtn.setText("已申请");
-                        }
-                    }
-                });
     }
 }

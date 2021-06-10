@@ -68,18 +68,18 @@ public class FriendFragment extends Fragment {
 //        mFriendList = mUserDao.getAllFriendList();
         mFriendsAdapter = new FriendsAdapter(getActivity(), R.layout.item_friends, flist);
         mFriendsLv.setAdapter(mFriendsAdapter);
-        HTTP.relation.friendList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
-                    @Override
-                    public void onNext(JsonResponse<List<FriendVo>> fl) {
-                        flist.addAll(fl.getData());
-                        mFriendsAdapter.notifyDataSetChanged();
-//                        Collections.sort(fl, new PinyinComparator() {
-//                        });
-                    }
-                });
+//        HTTP.relation.queryFriends()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
+//                    @Override
+//                    public void onNext(JsonResponse<List<FriendVo>> fl) {
+//                        flist.addAll(fl.getData());
+//                        mFriendsAdapter.notifyDataSetChanged();
+////                        Collections.sort(fl, new PinyinComparator() {
+////                        });
+//                    }
+//                });
         // 对list进行排序
 //        Collections.sort(mFriendList, new PinyinComparator() {
 //        });

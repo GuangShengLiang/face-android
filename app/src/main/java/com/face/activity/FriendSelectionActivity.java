@@ -85,16 +85,16 @@ public class FriendSelectionActivity extends BaseActivity {
         FriendsSelectionAdapter adapter = new FriendsSelectionAdapter(mContext, R.layout.friend_selection_list_item,
                 flist, uids);
         mFriendsLv.setAdapter(adapter);
-        HTTP.relation.friendList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
-                    @Override
-                    public void onNext(@NotNull JsonResponse<List<FriendVo>> fl) {
-                        flist.addAll(fl.getData());
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+//        HTTP.relation.queryFriends()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new BaseObserver<JsonResponse<List<FriendVo>>>() {
+//                    @Override
+//                    public void onNext(@NotNull JsonResponse<List<FriendVo>> fl) {
+//                        flist.addAll(fl.getData());
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                });
      /*   mFriendsLv.setOnItemClickListener((parent, view, position, id) -> {
             Log.d("tag", position + "");
             int uid = flist.get(position).getUid();

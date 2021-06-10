@@ -58,18 +58,10 @@ public class MyPublishAdapter extends RecyclerView.Adapter<MyPublishAdapter.Hori
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
-        RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.boy) //这里设置占位图
-                .error(R.drawable.boy);
-        Glide.with(mContext)
-                .load("http://img2.woyaogexing.com/2020/02/14/3d352b92e7df409bb2dd172d0b73ad4f!400x400.jpeg")    //myurl表示图片的url地址
-                .apply(options)
-                .into(holder.avatar);
         ActivityDetailVo d = mList.get(position);
         holder.title.setText(d.getTitle());
         holder.address.setText(d.getAddress());
-//        holder.uname.setText(d.getPublisher().getNickName());
-        holder.time.setText(d.getStime());
+        holder.period.setText(d.getStime());
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, ActManageActivity.class);
             intent.putExtra("aid", mList.get(position).getAid());
@@ -86,14 +78,10 @@ public class MyPublishAdapter extends RecyclerView.Adapter<MyPublishAdapter.Hori
 
         @BindView(R.id.title)
         TextView title;
-        @BindView(R.id.uname)
-        TextView uname;
         @BindView(R.id.address)
         TextView address;
-        @BindView(R.id.time)
-        TextView time;
-        @BindView(R.id.avatar)
-        ImageView avatar;
+        @BindView(R.id.period)
+        TextView period;
 
         public HorizontalViewHolder(View itemView) {
             super(itemView);

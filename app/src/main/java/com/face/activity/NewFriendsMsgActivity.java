@@ -57,16 +57,6 @@ public class NewFriendsMsgActivity extends BaseActivity {
         newFriendsMsgAdapter = new NewFriendsMsgAdapter(this, friendApplyList);
         mNewFriendsMsgLv.setAdapter(newFriendsMsgAdapter);
 
-        HTTP.relation.friendApplyList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<List<FriendApplyVo>>>() {
-                    @Override
-                    public void onNext(JsonResponse<List<FriendApplyVo>> fls) {
-                        friendApplyList.addAll(fls.getData());
-                        newFriendsMsgAdapter.notifyDataSetChanged();
-                    }
-                });
     }
 
     @OnClick(R.id.tv_search)

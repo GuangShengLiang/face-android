@@ -2,6 +2,7 @@ package com.face.http.client;
 
 
 import com.face.http.model.JsonResponse;
+import com.face.http.model.param.ApplySwitchParam;
 import com.face.http.model.vo.Account;
 import com.face.http.model.param.ActivityParam;
 import com.face.http.model.param.AidParam;
@@ -44,14 +45,8 @@ public interface ActivityHTTP {
     @POST("v1/activities/update")
     Observable<JsonResponse> modify(@Body ActivityParam req);
 
-    @POST("v1/activities/apply-stop")
-    Observable<JsonResponse> applyStop(@Body AidParam req);
-
-    @POST("v1/activities/start")
-    Observable<JsonResponse> start(@Body AidParam req);
-
-    @POST("v1/activities/finish")
-    Observable<JsonResponse> finish(@Body AidParam req);
+    @POST("v1/activities/apply-switch")
+    Observable<JsonResponse> applySwitch(@Body ApplySwitchParam req);
 
     @GET("v1/activities/members/list")
     Observable<JsonResponse<List<Account>>> listMember(@Query("aid") long aid);

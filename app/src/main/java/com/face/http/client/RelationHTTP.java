@@ -1,44 +1,40 @@
 package com.face.http.client;
 
 
-import java.util.List;
-
-import com.face.http.model.param.FriendParam;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.param.UidParam;
 import com.face.http.model.vo.FriendVo;
-import com.face.http.model.vo.FriendApplyVo;
+import com.face.http.model.vo.RelationStatVO;
 import com.face.http.model.vo.RelationVo;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+import java.util.List;
+
 public interface RelationHTTP {
 
     @GET("v1/relations/detail")
-    Observable<JsonResponse<RelationVo>> relation(@Query("ruid") int ruid);
+    Observable<JsonResponse<RelationVo>> relation(@Query("tuid") int ruid);
 
     @POST("v1/relations/black")
-    Observable<JsonResponse> black(@Query("ruid") int ruid);
+    Observable<JsonResponse> black(@Query("blackUid") int blackUid);
 
-    @GET("v1/friends/list")
-    Observable<JsonResponse<List<FriendVo>>> friendList();
+    @GET("v1/relations/friends")
+    Observable<JsonResponse<List<RelationVo>>> queryFriends();
 
-    @POST("v1/friends/delete")
-    Observable<Void> friendRemove(@Query("ruid") int ruid);
+    @POST("v1/relations/follow")
+    Observable<JsonResponse> follow(@Query("followUid") int followUid);
 
-    @GET("v1/friend/applies/detail")
-    Observable<JsonResponse> applyDetail(@Query("uid") int ruid);
+    @POST("v1/relations/unfollow")
+    Observable<JsonResponse> unfollow(@Query("followUid") int followUid);
 
-    @POST("v1/friend/applies/apply")
-    Observable<JsonResponse> friendApply(@Body FriendParam r);
+    @GET("v1/relations/followers")
+    Observable<JsonResponse<List<RelationVo>>> queryFollowers();
 
-    @POST("v1/friend/applies/agree")
-    Observable<JsonResponse> friendAgree(@Body UidParam r);
+    @GET("v1/relations/fans")
+    Observable<JsonResponse<List<RelationVo>>> queryFans();
 
-    @GET("v1/friend/applies/list")
-    Observable<JsonResponse<List<FriendApplyVo>>> friendApplyList();
-
+    @GET("v1/relations/stat")
+    Observable<JsonResponse<RelationStatVO>> queryStat();
 }

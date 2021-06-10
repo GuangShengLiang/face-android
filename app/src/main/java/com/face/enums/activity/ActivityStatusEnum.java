@@ -2,10 +2,11 @@ package com.face.enums.activity;
 
 public enum ActivityStatusEnum {
     NONE(-1),
-    报名中(0),
-    报名结束(1),
-    活动进行中(2),
-    活动结束(3);
+    创建(0),
+    报名中(10),
+    进行中(40),
+    已取消(80),
+    结束(90);
 
     public final int code;
 

@@ -1,29 +1,32 @@
 package com.face.http.model.vo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class RelationVo {
-    /**
-     * 关系Id
-     */
-    private Integer id;
     /**
      * 用户id
      */
     private int uid;
     /**
-     * 关系类型
+     * 对方账户
      */
-    private int ruid;
+    private Account account;
     /**
-     * 关系类型
+     * 显示的名称 remark > friend.nickName
+     * @mock 强子
      */
-    private Integer type;
+    private String displayName;
+    /**
+     * 关系类型：陌生人(0),朋友(1),黑名单(2),关注(3),粉丝(4)
+     */
+    private Integer relationType;
     /**
      * 备注
      */

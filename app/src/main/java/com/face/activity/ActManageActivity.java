@@ -130,46 +130,10 @@ public class ActManageActivity extends BaseActivity {
         AidParam r = new AidParam(d.getAid());
         switch (status) {
             case 报名中:
-                HTTP.activity.applyStop(r).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<JsonResponse>() {
-                            @Override
-                            public void onNext(JsonResponse v) {
-                                status = ActivityStatusEnum.报名结束;
-                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
-                                        Toast.LENGTH_SHORT, true);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        });
                 break;
             case 报名结束:
-                HTTP.activity.start(r).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<JsonResponse>() {
-                            @Override
-                            public void onNext(JsonResponse v) {
-                                status = ActivityStatusEnum.活动进行中;
-                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
-                                        Toast.LENGTH_SHORT, true);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        });
                 break;
             case 活动进行中:
-                HTTP.activity.finish(r).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<JsonResponse>() {
-                            @Override
-                            public void onNext(JsonResponse v) {
-                                status = ActivityStatusEnum.活动结束;
-                                Toast t = Toasty.success(FLinkApplication.getContext(), "OK",
-                                        Toast.LENGTH_SHORT, true);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        });
                 break;
             case 活动结束:
                 action.setVisibility(View.GONE);

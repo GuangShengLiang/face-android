@@ -6,28 +6,27 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.face.activity.LoginActivity;
 import com.face.activity.PublishActivity;
-import face.R;
 import com.face.fragment.FriendFragment;
 import com.face.fragment.HomeFragment;
 import com.face.fragment.MessageFragment;
 import com.face.fragment.ProfileFragment;
 import com.face.utils.PreferencesUtil;
 import com.face.view.KickBackAnimator;
-import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.utils.NavigationUtil;
 import com.next.easynavigation.view.EasyNavigationBar;
+import face.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private EasyNavigationBar navigationBar;
 
     private String[] tabText = {"首页", "朋友", "", "消息", "我的"};
-    //未选中icon
-    private int[] normalIcon = {R.mipmap.index, R.mipmap.friend1, R.mipmap.add_image, R.mipmap.message, R.mipmap.me};
-    //选中时icon
-    private int[] selectIcon = {R.mipmap.index1, R.mipmap.find1, R.mipmap.add_image, R.mipmap.message1, R.mipmap.me1};
-
     private List<Fragment> fragments = new ArrayList<>();
 
 
@@ -68,39 +62,51 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new FriendFragment());
         fragments.add(new MessageFragment());
         fragments.add(new ProfileFragment());
-//        fragments.add(new ProfileFragment());
-//        fragments.add(new ProfileFragment());
-//        fragments.add(new ProfileFragment());
 
         navigationBar.titleItems(tabText)
-                .normalIconItems(normalIcon)
-                .selectIconItems(selectIcon)
+//                .normalIconItems(normalIcon)
+//                .selectIconItems(selectIcon)
+                .canScroll(true)    //Viewpager能否左右滑动
                 .fragmentList(fragments)
                 .fragmentManager(getSupportFragmentManager())
-                .addLayoutRule(EasyNavigationBar.RULE_BOTTOM)
-                .navigationHeight(40)
+//                .iconSize(20)     //Tab图标大小
+                .tabTextSize(14)   //Tab文字大小
+                .tabTextTop(0)     //Tab文字距Tab图标的距离
+                .normalTextColor(Color.parseColor("#8E8E93"))   //Tab未选中时字体颜色
+                .selectTextColor(Color.parseColor("#FFFFFF"))   //Tab选中时字体颜色
+//                .scaleType(ImageView.ScaleType.CENTER_INSIDE)  //同 ImageView的ScaleType
+                .navigationBackground(Color.parseColor("#202020"))   //导航栏背景色
+                .centerLayoutRule(EasyNavigationBar.RULE_CENTER)
                 .hasPadding(true)
-                .onTabClickListener(new EasyNavigationBar.OnTabClickListener() {
+//                .setOnTabClickListener(new EasyNavigationBar.OnTabClickListener() {
+//                    @Override
+//                    public boolean onTabSelectEvent(View view, int position) {
+//                        //Tab点击事件  return true 页面不会切换
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onTabReSelectEvent(View view, int position) {
+//                        //Tab重复点击事件
+//                        return false;
+//                    }
+//                })
+                .setOnCenterTabClickListener(new EasyNavigationBar.OnCenterTabSelectListener(){
+
                     @Override
-                    public boolean onTabClickEvent(View view, int position) {
-                        if (position == 4) {
-//                            Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-                            //return true则拦截事件、不进行页面切换
-                            return false;
-                        } else if (position == 2) {
-                            //跳转页面（全民K歌）   或者   弹出菜单（微博）
-//                            showMunu();
-                            ComponentName cn = new ComponentName(MainActivity.this, PublishActivity.class);
-                            Intent intent = new Intent();
-                            intent.setComponent(cn);
-                            intent.putExtra("id", position);
-                            startActivity(intent);
-                        }
+                    public boolean onCenterTabSelectEvent(View view) {
+                        ComponentName cn = new ComponentName(MainActivity.this, PublishActivity.class);
+                        Intent intent = new Intent();
+                        intent.setComponent(cn);
+                        startActivity(intent);
                         return false;
                     }
                 })
-                .mode(EasyNavigationBar.MODE_ADD)
-                .anim(Anim.ZoomIn)
+                .mode(EasyNavigationBar.NavigationMode.MODE_ADD)   //默认MODE_NORMAL 普通模式  //MODE_ADD 带加号模式
+                .centerImageRes(R.mipmap.add_image)
+                .centerLayoutHeight(44)   //包含加号的布局高度 背景透明  所以加号看起来突出一块
+                .navigationHeight(44)  //导航栏高度
+//                .anim(Anim.ZoomIn)
                 .build();
 
 

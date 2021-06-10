@@ -55,7 +55,7 @@ public class UserInfoActivity extends BaseActivity {
                     @Override
                     public void onNext(JsonResponse<RelationVo> r) {
                         if (r != null) {
-                            if (r.getData().getType() == 1) {
+                            if (r.getData().getRelationType() == 1) {
                                 addFriend.setVisibility(View.GONE);
                                 bagree.setVisibility(View.GONE);
                             }
@@ -97,10 +97,6 @@ public class UserInfoActivity extends BaseActivity {
     public void addFriend() {
         FriendParam req = new FriendParam();
         req.setUid(getIntent().getIntExtra("ruid", 0));
-        HTTP.relation.friendApply(req)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<>());
     }
 
     @OnClick(R.id.b_fd_agree)
@@ -108,9 +104,5 @@ public class UserInfoActivity extends BaseActivity {
         UidParam r = new UidParam();
         int ruid = getIntent().getExtras().getInt("ruid", 93);
         r.setUid(ruid);
-        HTTP.relation.friendAgree(r)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<>());
     }
 }
