@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.Constant;
+import com.face.http.model.param.AccountBaseParam;
 import face.R;
 import com.face.dao.entity.User;
 import com.face.http.BaseObserver;
@@ -66,7 +67,7 @@ public class MyUserInfoActivity extends BaseActivity {
     }
 
     void initView() {
-        HTTP.account.baseInfo()
+        HTTP.account.getMineBaseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {
@@ -156,9 +157,9 @@ public class MyUserInfoActivity extends BaseActivity {
         TextView mMaleTv = window.findViewById(R.id.tv_content1);
         mMaleTv.setText(getString(R.string.sex_male));
         mMaleTv.setOnClickListener(view -> {
-            AccountParam req = new AccountParam();
+            AccountBaseParam req = new AccountBaseParam();
             req.setGender(1);
-            HTTP.account.updateInfo(req)
+            HTTP.account.updateBaseInfo(req)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<JsonResponse>() {
@@ -174,9 +175,9 @@ public class MyUserInfoActivity extends BaseActivity {
         mFemaleTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountParam req = new AccountParam();
+                AccountBaseParam req = new AccountBaseParam();
                 req.setGender(2);
-                HTTP.account.updateInfo(req)
+                HTTP.account.updateBaseInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<JsonResponse>() {

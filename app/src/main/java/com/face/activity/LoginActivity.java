@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loadUserInfo() {
-        HTTP.account.baseInfo()
+        HTTP.account.getMineBaseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {

@@ -11,5 +11,7 @@ public class AccountDetail {
     private String year;
     private int status;
     private int gender;
+    private int loveStatus;
     private String genderName;
+    private String loveStatusName;
 }

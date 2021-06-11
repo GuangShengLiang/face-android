@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
     void initView(){
-        HTTP.account.baseInfo()
+        HTTP.account.getMineBaseInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {

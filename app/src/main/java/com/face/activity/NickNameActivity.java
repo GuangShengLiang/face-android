@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.face.http.model.param.AccountBaseParam;
 import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -49,9 +50,9 @@ public class NickNameActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                AccountParam req = new AccountParam();
+                AccountBaseParam req = new AccountBaseParam();
                 req.setNickName(nickName.getText().toString());
-                HTTP.account.updateInfo(req)
+                HTTP.account.updateBaseInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<JsonResponse>() {

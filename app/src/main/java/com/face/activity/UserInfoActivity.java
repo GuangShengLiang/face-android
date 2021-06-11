@@ -62,7 +62,7 @@ public class UserInfoActivity extends BaseActivity {
                         }
                     }
                 });
-        HTTP.account.info(ruid)
+        HTTP.account.getDetail(ruid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {
