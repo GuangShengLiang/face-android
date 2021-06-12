@@ -111,17 +111,6 @@ public class ActManageActivity extends BaseActivity {
             case 报名中:
                 action.setText("停止报名");
                 break;
-            case 报名结束:
-                action.setText("开始");
-                break;
-            case 活动进行中:
-                action.setText("结束");
-                break;
-            case 活动结束:
-                action.setText("已结束");
-                action.setBackgroundColor(Color.GRAY);
-                action.setClickable(false);
-                break;
         }
     }
 
@@ -130,13 +119,6 @@ public class ActManageActivity extends BaseActivity {
         AidParam r = new AidParam(d.getAid());
         switch (status) {
             case 报名中:
-                break;
-            case 报名结束:
-                break;
-            case 活动进行中:
-                break;
-            case 活动结束:
-                action.setVisibility(View.GONE);
                 break;
             default:
                 break;

@@ -7,7 +7,7 @@ public class AccountDetail {
     private int uid;
     private String nickName;
     private String avatar;
-    private String birthday;
+    private long birthdayTime;
     private String year;
     private int status;
     private int gender;
