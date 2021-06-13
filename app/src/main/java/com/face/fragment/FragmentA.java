@@ -87,17 +87,6 @@ public class FragmentA extends Fragment {
                         });*/
                 break;
             case "finish":
-                HTTP.activity.listFinish()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<JsonResponse<List<ActivityDetailVo>>>() {
-                            @Override
-                            public void onNext(JsonResponse<List<ActivityDetailVo>> ls) {
-                                adapter.mList.addAll(ls.getData());
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
-                break;
             default:
                 break;
         }

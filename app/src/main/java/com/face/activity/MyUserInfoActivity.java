@@ -15,19 +15,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.Constant;
-import com.face.http.model.param.AccountBaseParam;
-import face.R;
 import com.face.dao.entity.User;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.vo.AccountDetail;
-import com.face.http.model.param.AccountParam;
+import com.face.http.model.param.MyInfoUpdateParam;
+import com.face.http.model.vo.AccountVO;
 import com.face.utils.CommonUtil;
 import com.face.utils.FileUtil;
 import com.face.utils.PreferencesUtil;
 import com.face.widget.LoadingDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
+import face.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -53,7 +52,7 @@ public class MyUserInfoActivity extends BaseActivity {
 
     LoadingDialog dialog;
     User user;
-    AccountDetail acc;
+    AccountVO acc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +66,12 @@ public class MyUserInfoActivity extends BaseActivity {
     }
 
     void initView() {
-        HTTP.account.getMineBaseInfo()
+        HTTP.account.myinfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {
+                .subscribe(new BaseObserver<JsonResponse<AccountVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountDetail> a) {
+                    public void onNext(JsonResponse<AccountVO> a) {
                         acc = a.getData();
                         PreferencesUtil.saveAccount(context, acc);
                         mNickNameTv.setText(acc.getNickName());
@@ -157,7 +156,7 @@ public class MyUserInfoActivity extends BaseActivity {
         TextView mMaleTv = window.findViewById(R.id.tv_content1);
         mMaleTv.setText(getString(R.string.sex_male));
         mMaleTv.setOnClickListener(view -> {
-            AccountBaseParam req = new AccountBaseParam();
+            MyInfoUpdateParam req = new MyInfoUpdateParam();
             req.setGender(1);
             HTTP.account.updateBaseInfo(req)
                     .subscribeOn(Schedulers.io())
@@ -175,7 +174,7 @@ public class MyUserInfoActivity extends BaseActivity {
         mFemaleTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AccountBaseParam req = new AccountBaseParam();
+                MyInfoUpdateParam req = new MyInfoUpdateParam();
                 req.setGender(2);
                 HTTP.account.updateBaseInfo(req)
                         .subscribeOn(Schedulers.io())

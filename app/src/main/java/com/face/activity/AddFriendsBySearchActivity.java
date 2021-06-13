@@ -93,7 +93,8 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
     }
 
     private void searchUser(String mobile) {
-        HTTP.account.searchByMobile(mobile)
+/*
+        HTTP.account.se(mobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<JsonResponse<Account>>() {
@@ -108,6 +109,7 @@ public class AddFriendsBySearchActivity extends FragmentActivity {
                         ActivityUtils.openUserInfoActivity(context, a.getData().getUid());
                     }
                 });
+*/
     }
 
     /**

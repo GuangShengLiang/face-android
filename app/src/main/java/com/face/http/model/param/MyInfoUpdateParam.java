@@ -3,7 +3,7 @@ package com.face.http.model.param;
 import lombok.Data;
 
 @Data
-public class AccountBaseParam {
+public class MyInfoUpdateParam {
     /**
      * 昵称
      */
@@ -24,4 +24,12 @@ public class AccountBaseParam {
      * 情感状态
      */
     private Integer loveStatus;
+    /**
+     * 简介 140字
+     */
+    private String brief;
+    /**
+     * 城市编码
+     */
+    private String cityCode;
 }

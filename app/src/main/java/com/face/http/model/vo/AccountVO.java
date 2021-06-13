@@ -3,7 +3,7 @@ package com.face.http.model.vo;
 import lombok.Data;
 
 @Data
-public class AccountDetail {
+public class AccountVO {
     private int uid;
     private String nickName;
     private String avatar;

@@ -55,29 +55,29 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (mAdapter == null) {
             mRecyclerView.setAdapter(mAdapter = new ActAdapter(this.getContext()));
-            actHTTP.listActivitiesFriendJoinNext(0)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
-                        @Override
-                        public void onNext(JsonResponse<List<ActivityFeedVo>> resp) {
-                            mAdapter.refresh(resp.getData());
-                        }
-
-                    });
+//            actHTTP.listActFri(0)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
+//                        @Override
+//                        public void onNext(JsonResponse<List<ActivityFeedVo>> resp) {
+//                            mAdapter.refresh(resp.getData());
+//                        }
+//
+//                    });
             mRefreshLayout.autoRefresh();
         }
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            actHTTP.listActivitiesFriendJoinPrevious(0)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
-                        @Override
-                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
-                            mAdapter.refresh(ls.getData());
-                        }
-
-                    });
+//            actHTTP.listActivitiesFriendJoinPrevious(0)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
+//                        @Override
+//                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
+//                            mAdapter.refresh(ls.getData());
+//                        }
+//
+//                    });
             refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -85,15 +85,15 @@ public class HomeFragment extends Fragment {
             if (!mAdapter.list.isEmpty()) {
                 sid = mAdapter.list.get(mAdapter.list.size() - 1).getAid();
             }
-            actHTTP.listActivitiesFriendJoinNext(sid)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
-                        @Override
-                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
-                            mAdapter.loadMore(ls.getData());
-                        }
-                    });
+//            actHTTP.listActivitiesFriendJoinNext(sid)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new BaseObserver<JsonResponse<List<ActivityFeedVo>>>() {
+//                        @Override
+//                        public void onNext(JsonResponse<List<ActivityFeedVo>> ls) {
+//                            mAdapter.loadMore(ls.getData());
+//                        }
+//                    });
             refreshLayout.finishLoadMore(2000);
         });
     }

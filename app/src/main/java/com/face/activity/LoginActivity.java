@@ -15,7 +15,7 @@ import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.vo.AccountDetail;
+import com.face.http.model.vo.AccountVO;
 import com.face.http.model.param.LoginParam;
 import com.face.http.model.vo.LoginVo;
 import com.face.utils.ToastUtil;
@@ -80,12 +80,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loadUserInfo() {
-        HTTP.account.getMineBaseInfo()
+        HTTP.account.myinfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountDetail>>() {
+                .subscribe(new BaseObserver<JsonResponse<AccountVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountDetail> a) {
+                    public void onNext(JsonResponse<AccountVO> a) {
                         PreferencesUtil.saveAccount(mContext, a.getData());
                     }
                 });

@@ -59,7 +59,7 @@ public class ActAdapter extends RecyclerView.Adapter {
         period.setText(d.getPeriod());
         bindMemberLayout(friends,d.getMembers());
         holder.itemView.setOnClickListener(view -> {
-            AccountDetail acc = PreferencesUtil.getAccount(mContext);
+            AccountVO acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
             if (acc != null && acc.getUid() == d.getPublisher().getAccount().getUid()) {
                 intent = new Intent(mContext, ActManageActivity.class);

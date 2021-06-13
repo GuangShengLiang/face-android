@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RelationVo {
+public class RelationVO {
     /**
      * 用户id
      */

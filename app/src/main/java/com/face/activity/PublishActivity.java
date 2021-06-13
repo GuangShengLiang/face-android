@@ -18,7 +18,7 @@ import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.param.ActivityParam;
+import com.face.http.model.param.ActivityCreateParam;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 
@@ -103,11 +103,11 @@ public class PublishActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                ActivityParam r = ActivityParam.builder().title(title.getText().toString())
-                        .startTime(stime.getText().toString())
-                        .endTime(etime.getText().toString())
-                        .address(address.getText().toString())
-                        .pubType(0)
+                ActivityCreateParam r = ActivityCreateParam.builder().title(title.getText().toString())
+//                        .startTime(stime.getText().toString())
+//                        .endTime(etime.getText().toString())
+//                        .address(address.getText().toString())
+//                        .pubType(0)
                         .detail(detail.getText().toString()).build();
                 HTTP.activity.create(r).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

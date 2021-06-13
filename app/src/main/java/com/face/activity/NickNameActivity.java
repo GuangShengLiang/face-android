@@ -4,13 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.face.http.model.param.AccountBaseParam;
+import com.face.http.model.param.MyInfoUpdateParam;
 import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
-import com.face.http.model.vo.AccountDetail;
-import com.face.http.model.param.AccountParam;
+import com.face.http.model.vo.AccountVO;
 import com.face.utils.PreferencesUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -35,7 +34,7 @@ public class NickNameActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nick_name);
         ButterKnife.bind(this);
-        AccountDetail a = PreferencesUtil.getAccount(mContext);
+        AccountVO a = PreferencesUtil.getAccount(mContext);
         Optional.of(a).ifPresent(e -> nickName.setText(a.getNickName()));
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
@@ -50,7 +49,7 @@ public class NickNameActivity extends BaseActivity {
 
             @Override
             public void onRightClick(View v) {
-                AccountBaseParam req = new AccountBaseParam();
+                MyInfoUpdateParam req = new MyInfoUpdateParam();
                 req.setNickName(nickName.getText().toString());
                 HTTP.account.updateBaseInfo(req)
                         .subscribeOn(Schedulers.io())

@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import face.R;
 import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
-import com.face.http.model.vo.AccountDetail;
+import com.face.http.model.vo.AccountVO;
 import com.face.http.model.vo.ActivityDetailVo;
 import com.face.utils.PreferencesUtil;
 
@@ -60,7 +60,7 @@ public class MyJoinAdapter extends RecyclerView.Adapter<MyJoinAdapter.Horizontal
 //            Intent intent = new Intent(mContext, ActDetailActivity.class);
 //            intent.putExtra("aid", mList.get(position).getAid());
 //            mContext.startActivity(intent);
-            AccountDetail acc = PreferencesUtil.getAccount(mContext);
+            AccountVO acc = PreferencesUtil.getAccount(mContext);
             Intent intent;
             if (acc != null && acc.getUid() == d.getPublisher().getAccount().getUid()) {
                 intent = new Intent(mContext, ActManageActivity.class);

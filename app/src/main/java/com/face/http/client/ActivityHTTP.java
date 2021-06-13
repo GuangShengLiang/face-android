@@ -2,10 +2,9 @@ package com.face.http.client;
 
 
 import com.face.http.model.JsonResponse;
+import com.face.http.model.param.ActivityCreateParam;
 import com.face.http.model.param.ApplySwitchParam;
 import com.face.http.model.vo.Account;
-import com.face.http.model.param.ActivityParam;
-import com.face.http.model.param.AidParam;
 import com.face.http.model.vo.ActivityDetailVo;
 import com.face.http.model.vo.ActivityFeedVo;
 import io.reactivex.Observable;
@@ -18,20 +17,17 @@ import java.util.List;
 
 public interface ActivityHTTP {
 
-    @GET("v1/activities/list/friend-join/previous")
-    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFriendJoinPrevious(@Query("startAid") long startAid);
+    @GET("v1/activities/list/friend-join")
+    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFriendJoin();
 
-    @GET("v1/activities/list/friend-join/next")
-    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFriendJoinNext(@Query("startAid") long startAid);
+    @GET("v1/activities/list/follower-join")
+    Observable<JsonResponse<List<ActivityFeedVo>>> listActivitiesFollowerJoin(@Query("startTime") long startTime);
 
     @GET("v1/activities/list/publish")
     Observable<JsonResponse<List<ActivityDetailVo>>> listPublish();
 
     @GET("v1/activities/list/waiting")
     Observable<JsonResponse<List<ActivityDetailVo>>> listWaiting();
-
-    @GET("v1/activities/list/finish")
-    Observable<JsonResponse<List<ActivityDetailVo>>> listFinish();
 
     @GET("v1/activities/list/join")
     Observable<JsonResponse<List<ActivityDetailVo>>> listJoin();
@@ -40,10 +36,13 @@ public interface ActivityHTTP {
     Observable<JsonResponse<ActivityDetailVo>> detail(@Query("aid") long aid);
 
     @POST("v1/activities/create")
-    Observable<JsonResponse> create(@Body ActivityParam r);
+    Observable<JsonResponse> create(@Body ActivityCreateParam r);
+
+    @POST("v1/activities/create-publish")
+    Observable<JsonResponse> createAndPublish(@Body ActivityCreateParam r);
 
     @POST("v1/activities/update")
-    Observable<JsonResponse> modify(@Body ActivityParam req);
+    Observable<JsonResponse> modify(@Body ActivityCreateParam req);
 
     @POST("v1/activities/apply-switch")
     Observable<JsonResponse> applySwitch(@Body ApplySwitchParam req);
