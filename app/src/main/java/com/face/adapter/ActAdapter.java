@@ -15,9 +15,8 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.face.activity.ActDetailActivity;
 import com.face.activity.ActManageActivity;
-import com.face.enums.account.RelationTypeEnum;
+import com.face.enums.account.FriendshipTypeEnum;
 import com.face.http.model.vo.*;
-import com.face.utils.CommonUtil;
 import com.face.utils.PreferencesUtil;
 import face.R;
 
@@ -94,9 +93,9 @@ public class ActAdapter extends RecyclerView.Adapter {
         memberVos.forEach(m -> {
             View layout = LayoutInflater.from(mContext).inflate(R.layout.item_layout_friends, null, false);
             ImageView ivFriend = layout.findViewById(R.id.iv_friend);
-            CommonUtil.loadAvatar(mContext, ivFriend, m.getAccount().getGender());
+//            CommonUtil.loadAvatar(mContext, ivFriend, m.getAccount().getGender());
             TextView tvFriend = layout.findViewById(R.id.tv_friend);
-            if (m.getRelationType() == RelationTypeEnum.friend.code) {
+            if (m.getRelationType() == FriendshipTypeEnum.friend.getCode()) {
                 tvFriend.setTextColor(Color.RED);
             }
             tvFriend.setText(m.getDisplayName());

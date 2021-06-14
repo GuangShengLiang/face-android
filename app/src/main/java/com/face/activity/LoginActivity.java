@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.MainActivity;
+import com.face.http.model.vo.MyInfoVO;
 import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
@@ -80,12 +81,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loadUserInfo() {
-        HTTP.account.myinfo()
+        HTTP.account.myInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountVO>>() {
+                .subscribe(new BaseObserver<JsonResponse<MyInfoVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountVO> a) {
+                    public void onNext(JsonResponse<MyInfoVO> a) {
                         PreferencesUtil.saveAccount(mContext, a.getData());
                     }
                 });

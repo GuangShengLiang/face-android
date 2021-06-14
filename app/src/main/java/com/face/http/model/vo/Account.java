@@ -25,9 +25,4 @@ public class Account {
      * 头像地址
      */
     private String avatar;
-    /**
-     * 性别:男(1),女(2),未知(0)
-     *
-     */
-    private int gender;
 }

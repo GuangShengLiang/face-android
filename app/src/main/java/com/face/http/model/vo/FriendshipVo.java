@@ -9,11 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RelationVO {
-    /**
-     * 用户id
-     */
-    private int uid;
+public class FriendshipVo {
     /**
      * 对方账户
      */
@@ -27,8 +23,4 @@ public class RelationVO {
      * 关系类型：陌生人(0),朋友(1),黑名单(2),关注(3),粉丝(4)
      */
     private Integer relationType;
-    /**
-     * 备注
-     */
-    private String remark;
 }

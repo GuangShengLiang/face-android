@@ -7,14 +7,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.face.http.model.vo.AccountDetailVO;
+import com.face.http.model.vo.AccountInfoVO;
 import face.R;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.param.FriendParam;
 import com.face.http.model.param.UidParam;
-import com.face.http.model.vo.RelationVO;
 import com.face.utils.CommonUtil;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -48,26 +47,12 @@ public class UserInfoActivity extends BaseActivity {
         setContentView(R.layout.user_info);
         ButterKnife.bind(this);
         int ruid = getIntent().getExtras().getInt("ruid", 93);
-        HTTP.relation.relation(ruid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<RelationVO>>() {
-                    @Override
-                    public void onNext(JsonResponse<RelationVO> r) {
-                        if (r != null) {
-                            if (r.getData().getRelationType() == 1) {
-                                addFriend.setVisibility(View.GONE);
-                                bagree.setVisibility(View.GONE);
-                            }
-                        }
-                    }
-                });
         HTTP.account.info(ruid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountDetailVO>>() {
+                .subscribe(new BaseObserver<JsonResponse<AccountInfoVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountDetailVO> a) {
+                    public void onNext(JsonResponse<AccountInfoVO> a) {
                         name.setText(a.getData().getAccount().getNickName());
                         birthday.setText(a.getData().getAccount().getYear());
                         city.setText("北京");

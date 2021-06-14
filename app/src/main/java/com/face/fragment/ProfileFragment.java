@@ -22,6 +22,7 @@ import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.vo.AccountVO;
+import com.face.http.model.vo.MyInfoVO;
 import com.face.utils.CommonUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -54,12 +55,12 @@ public class ProfileFragment extends Fragment {
         return view;
     }
     void initView(){
-        HTTP.account.myinfo()
+        HTTP.account.myInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountVO>>() {
+                .subscribe(new BaseObserver<JsonResponse<MyInfoVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountVO> a) {
+                    public void onNext(JsonResponse<MyInfoVO> a) {
                         mNickNameTv.setText(a.getData().getNickName());
                         mWxIdTv.setText("ID:" + a.getData().getUid());
                         CommonUtil.loadAvatar(getContext(), mAvatarSdv, a.getData().getAvatar());

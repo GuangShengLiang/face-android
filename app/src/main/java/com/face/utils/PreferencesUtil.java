@@ -9,6 +9,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.face.dao.entity.User;
 import com.face.http.model.vo.AccountVO;
+import com.face.http.model.vo.MyInfoVO;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayInputStream;
@@ -224,7 +225,7 @@ public class PreferencesUtil {
     private static String CONFIG = "config";
     private static String TOKEN = "token";
 
-    public static void saveAccount(Context context, AccountVO a) {
+    public static void saveAccount(Context context, MyInfoVO a) {
         SharedPreferences config = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = config.edit();
         editor.putString(ACCOUNT, gson.toJson(a));

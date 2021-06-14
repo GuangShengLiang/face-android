@@ -22,8 +22,7 @@ public class HTTP {
     private static final String base_url = "http://39.101.138.75/api/";
 //        private static final String base_url = "http://192.168.0.105/api/";
     public static final AccountHTTP account;
-    public static final PassportHTTP passport;
-    public static final LinkHTTP link;
+    public static final AuthHTTP passport;
     public static final ActivityHTTP activity;
     public static final RelationHTTP relation;
     public static final ApplyHTTP apply;
@@ -37,14 +36,13 @@ public class HTTP {
                 .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(slowHttpClient());
-        passport = builder.baseUrl(base_url + "passport/").build().create(PassportHTTP.class);
+        passport = builder.baseUrl(base_url + "auth/").build().create(AuthHTTP.class);
         account = builder.baseUrl(base_url + "account/").build().create(AccountHTTP.class);
         relation = builder.baseUrl(base_url + "account/").build().create(RelationHTTP.class);
         activity = builder.baseUrl(base_url + "activity/").build().create(ActivityHTTP.class);
         apply = builder.baseUrl(base_url + "activity/").build().create(ApplyHTTP.class);
         invite = builder.baseUrl(base_url + "activity/").build().create(InviteHTTP.class);
         invited = builder.baseUrl(base_url + "activity/").build().create(InvitedHTTP.class);
-        link = builder.baseUrl(base_url + "link/").build().create(LinkHTTP.class);
     }
 
     public static OkHttpClient slowMoreHttpClient() {

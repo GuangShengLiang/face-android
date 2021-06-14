@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-public interface PassportHTTP {
+public interface AuthHTTP {
 
     @POST("v1/account/login")
     Observable<JsonResponse<LoginVo>> login(@Body LoginParam r);

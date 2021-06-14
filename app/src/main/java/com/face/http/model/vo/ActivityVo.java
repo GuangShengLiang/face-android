@@ -20,8 +20,4 @@ public class ActivityVo {
      *活动地址
      */
     private String address;
-    /**
-     * 活动图片
-     */
-    private String picture;
 }

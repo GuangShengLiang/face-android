@@ -51,7 +51,7 @@ public class NickNameActivity extends BaseActivity {
             public void onRightClick(View v) {
                 MyInfoUpdateParam req = new MyInfoUpdateParam();
                 req.setNickName(nickName.getText().toString());
-                HTTP.account.updateBaseInfo(req)
+                HTTP.account.updateMyInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<JsonResponse>() {

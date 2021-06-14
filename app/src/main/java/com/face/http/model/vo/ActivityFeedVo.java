@@ -17,7 +17,6 @@ public class ActivityFeedVo extends ActivityVo {
     private MemberVo publisher;
     /**
      * 参加的好友列表
-     * @deprecated
      */
     private List<MemberVo> friends;
     /**
@@ -25,7 +24,7 @@ public class ActivityFeedVo extends ActivityVo {
      */
     private List<MemberVo> members;
     /**
-     * 状态:报名中(0),报名结束(1),活动进行中(2),活动结束(3)
+     * 状态:  创建(0), 报名中(10), 进行中(40), 已取消(80), 结束(90);
      */
     private Integer status;
     /**
@@ -39,6 +38,7 @@ public class ActivityFeedVo extends ActivityVo {
 
     /**
      * 活动时间段
+     *
      * @mock 04/29 08:00-23:00
      */
     private String period;

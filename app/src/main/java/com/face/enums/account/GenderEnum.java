@@ -1,21 +1,28 @@
 package com.face.enums.account;
 
+import lombok.Getter;
+
+@Getter
 public enum GenderEnum {
-    男(1),
-    女(2),
-    未知(0);
+    man(1, "男"),
+    female(2, "女"),
+    unkonw(0, "");
 
-    public final int code;
+    private final int code;
+    private final String desc;
 
-    GenderEnum(int code) {
+    GenderEnum(int code, String desc) {
         this.code = code;
+        this.desc = desc;
     }
-    public static GenderEnum get(int code){
-        for(GenderEnum e:values()){
-            if (e.code == code){
+
+    public static GenderEnum get(int code) {
+        for (GenderEnum e : values()) {
+            if (e.code == code) {
                 return e;
             }
         }
-        return 未知;
+        return unkonw;
     }
 }
+

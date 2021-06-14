@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.face.Constant;
 import com.face.enums.account.GenderEnum;
 import face.R;
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -12,8 +11,6 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
-import java.io.File;
 
 public class CommonUtil {
     /**
@@ -76,7 +73,7 @@ public class CommonUtil {
 
     public static void loadAvatar(Context mContext, ImageView avatar, int gender) {
         String avatarStr = PATH_HEAD + "header/";
-        if (GenderEnum.男.code == gender) {
+        if (GenderEnum.man.getCode() == gender) {
             avatarStr += "boy_01.jpeg";
         } else {
             avatarStr += "girl_01.jpeg";

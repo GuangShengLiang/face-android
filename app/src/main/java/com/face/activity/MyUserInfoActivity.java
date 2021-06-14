@@ -21,6 +21,7 @@ import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
 import com.face.http.model.param.MyInfoUpdateParam;
 import com.face.http.model.vo.AccountVO;
+import com.face.http.model.vo.MyInfoVO;
 import com.face.utils.CommonUtil;
 import com.face.utils.FileUtil;
 import com.face.utils.PreferencesUtil;
@@ -52,7 +53,7 @@ public class MyUserInfoActivity extends BaseActivity {
 
     LoadingDialog dialog;
     User user;
-    AccountVO acc;
+    MyInfoVO acc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +67,12 @@ public class MyUserInfoActivity extends BaseActivity {
     }
 
     void initView() {
-        HTTP.account.myinfo()
+        HTTP.account.myInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<AccountVO>>() {
+                .subscribe(new BaseObserver<JsonResponse<MyInfoVO>>() {
                     @Override
-                    public void onNext(JsonResponse<AccountVO> a) {
+                    public void onNext(JsonResponse<MyInfoVO> a) {
                         acc = a.getData();
                         PreferencesUtil.saveAccount(context, acc);
                         mNickNameTv.setText(acc.getNickName());
@@ -158,7 +159,7 @@ public class MyUserInfoActivity extends BaseActivity {
         mMaleTv.setOnClickListener(view -> {
             MyInfoUpdateParam req = new MyInfoUpdateParam();
             req.setGender(1);
-            HTTP.account.updateBaseInfo(req)
+            HTTP.account.updateMyInfo(req)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<JsonResponse>() {
@@ -176,7 +177,7 @@ public class MyUserInfoActivity extends BaseActivity {
             public void onClick(View view) {
                 MyInfoUpdateParam req = new MyInfoUpdateParam();
                 req.setGender(2);
-                HTTP.account.updateBaseInfo(req)
+                HTTP.account.updateMyInfo(req)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new BaseObserver<JsonResponse>() {

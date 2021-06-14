@@ -3,7 +3,7 @@ package com.face.http.model.vo;
 import lombok.Data;
 
 @Data
-public class AccountDetailVO {
+public class AccountInfoVO {
     /**
      * 账户详情
      */
@@ -11,5 +11,5 @@ public class AccountDetailVO {
     /**
      * 关系信息
      */
-    private RelationVO relation;
+    private FriendshipVo friendship;
 }
