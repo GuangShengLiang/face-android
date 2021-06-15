@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebebeb"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backButton="true"
+            app:barStyle="light"
+            app:rightColor="@color/black"
+            app:rightTitle="完成"
+            app:rightSize="14dp"
+            app:title="活动详情"
+            app:titleSize="13dp"
+            app:titleColor="@color/black"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:paddingLeft="36dp"
+            android:singleLine="true"
+            android:text="@string/wx_id_or_phone"
+            android:textColor="#aaaaaa"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignLeft="@id/tv_search"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/search" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:gravity="bottom"
+        android:paddingLeft="12dp"
+        android:paddingBottom="4dp"
+        android:text="@string/new_friends"
+        android:textSize="12sp" />
+
+    <ListView
+        android:id="@+id/lv_new_friends_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="#DADADA"
+        android:dividerHeight="0.1dp" />
+
+</LinearLayout>

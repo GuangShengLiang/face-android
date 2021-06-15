@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backButton="true"
+            app:barStyle="light"
+            app:rightColor="@color/google_blue"
+            app:rightTitle="发布"
+            app:rightSize="16dp"
+            app:title="活动详情"
+            app:titleSize="14dp"
+            app:titleColor="@color/black"/>
+
+    <LinearLayout style="@style/linear_item">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="标题"/>
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/tv_pd_title"/>
+    </LinearLayout>
+    <LinearLayout style="@style/linear_item">
+        <TextView style="@style/publish_item_left"
+                  android:text="开始时间"/>
+        <TextView style="@style/publish_item_right"
+                  android:id="@+id/tv_st_time"
+                  android:hint="选择时间"/>
+    </LinearLayout>
+    <LinearLayout style="@style/linear_item">
+        <TextView style="@style/publish_item_left"
+                  android:text="结束时间"/>
+        <TextView style="@style/publish_item_right"
+                  android:id="@+id/tv_end_time"
+                  android:hint="选择时间"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/linear_item">
+        <TextView style="@style/publish_item_left"
+                  android:text="地点"/>
+        <EditText style="@style/publish_item_right"
+                  android:id="@+id/tv_pd_address"
+                  android:hint="输入地点"/>
+    </LinearLayout>
+    <LinearLayout style="@style/linear_item">
+        <TextView style="@style/publish_item_left"
+                  android:text="可见"/>
+        <TextView style="@style/publish_item_right"
+                  android:id="@+id/tv_pd_visibility"
+                  android:text="参与者朋友可见"/>
+    </LinearLayout>
+    <LinearLayout style="@style/linear_item"
+                  android:orientation="vertical">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="内容"/>
+        <EditText
+                android:id="@+id/tv_pd_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="5"
+                android:gravity="top"
+                android:layout_weight="1"
+        />
+    </LinearLayout>
+</LinearLayout>
