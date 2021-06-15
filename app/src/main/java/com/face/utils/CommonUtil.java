@@ -9,6 +9,7 @@ import com.face.enums.account.GenderEnum;
 import com.face.http.BaseObserver;
 import com.face.http.HTTP;
 import com.face.http.model.JsonResponse;
+import com.face.http.model.vo.AvatarUploadVO;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
@@ -99,23 +100,22 @@ public class CommonUtil {
         HTTP.account.getAvatarUploadToken()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<JsonResponse<String>>() {
+                .subscribe(new BaseObserver<JsonResponse<AvatarUploadVO>>() {
                     @Override
-                    public void onNext(JsonResponse<String> token) {
+                    public void onNext(JsonResponse<AvatarUploadVO> uploadVO) {
 
                     }
                 });
     }
 
-    public void upload(String token) {
+    public void upload(AvatarUploadVO uploadVO) {
         Configuration config = new Configuration.Builder()
 //                .zone(FixedZone.zone1)
                 .build();
         UploadManager uploadManager = new UploadManager(config);
 //        data = <File 对象 或 文件路径 或 字节数组 或 数据流 或 Uri 资源>
-//                String key = <指定七牛服务上的文件名，或 null>;
-        String data="";
-        uploadManager.put(data, null, token,
+        String data = "";
+        uploadManager.put(data, uploadVO.getKey(), uploadVO.getToken(),
                 new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject res) {

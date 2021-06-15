@@ -34,7 +34,7 @@ public interface AccountHTTP {
      * @return
      */
     @GET("v1/myinfo/avatar/upload-token")
-    Observable<JsonResponse<String>> getAvatarUploadToken();
+    Observable<JsonResponse<AvatarUploadVO>> getAvatarUploadToken();
 
     /**
      * 搜索用户
