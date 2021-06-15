@@ -115,7 +115,7 @@ public class HTTP {
             throw e;
         } finally {
             long cost = System.currentTimeMillis() - t1;
-            Log.d("HTTP_LOG", String.format("|%s |%s |%s |cost %d|", url, rb, pb, cost));
+            Log.e("HTTP_LOG", String.format("|%s |%s |%s |cost %d|", url, rb, pb, cost));
         }
         return response.newBuilder()
                 .body(okhttp3.ResponseBody.create(pb, mediaType))

@@ -3,6 +3,17 @@
 <!--    <color name="colorPrimary">#008577</color>-->
 <!--    <color name="colorPrimaryDark">#00574B</color>-->
 <!--    <color name="colorAccent">#D81B60</color>-->
+
+    <!--背景颜色-->
+    <color name="appBg">#202020</color>
+    <color name="appLine">#BBBBBB</color>
+
+    <color name="save">#e9445a</color>
+    <color name="nosave">#5d2434</color>
+
+
+
+    <color name="b2">#B2B2B2</color>
     <color name="white">#FFFFFF</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

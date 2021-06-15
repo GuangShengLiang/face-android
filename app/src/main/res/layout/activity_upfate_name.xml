@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBg"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_bp_common_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的称呼"
+            android:textSize="14sp"
+            android:textColor="@color/b2"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="50dp">
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:hint="记得填写称呼哦"
+                android:inputType="text"
+                android:maxLength="20"
+                android:textColor="@color/white"
+                android:textColorHint="#979797"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/nums"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/20"
+            android:textSize="12sp"
+            android:textColor="#979797"/>
+    </LinearLayout>
+
+</LinearLayout>

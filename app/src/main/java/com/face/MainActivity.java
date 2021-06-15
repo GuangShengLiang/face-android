@@ -11,13 +11,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.face.activity.LoginActivity;
 import com.face.activity.PublishActivity;
+import com.face.base.BaseActivity;
 import com.face.fragment.FriendFragment;
 import com.face.fragment.HomeFragment;
 import com.face.fragment.MessageFragment;
@@ -31,12 +33,19 @@ import face.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends BaseActivity {
     private EasyNavigationBar navigationBar;
 
-    private String[] tabText = {"首页", "朋友", "", "消息", "我的"};
+    private String[] tabText = {"首页", "发现", "消息", "我的"};
+
+    private String[] tabText2 = {"商城", "订单", "地址"};
+    //未选中icon
+    private int[] normalIcon = {R.mipmap.index, R.mipmap.find,  R.mipmap.message, R.mipmap.me};
+    //选中时icon
+    private int[] selectIcon = {R.mipmap.index1, R.mipmap.find1, R.mipmap.message1, R.mipmap.me1};
+
     private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> changeFragments = new ArrayList<>();
 
 
     //仿微博图片和文字集合
@@ -64,35 +73,15 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new ProfileFragment());
 
         navigationBar.titleItems(tabText)
-//                .normalIconItems(normalIcon)
-//                .selectIconItems(selectIcon)
-                .canScroll(true)    //Viewpager能否左右滑动
+                .centerImageRes(R.mipmap.add_image)
                 .fragmentList(fragments)
                 .fragmentManager(getSupportFragmentManager())
-//                .iconSize(20)     //Tab图标大小
                 .tabTextSize(14)   //Tab文字大小
-                .tabTextTop(0)     //Tab文字距Tab图标的距离
                 .normalTextColor(Color.parseColor("#8E8E93"))   //Tab未选中时字体颜色
                 .selectTextColor(Color.parseColor("#FFFFFF"))   //Tab选中时字体颜色
-//                .scaleType(ImageView.ScaleType.CENTER_INSIDE)  //同 ImageView的ScaleType
                 .navigationBackground(Color.parseColor("#202020"))   //导航栏背景色
                 .centerLayoutRule(EasyNavigationBar.RULE_CENTER)
-                .hasPadding(true)
-//                .setOnTabClickListener(new EasyNavigationBar.OnTabClickListener() {
-//                    @Override
-//                    public boolean onTabSelectEvent(View view, int position) {
-//                        //Tab点击事件  return true 页面不会切换
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onTabReSelectEvent(View view, int position) {
-//                        //Tab重复点击事件
-//                        return false;
-//                    }
-//                })
                 .setOnCenterTabClickListener(new EasyNavigationBar.OnCenterTabSelectListener(){
-
                     @Override
                     public boolean onCenterTabSelectEvent(View view) {
                         ComponentName cn = new ComponentName(MainActivity.this, PublishActivity.class);
@@ -102,20 +91,15 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 })
-                .mode(EasyNavigationBar.NavigationMode.MODE_ADD)   //默认MODE_NORMAL 普通模式  //MODE_ADD 带加号模式
+                .mode(EasyNavigationBar.NavigationMode.MODE_ADD)
                 .centerImageRes(R.mipmap.add_image)
                 .centerLayoutHeight(44)   //包含加号的布局高度 背景透明  所以加号看起来突出一块
                 .navigationHeight(44)  //导航栏高度
-//                .anim(Anim.ZoomIn)
                 .build();
-
-
-//        navigationBar.setAddViewLayout(createWeiboView());
-
     }
 
     private boolean isLogin(){
-       return PreferencesUtil.getInstance().isLogin();
+        return PreferencesUtil.getInstance().isLogin();
     }
 
     private void toLogin(){
@@ -132,13 +116,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //仿微博弹出菜单
-    private View createWeiboView() {
-        ViewGroup view = (ViewGroup) View.inflate(MainActivity.this, R.layout.act_publish, null);
-        return view;
-    }
-
-    //
     private void showMunu() {
         startAnimation();
         mHandler.post(new Runnable() {
@@ -202,46 +179,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 关闭window动画
-     */
-    private void closeAnimation() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                cancelImageView.animate().rotation(0).setDuration(400);
-            }
-        });
-
-        try {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-
-                int x = NavigationUtil.getScreenWidth(this) / 2;
-                int y = (NavigationUtil.getScreenHeith(this) - NavigationUtil.dip2px(this, 25));
-                Animator animator = ViewAnimationUtils.createCircularReveal(navigationBar.getAddViewLayout(), x,
-                        y, navigationBar.getAddViewLayout().getHeight(), 0);
-                animator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        //							layout.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        navigationBar.getAddViewLayout().setVisibility(View.GONE);
-                        //dismiss();
-                    }
-                });
-                animator.setDuration(300);
-                animator.start();
-            }
-        } catch (Exception e) {
-        }
-    }
 
 
     public EasyNavigationBar getNavigationBar() {
         return navigationBar;
     }
 
+
+    public void changeStyle() {
+        navigationBar
+                .defaultSetting()
+                .fragmentList(changeFragments)
+                .fragmentManager(getSupportFragmentManager())
+                .titleItems(tabText2)
+                .centerLayoutRule(EasyNavigationBar.RULE_BOTTOM)
+                .setOnCenterTabClickListener(new EasyNavigationBar.OnCenterTabSelectListener() {
+                    @Override
+                    public boolean onCenterTabSelectEvent(View view) {
+                        Toast.makeText(getApplicationContext(), "hhh,已经更改样式了", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .textSizeType(EasyNavigationBar.TextSizeType.TYPE_SP)
+                .build();
+
+
+//        navigationBar.setAddViewLayout(createWeiboView());
+    }
 }

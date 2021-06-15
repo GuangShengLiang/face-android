@@ -2,7 +2,7 @@
     <string name="app_name">face-android</string>
     <string name="title_home">Home</string>
 
-<!--wechat start-->
+    <!--wechat start-->
     <string name="login_by_phone">使用手机号登录</string>
     <string name="country_and_area">国家和地区</string>
     <string name="country_china">中国</string>
@@ -137,6 +137,6 @@
     <string name="search_friend_by_phone">来自手机号搜索</string>
     <string name="search_friend_by_wx_id">来自微信号搜索</string>
     <string name="login_failed">登录请求失败</string>
-<!--    end-->
+    <!--    end-->
 
 </resources>

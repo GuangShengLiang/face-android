@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.face.MainActivity;
+import com.face.base.BaseActivity;
 import com.face.http.model.vo.MyInfoVO;
 import face.R;
 import com.face.http.BaseObserver;
