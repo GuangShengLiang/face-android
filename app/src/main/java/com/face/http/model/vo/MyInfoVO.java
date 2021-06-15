@@ -40,6 +40,14 @@ public class MyInfoVO {
      */
     private String loveStatusName;
     /**
+     * 城市编码
+     */
+    private String cityCode;
+    /**
+     * 简介
+     */
+    private String brief;
+    /**
      * 关注总数
      */
     private int followTotal;
