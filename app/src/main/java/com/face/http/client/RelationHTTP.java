@@ -13,12 +13,26 @@ import java.util.List;
 
 public interface RelationHTTP {
 
+    /**
+     * 朋友列表：互相关注的好友
+     * @return
+     */
     @GET("v1/relations/friends")
     Observable<JsonResponse<List<FriendshipVo>>> queryFriends();
 
+    /**
+     * 关注
+     * @param targetUid 目标uid
+     * @return
+     */
     @POST("v1/relations/follow")
     Observable<JsonResponse> follow(@Query("targetUid") int targetUid);
 
+    /**
+     * 取消关注
+     * @param targetUid 目标uid
+     * @return
+     */
     @POST("v1/relations/unfollow")
     Observable<JsonResponse> unfollow(@Query("targetUid") int targetUid);
 
@@ -28,6 +42,12 @@ public interface RelationHTTP {
     @GET("v1/relations/fans")
     Observable<JsonResponse<List<FriendshipVo>>> queryFans();
 
+    /**
+     * 关注和粉丝统计
+     * 关注列表
+     * 粉丝列表
+     * @return
+     */
     @GET("v1/relations/stat")
     Observable<JsonResponse<RelationStatVO>> queryStat();
 
