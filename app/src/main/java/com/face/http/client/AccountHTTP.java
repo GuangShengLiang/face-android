@@ -2,10 +2,7 @@ package com.face.http.client;
 
 import com.face.http.model.JsonResponse;
 import com.face.http.model.param.MyInfoUpdateParam;
-import com.face.http.model.vo.AccountInfoVO;
-import com.face.http.model.vo.AccountVO;
-import com.face.http.model.vo.FriendshipVo;
-import com.face.http.model.vo.MyInfoVO;
+import com.face.http.model.vo.*;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

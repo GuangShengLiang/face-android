@@ -30,4 +30,5 @@ public interface RelationHTTP {
 
     @GET("v1/relations/stat")
     Observable<JsonResponse<RelationStatVO>> queryStat();
+
 }
