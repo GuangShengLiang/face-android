@@ -103,7 +103,7 @@ public class CommonUtil {
                 .subscribe(new BaseObserver<JsonResponse<AvatarUploadVO>>() {
                     @Override
                     public void onNext(JsonResponse<AvatarUploadVO> uploadVO) {
-
+                        upload(uploadVO.getData());
                     }
                 });
     }
